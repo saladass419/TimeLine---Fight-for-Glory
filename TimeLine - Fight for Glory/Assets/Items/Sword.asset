@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e398e537bd4c444f930b6cb264b746c, type: 3}
+  m_Name: Sword
+  m_EditorClassIdentifier: 
+  itemId: 2
+  itemDimensionAvailable: 0
+  isItemUnlocked: 0
+  rarity: 50
+  itemName: Sword
+  itemDescription: 
+  itemTypes: 010000000200000001000000
+  price: 600
+  itemSprite: {fileID: 0}
+  isStackable: 0
+  attributes:
+  - attributeName: 1
+    value: 1
+  craftingRecipe:
+  - item: {fileID: 11400000, guid: 20bdeb2d65d437f4c88a31df5078bdce, type: 2}
+    amount: 2
+  - item: {fileID: 11400000, guid: ac6374cc6ff6db24187f299a47ffe7e8, type: 2}
+    amount: 1
