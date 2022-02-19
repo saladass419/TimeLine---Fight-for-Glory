@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public static class StaticImportantFunction
 {
-    public static System.Random rng;
-    public static void Shuffle<T>(IList<T> list)
+    private static System.Random rng = new System.Random();
+    public static void Shuffle<T>(this IList<T> list)
     {
         int n = list.Count;
         while (n > 1)

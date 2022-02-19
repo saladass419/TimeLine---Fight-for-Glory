@@ -13,17 +13,7 @@ public class Chest : GenericInventory
     }
     private void Start()
     {
-        foreach (GenericItemObject item in Database.instance.ItemObjects)
-        {
-            possibleItems.Add(item);
-            Debug.Log(item.name);
-        }
-        //StaticImportantFunction.Shuffle(possibleItems);
-        /*Debug.Log("SHUFFLING");
-        foreach (GenericItemObject item in possibleItems)
-        {
-            Debug.Log(item.name);
-        }*/
+        StaticImportantFunction.Shuffle(possibleItems);
     }
     public void FillChest()
     {
