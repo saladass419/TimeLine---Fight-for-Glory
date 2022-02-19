@@ -19,7 +19,7 @@ MonoBehaviour:
   itemName: Stone
   itemDescription: 
   itemTypes: 02000000
-  price: 0
+  price: 50
   itemSprite: {fileID: 0}
   isStackable: 0
   attributes: []

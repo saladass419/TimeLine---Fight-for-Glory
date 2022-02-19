@@ -7,6 +7,7 @@ public class ShopItemObject : GenericItemObject
 {
     private void Awake()
     {
-        itemTypes.Add(ItemType.Shop);
+        if(!itemTypes.Contains(ItemType.Shop))
+            itemTypes.Add(ItemType.Shop);
     }
 }
