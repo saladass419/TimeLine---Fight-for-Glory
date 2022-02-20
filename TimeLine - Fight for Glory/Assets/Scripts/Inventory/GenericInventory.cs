@@ -17,7 +17,7 @@ public class GenericInventory : MonoBehaviour
         inventoryItems.Clear();
         foreach (var item in inventory)
         {
-            ShowItemsInInspector newItem= new ShowItemsInInspector();
+            ShowItemsInInspector newItem = new ShowItemsInInspector();
             newItem.Item = item.Key;
             newItem.Amount = item.Value;
             inventoryItems.Add(newItem);
