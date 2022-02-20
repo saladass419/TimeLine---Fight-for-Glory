@@ -10,7 +10,8 @@ public class GenericItemObject : ScriptableObject
     [SerializeField] private int itemId;
     [SerializeField] private int itemDimensionAvailable;
     [SerializeField] private bool isItemUnlocked;
-    [SerializeField] private int rarity;
+    [SerializeField] [Range(0,100)] private int rarity;
+    [SerializeField] private RarityType rarityType;
     [SerializeField] private string itemName;
     [SerializeField] private string itemDescription;
     [SerializeField] public List <ItemType> itemTypes;
@@ -25,8 +26,37 @@ public class GenericItemObject : ScriptableObject
     public int Rarity { get => rarity; set => rarity = value; }
     public bool IsStackable { get => isStackable; set => isStackable = value; }
     public int Price { get => price; set => price = value; }
+    public RarityType RarityType { get => rarityType; private set => rarityType = value; }
+    private void OnValidate()
+    {
+        switch (rarity)
+        {
+            case var expression when rarity > 75:
+                RarityType = RarityType.Common;
+                break;
+            case var expression when (rarity <= 75 && rarity > 50):
+                RarityType = RarityType.Uncommon;
+                break;
+            case var expression when (rarity <= 50 && rarity > 25):
+                RarityType = RarityType.Rare;
+                break;
+            case var expression when (rarity <= 25 && rarity > 10):
+                RarityType = RarityType.Epic;
+                break;
+            case var expression when (rarity <= 10 && rarity > 0):
+                RarityType = RarityType.Legendary;
+                break;
+            case var expression when (rarity <= 0):
+                RarityType = RarityType.CantBeFound;
+                break;
+        }
+    }
 }
 public enum ItemType
 {
     Generic, Craftable, Shop
+}
+public enum RarityType
+{
+    Common, Uncommon, Rare, Epic, Legendary, CantBeFound
 }

@@ -15,11 +15,12 @@ MonoBehaviour:
   itemId: 1
   itemDimensionAvailable: 0
   isItemUnlocked: 0
-  rarity: 50
+  rarity: 80
+  rarityType: 0
   itemName: Wood
   itemDescription: 
   itemTypes: 02000000
   price: 0
   itemSprite: {fileID: 0}
-  isStackable: 0
+  isStackable: 1
   attributes: []

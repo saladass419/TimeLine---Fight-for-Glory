@@ -10,8 +10,13 @@ public class Shop : MonoBehaviour
     [SerializeField] private PlayerInventory inventory;
     [SerializeField] private int shopLevel;
 
-    private List<GenericItemObject> supplies = new List<GenericItemObject>();
+    [SerializeField] private List<GenericItemObject> supplies = new List<GenericItemObject>();
     private System.Random rnd = new System.Random();
+
+    private void Start()
+    {
+        RefreshShop();
+    }
     public void RefreshShop()
     {
         supplies.Clear();
@@ -31,13 +36,6 @@ public class Shop : MonoBehaviour
             if(!inventory.AddItemToInventory(item, 1)) return;
             player.Currency -= item.Price;
             supplies.RemoveAt(supplies.FindIndex(a => a.ItemId == item.ItemId));
-        }
-    }
-    public void SuppliesOutInEditor()
-    {
-        foreach (GenericItemObject item in supplies)
-        {
-            Debug.Log(item.name + " "+ item.Price);
         }
     }
 }

@@ -8,17 +8,13 @@ public class PlayerInventory : GenericInventory
     private void Awake()
     {
         inventoryType = InventoryType.PlayerInventory;
-        maxSlot = 24;
+        if(maxSlot==0) maxSlot = 24;
     }
     private void Start()
     {
+        SetStartingItemsFromInspector();
         FindObjectOfType<Item>().itemPickUpEventInventory += AddItemToInventory;
-    }
-    public void InventoryOutPutInEDitor()
-    {
-        for (int i = 0; i < inventory.Count; i++)
-        {
-            Debug.Log(inventory.ElementAt(i).Key + " " + inventory.ElementAt(i).Value);
-        }
+
+        AddItemToInventory(Database.instance.ItemObjects[2], 2);
     }
 }

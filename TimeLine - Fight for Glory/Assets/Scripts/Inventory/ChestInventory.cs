@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Chest : GenericInventory
+public class ChestInventory : GenericInventory
 {
     private List<GenericItemObject> possibleItems = new List<GenericItemObject>();
     private void Awake()
     {
         inventoryType = InventoryType.ChestInventory;
-        maxSlot = 12;
+        if(maxSlot == 0) maxSlot = 12;
     }
     private void Start()
     {
+        SetStartingItemsFromInspector();
         StaticImportantFunction.Shuffle(possibleItems);
     }
     public void FillChest()
