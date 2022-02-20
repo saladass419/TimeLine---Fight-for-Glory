@@ -17,6 +17,10 @@ public class ChestInventory : GenericInventory
         SetStartingItemsFromInspector();
         StaticImportantFunction.Shuffle(possibleItems);
     }
+    private void Update()
+    {
+        TakeItemsFronChest(FindObjectOfType<PlayerInventory>(), Database.instance.ItemObjects[0], 2);
+    }
     private void FillChest()
     {
 
@@ -35,10 +39,13 @@ public class ChestInventory : GenericInventory
     }
     public bool TakeItemsFronChest(GenericInventory inventoryTo, GenericItemObject item, int amount) // needs a interaction managers of some sort
     {
-        if (inventoryTo.AddItemToInventory(item, amount))
+        if (IsEnougItemsInInventory(item, amount))
         {
-            RemoveItemFromInventory(item, amount);
-            return true;
+            if (inventoryTo.AddItemToInventory(item, amount))
+            {
+                RemoveItemFromInventory(item, amount);
+                return true;
+            }
         }
         return false;
     }
