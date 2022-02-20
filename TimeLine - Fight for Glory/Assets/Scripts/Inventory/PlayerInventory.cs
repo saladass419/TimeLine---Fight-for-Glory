@@ -19,6 +19,8 @@ public class PlayerInventory : GenericInventory
         SetStartingItemsFromInspector();
         SetStartingEquipmentsFromInspector();
         FindObjectOfType<Item>().itemPickUpEventInventory += AddItemToInventory;
+
+        UnequipItem(Database.instance.ItemObjects[2]);
     }
     public void EquipItem(GenericItemObject item)
     {
@@ -28,7 +30,7 @@ public class PlayerInventory : GenericInventory
             return; 
         }
 
-        RemoveItemFromInventory(item, 1);
+        if (!RemoveItemFromInventory(item, 1)) return;
         playerEquipment.Add(item);
 
         if (itemEquipped != null)
@@ -41,6 +43,8 @@ public class PlayerInventory : GenericInventory
     }
     public void UnequipItem(GenericItemObject item)
     {
+        if (!AddItemToInventory(item, 1)) return;
+        playerEquipment.Remove(item);
         if (itemEquipped != null)
         {
             foreach (Attribute attribute in item.Attributes)
@@ -48,9 +52,6 @@ public class PlayerInventory : GenericInventory
                 itemEquipped(attribute.AttributeName, -1*attribute.Value);
             }
         }
-
-        playerEquipment.Remove(item);
-        AddItemToInventory(item, 1);
     }
     private void SetStartingEquipmentsFromInspector()
     {

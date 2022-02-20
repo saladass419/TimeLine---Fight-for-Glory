@@ -533,6 +533,8 @@ MonoBehaviour:
     value: 5
   - attributeName: 1
     value: 2
+  - attributeName: 2
+    value: 10
   currency: 100
 --- !u!4 &1712783145
 Transform:

@@ -18,8 +18,8 @@ public class Item : MonoBehaviour
     {
         if(itemPickUpEventInventory != null)
         {
-            itemPickUpEventInventory(itemObject, amount);
+            if(itemPickUpEventInventory(itemObject, amount)) 
+                Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }

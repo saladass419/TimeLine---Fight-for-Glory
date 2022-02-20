@@ -17,5 +17,6 @@ public class Attribute
 public enum AttributeName
 {
     Health,
-    Damage
+    Damage,
+    Speed
 } 

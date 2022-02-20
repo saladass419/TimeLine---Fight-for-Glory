@@ -6,7 +6,6 @@ using System;
 [CreateAssetMenu(menuName = "ItemObject/GenericItemObject")]
 public class GenericItemObject : ScriptableObject
 {
-
     [SerializeField] private int itemId;
     [SerializeField] private int itemDimensionAvailable;
     [SerializeField] private bool isItemUnlocked;
