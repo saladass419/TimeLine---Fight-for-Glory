@@ -30,7 +30,7 @@ public class GenericInventory : MonoBehaviour
     private void RemoveFromInspectorInventory(GenericItemObject item, int amount)
     {
         int index = inventoryItems.FindIndex(a => a.Item == item);
-        if (inventory.ContainsKey(item)) //needs to check inventory
+        if (inventory.ContainsKey(item))
         {
             inventoryItems[index].Amount -= amount;
         }

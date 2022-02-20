@@ -9,7 +9,6 @@ public class Item : MonoBehaviour
     [SerializeField] private int amount;
     public GenericItemObject ItemObject { get => itemObject; set => itemObject = value; }
     public int Amount { get => amount; set => amount = value; }
-
     private void OnValidate()
     {
         if (amount < 1) amount = 1;
@@ -21,5 +20,6 @@ public class Item : MonoBehaviour
         {
             itemPickUpEventInventory(itemObject, amount);
         }
+        Destroy(gameObject);
     }
 }

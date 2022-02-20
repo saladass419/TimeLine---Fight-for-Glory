@@ -21,18 +21,25 @@ public class ChestInventory : GenericInventory
     {
 
     }
-    public void PutItemsInChest(GenericInventory inventoryFrom, GenericItemObject item, int amount) // needs a interaction managers of some sort
+    public bool PutItemsInChest(GenericInventory inventoryFrom, GenericItemObject item, int amount) // needs a interaction managers of some sort
     {
-        if (inventoryFrom.RemoveItemFromInventory(item, amount))
+        if (IsEnoughSpaceInInventory(item,amount)==amount)
         {
-            AddItemToInventory(item, amount);
+            if (inventoryFrom.RemoveItemFromInventory(item, amount))
+            {
+                AddItemToInventory(item, amount);
+                return true;
+            }
         }
+        return false;
     }
-    public void TakeItemsFronChest(GenericInventory inventoryTo, GenericItemObject item, int amount) // needs a interaction managers of some sort
+    public bool TakeItemsFronChest(GenericInventory inventoryTo, GenericItemObject item, int amount) // needs a interaction managers of some sort
     {
         if (inventoryTo.AddItemToInventory(item, amount))
         {
             RemoveItemFromInventory(item, amount);
+            return true;
         }
+        return false;
     }
 }
