@@ -17,13 +17,16 @@ public class PlayerInventory : GenericInventory
     private void Start()
     {
         SetStartingItemsFromInspector();
+        SetStartingEquipmentsFromInspector();
         FindObjectOfType<Item>().itemPickUpEventInventory += AddItemToInventory;
-
-        UnequipItem(playerEquipment[0]);
     }
     public void EquipItem(GenericItemObject item)
     {
-        if (playerEquipment.Contains(item)) return;
+        if (playerEquipment.Contains(item)) 
+        {
+            Debug.Log("Item already equipped!");
+            return; 
+        }
 
         RemoveItemFromInventory(item, 1);
         playerEquipment.Add(item);
@@ -48,5 +51,15 @@ public class PlayerInventory : GenericInventory
 
         playerEquipment.Remove(item);
         AddItemToInventory(item, 1);
+    }
+    private void SetStartingEquipmentsFromInspector()
+    {
+        foreach (GenericItemObject item in playerEquipment)
+        {
+            foreach (Attribute attribute in item.Attributes)
+            {
+                itemEquipped(attribute.AttributeName, attribute.Value);
+            }
+        }
     }
 }

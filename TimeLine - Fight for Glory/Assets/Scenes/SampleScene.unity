@@ -156,6 +156,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 20bdeb2d65d437f4c88a31df5078bdce, type: 2}
   - {fileID: 11400000, guid: ac6374cc6ff6db24187f299a47ffe7e8, type: 2}
   - {fileID: 11400000, guid: 6a2b0187f8410314e96eb1098da8bbe2, type: 2}
+  - {fileID: 11400000, guid: 254911bd17d6e7149899cd227cebf740, type: 2}
   itemsUnlockedInCurrentDimension: []
   itemsUnlocked: []
 --- !u!4 &693609777
@@ -559,7 +560,8 @@ MonoBehaviour:
   inventoryType: 0
   maxSlot: 24
   inventoryItems: []
-  playerEquipment: []
+  playerEquipment:
+  - {fileID: 11400000, guid: 6a2b0187f8410314e96eb1098da8bbe2, type: 2}
 --- !u!114 &1712783147
 MonoBehaviour:
   m_ObjectHideFlags: 0
