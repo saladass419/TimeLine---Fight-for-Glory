@@ -23,6 +23,7 @@ public class GenericInventory : MonoBehaviour
             ShowItemsInInspector itemToShow = new ShowItemsInInspector();
             itemToShow.Item = item;
             itemToShow.Amount = amount;
+
             inventoryItems.Add(itemToShow);
         }
     }
@@ -42,16 +43,25 @@ public class GenericInventory : MonoBehaviour
     {
         int putInAmount = IsEnoughSpaceInInventory(item, amount);
         if (putInAmount<1) return false;
+
         if (inventory.ContainsKey(item)) inventory[item] += putInAmount;
         else inventory.Add(item, putInAmount);
+
         AddToInspectorInventory(item, putInAmount);
         return true;
     }
-    public void RemoveItemFromInventory(GenericItemObject item, int amount)
+    public bool RemoveItemFromInventory(GenericItemObject item, int amount)
     {
-        inventory[item] -= amount;
-        if (!IsEnougItemsInInventory(item, 1)) inventory.Remove(item);
-        RemoveFromInspectorInventory(item, amount);
+        if (IsEnougItemsInInventory(item, amount))
+        {
+            inventory[item] -= amount;
+            if (!IsEnougItemsInInventory(item, 1)) inventory.Remove(item);
+
+            RemoveFromInspectorInventory(item, amount);
+
+            return true;
+        }
+        return false;
     }
     public int IsEnoughSpaceInInventory(GenericItemObject item, int amount)
     {
@@ -64,18 +74,17 @@ public class GenericInventory : MonoBehaviour
             }else if (!item.IsStackable)
             {
                 int _amount = Mathf.Clamp(maxSlot - inventory.Keys.Count,0,amount);
-                if(_amount<amount) Debug.Log("Not enough space in inventory!");
                 return _amount;
             }
         }
-        Debug.Log("Not enough space in inventory!");
         return 0;
     }
     public bool IsEnougItemsInInventory(GenericItemObject item, int amountNeeded)
     {
-        if (!inventory.ContainsKey(item)) return false;
-        else if (inventory[item] >= amountNeeded) return true;
-        else return false;
+        if (inventory.ContainsKey(item) && inventory[item] >= amountNeeded)
+            return true;
+        else 
+            return false;
     }
     public void SetStartingItemsFromInspector()
     {
