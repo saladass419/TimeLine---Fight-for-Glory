@@ -15,7 +15,7 @@ MonoBehaviour:
   itemId: 2
   itemDimensionAvailable: 0
   isItemUnlocked: 0
-  rarity: 70
+  rarity: 68
   rarityType: 1
   itemName: Sword
   itemDescription: 

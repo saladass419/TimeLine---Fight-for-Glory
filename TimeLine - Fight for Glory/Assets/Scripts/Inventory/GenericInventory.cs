@@ -10,33 +10,17 @@ public class GenericInventory : MonoBehaviour
 
     public Dictionary<GenericItemObject, int> inventory = new Dictionary<GenericItemObject, int>();
 
-    [SerializeField] private List<ShowItemsInInspector> inventoryItems = new List<ShowItemsInInspector>();
+    [SerializeField] public List<ShowItemsInInspector> inventoryItems = new List<ShowItemsInInspector>();
 
-    private void AddToInspectorInventory(GenericItemObject item, int amount)
+    public void RefreshInspector()
     {
-        if(inventoryItems.Find(a=>a.Item == item) != null)
+        inventoryItems.Clear();
+        foreach (var item in inventory)
         {
-            inventoryItems.Find(a => a.Item == item).Amount += amount;
-        }
-        else
-        {
-            ShowItemsInInspector itemToShow = new ShowItemsInInspector();
-            itemToShow.Item = item;
-            itemToShow.Amount = amount;
-
-            inventoryItems.Add(itemToShow);
-        }
-    }
-    private void RemoveFromInspectorInventory(GenericItemObject item, int amount)
-    {
-        int index = inventoryItems.FindIndex(a => a.Item == item);
-        if (inventory.ContainsKey(item))
-        {
-            inventoryItems[index].Amount -= amount;
-        }
-        else
-        {
-            inventoryItems.RemoveAt(index);
+            ShowItemsInInspector newItem= new ShowItemsInInspector();
+            newItem.Item = item.Key;
+            newItem.Amount = item.Value;
+            inventoryItems.Add(newItem);
         }
     }
     public bool AddItemToInventory(GenericItemObject item, int amount)
@@ -47,7 +31,7 @@ public class GenericInventory : MonoBehaviour
         if (inventory.ContainsKey(item)) inventory[item] += putInAmount;
         else inventory.Add(item, putInAmount);
 
-        AddToInspectorInventory(item, putInAmount);
+        RefreshInspector();
         return true;
     }
     public bool RemoveItemFromInventory(GenericItemObject item, int amount)
@@ -57,8 +41,7 @@ public class GenericInventory : MonoBehaviour
             inventory[item] -= amount;
             if (!IsEnougItemsInInventory(item, 1)) inventory.Remove(item);
 
-            RemoveFromInspectorInventory(item, amount);
-
+            RefreshInspector();
             return true;
         }
         return false;

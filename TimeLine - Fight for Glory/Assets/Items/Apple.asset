@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73420c41c05f13439095b4fe5b9d29a, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  itemId: 0
+  itemId: 3
   itemDimensionAvailable: 0
   isItemUnlocked: 0
-  rarity: 0
-  rarityType: 5
+  rarity: 100
+  rarityType: 0
   itemName: Apple
   itemDescription: 
   itemTypes: 00000000

@@ -478,6 +478,10 @@ MonoBehaviour:
   inventoryType: 1
   maxSlot: 12
   inventoryItems: []
+  possibleItems: []
+  rarityType: 1
+  FillChestOnStart: 1
+  isFull: 0
 --- !u!4 &1405889726
 Transform:
   m_ObjectHideFlags: 0
