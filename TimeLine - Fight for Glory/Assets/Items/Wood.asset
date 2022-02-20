@@ -15,7 +15,7 @@ MonoBehaviour:
   itemId: 1
   itemDimensionAvailable: 0
   isItemUnlocked: 0
-  rarity: 80
+  rarity: 95
   rarityType: 0
   itemName: Wood
   itemDescription: 

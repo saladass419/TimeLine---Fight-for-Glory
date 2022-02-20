@@ -14,17 +14,9 @@ public class Item : MonoBehaviour
     {
         if (amount < 1) amount = 1;
     }
-    public event Func<AttributeName, float,bool> itemPickUpEventAttribute;
     public event Func<GenericItemObject, int, bool> itemPickUpEventInventory;
     public void ItemPickUp()
     {
-        if (itemPickUpEventAttribute != null)
-        {
-            foreach (Attribute item in itemObject.Attributes)
-            {
-                itemPickUpEventAttribute(item.AttributeName, item.Value);
-            }
-        }
         if(itemPickUpEventInventory != null)
         {
             itemPickUpEventInventory(itemObject, amount);

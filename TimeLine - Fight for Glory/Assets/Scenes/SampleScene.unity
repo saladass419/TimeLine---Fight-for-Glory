@@ -474,9 +474,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e979f62686d83b64baecfd53369cfa30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryItems: []
   inventoryType: 1
   maxSlot: 12
+  inventoryItems: []
 --- !u!4 &1405889726
 Transform:
   m_ObjectHideFlags: 0
@@ -556,15 +556,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9f9b03f86180e4fb68b745e7f3814e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryItems:
-  - item: {fileID: 11400000, guid: 20bdeb2d65d437f4c88a31df5078bdce, type: 2}
-    amount: 3
-  - item: {fileID: 11400000, guid: ac6374cc6ff6db24187f299a47ffe7e8, type: 2}
-    amount: 3
-  - item: {fileID: 11400000, guid: 6a2b0187f8410314e96eb1098da8bbe2, type: 2}
-    amount: 1
   inventoryType: 0
   maxSlot: 24
+  inventoryItems: []
+  playerEquipment: []
 --- !u!114 &1712783147
 MonoBehaviour:
   m_ObjectHideFlags: 0

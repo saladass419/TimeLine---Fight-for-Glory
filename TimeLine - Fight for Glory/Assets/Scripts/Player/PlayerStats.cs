@@ -6,14 +6,13 @@ public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private List<Attribute> attributes = new List<Attribute>();
     [SerializeField] private int currency;
-
     public int Currency { get => currency; set => currency = value; }
 
     private void Start()
     {
-        FindObjectOfType<Item>().itemPickUpEventAttribute += ChangeAttributeValue;
+        FindObjectOfType<PlayerInventory>().itemEquipped += ChangeAttributeValue;
     }
-    private bool ChangeAttributeValue(AttributeName attribute, float value)
+    public void ChangeAttributeValue(AttributeName attribute, float value)
     {
         foreach (Attribute item in attributes)
         {
@@ -23,6 +22,5 @@ public class PlayerStats : MonoBehaviour
                 break;
             }
         }
-        return true;
     }
 }

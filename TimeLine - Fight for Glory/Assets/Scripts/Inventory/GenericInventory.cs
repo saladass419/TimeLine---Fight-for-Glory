@@ -5,13 +5,14 @@ using System.Linq;
 
 public class GenericInventory : MonoBehaviour
 {
+    public InventoryType inventoryType;
+    public int maxSlot;
+
     public Dictionary<GenericItemObject, int> inventory = new Dictionary<GenericItemObject, int>();
 
     [SerializeField] private List<ShowItemsInInspector> inventoryItems = new List<ShowItemsInInspector>();
 
-    public InventoryType inventoryType;
-    public int maxSlot;
-    private void RefreshInspectorInventory(GenericItemObject item, int amount)
+    private void AddToInspectorInventory(GenericItemObject item, int amount)
     {
         if(inventoryItems.Find(a=>a.Item == item) != null)
         {
@@ -25,20 +26,32 @@ public class GenericInventory : MonoBehaviour
             inventoryItems.Add(itemToShow);
         }
     }
+    private void RemoveFromInspectorInventory(GenericItemObject item, int amount)
+    {
+        int index = inventoryItems.FindIndex(a => a.Item == item);
+        if (inventory.ContainsKey(item)) //needs to check inventory
+        {
+            inventoryItems[index].Amount -= amount;
+        }
+        else
+        {
+            inventoryItems.RemoveAt(index);
+        }
+    }
     public bool AddItemToInventory(GenericItemObject item, int amount)
     {
         int putInAmount = IsEnoughSpaceInInventory(item, amount);
         if (putInAmount<1) return false;
         if (inventory.ContainsKey(item)) inventory[item] += putInAmount;
         else inventory.Add(item, putInAmount);
-        RefreshInspectorInventory(item, putInAmount);
+        AddToInspectorInventory(item, putInAmount);
         return true;
     }
     public void RemoveItemFromInventory(GenericItemObject item, int amount)
     {
         inventory[item] -= amount;
         if (!IsEnougItemsInInventory(item, 1)) inventory.Remove(item);
-        RefreshInspectorInventory(item, amount);
+        RemoveFromInspectorInventory(item, amount);
     }
     public int IsEnoughSpaceInInventory(GenericItemObject item, int amount)
     {
@@ -48,8 +61,7 @@ public class GenericInventory : MonoBehaviour
             {
                 if (inventory.Keys.Count() < maxSlot) return amount;
                 if (inventory.ContainsKey(item)) return amount;
-            }
-            if (!item.IsStackable)
+            }else if (!item.IsStackable)
             {
                 int _amount = Mathf.Clamp(maxSlot - inventory.Keys.Count,0,amount);
                 if(_amount<amount) Debug.Log("Not enough space in inventory!");
@@ -62,7 +74,8 @@ public class GenericInventory : MonoBehaviour
     public bool IsEnougItemsInInventory(GenericItemObject item, int amountNeeded)
     {
         if (!inventory.ContainsKey(item)) return false;
-        else return true ? inventory[item] >= amountNeeded : false;
+        else if (inventory[item] >= amountNeeded) return true;
+        else return false;
     }
     public void SetStartingItemsFromInspector()
     {

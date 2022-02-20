@@ -15,8 +15,8 @@ MonoBehaviour:
   itemId: 0
   itemDimensionAvailable: 0
   isItemUnlocked: 0
-  rarity: 0
-  rarityType: 5
+  rarity: 90
+  rarityType: 0
   itemName: Stone
   itemDescription: 
   itemTypes: 02000000
