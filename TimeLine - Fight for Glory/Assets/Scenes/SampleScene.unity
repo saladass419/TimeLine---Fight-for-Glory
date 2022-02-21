@@ -565,7 +565,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryType: 0
   maxSlot: 24
-  inventoryItems: []
+  inventoryItems:
+  - item: {fileID: 11400000, guid: 20bdeb2d65d437f4c88a31df5078bdce, type: 2}
+    amount: 3
+  - item: {fileID: 11400000, guid: ac6374cc6ff6db24187f299a47ffe7e8, type: 2}
+    amount: 3
   playerEquipment: []
 --- !u!114 &1712783147
 MonoBehaviour:

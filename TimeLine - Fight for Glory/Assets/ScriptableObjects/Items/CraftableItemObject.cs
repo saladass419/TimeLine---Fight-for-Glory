@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ItemObject/CraftableItemObject")]
 public class CraftableItemObject : GenericItemObject
 {
-    private void Awake()
+    private void OnValidate()
     {
-        if(!itemTypes.Contains(ItemType.Craftable)) 
+        if (!itemTypes.Contains(ItemType.Craftable))
             itemTypes.Add(ItemType.Craftable);
     }
     [SerializeField] private CraftingRecipe[] craftingRecipe;

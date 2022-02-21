@@ -19,7 +19,7 @@ MonoBehaviour:
   rarityType: 1
   itemName: Sword
   itemDescription: 
-  itemTypes: 0100000002000000
+  itemTypes: 010000000200000000000000
   price: 600
   itemSprite: {fileID: 0}
   isStackable: 0
