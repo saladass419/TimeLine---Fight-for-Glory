@@ -19,6 +19,8 @@ public class PlayerInventory : GenericInventory
         SetStartingItemsFromInspector();
         SetStartingEquipmentsFromInspector();
         FindObjectOfType<Item>().itemPickUpEventInventory += AddItemToInventory;
+
+        FindObjectOfType<Shop>().PurchaseItem(Database.instance.ItemObjects[1], gameObject);
     }
     public void EquipItem(GenericItemObject item)
     {

@@ -6,8 +6,6 @@ using System;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private PlayerStats player;
-    [SerializeField] private PlayerInventory inventory;
     [SerializeField] private int shopLevel;
 
     [SerializeField] private List<GenericItemObject> supplies = new List<GenericItemObject>();
@@ -29,12 +27,12 @@ public class Shop : MonoBehaviour
             if (rnd.Next(0, 100) > supplies[i].Rarity) supplies.Remove(supplies[i]);
         }
     }
-    public void PurchaseItem(GenericItemObject item)
+    public void PurchaseItem(GenericItemObject item, GameObject player)
     {
-        if(item.Price<=player.Currency)
+        if(item.Price<=player.GetComponent<PlayerStats>().Currency)
         {
-            if(!inventory.AddItemToInventory(item, 1)) return;
-            player.Currency -= item.Price;
+            if(!player.GetComponent<PlayerInventory>().AddItemToInventory(item, 1)) return;
+            player.GetComponent<PlayerStats>().Currency -= item.Price;
             supplies.RemoveAt(supplies.FindIndex(a => a.ItemId == item.ItemId));
         }
     }

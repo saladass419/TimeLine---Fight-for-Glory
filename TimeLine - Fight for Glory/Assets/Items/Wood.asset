@@ -20,7 +20,7 @@ MonoBehaviour:
   itemName: Wood
   itemDescription: 
   itemTypes: 0200000000000000
-  price: 0
+  price: 70
   itemSprite: {fileID: 0}
   isStackable: 1
   attributes: []
