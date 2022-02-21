@@ -6,11 +6,10 @@ using System;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private int shopLevel;
-
-    [SerializeField] private List<GenericItemObject> supplies = new List<GenericItemObject>();
     private System.Random rnd = new System.Random();
 
+    [SerializeField] private int shopLevel;
+    [SerializeField] private List<GenericItemObject> supplies = new List<GenericItemObject>();
     private void Start()
     {
         RefreshShop();
