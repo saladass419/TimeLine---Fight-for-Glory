@@ -26,7 +26,7 @@ public class Skill : ScriptableObject
         UpgradeAttributes();
         UpdateUpgradeCost();
     }
-    private void Awake()
+    private void Start()
     {
         FindObjectOfType<PlayerSkills>().upgradeSkillLevel += UpgradeSkill;
     }

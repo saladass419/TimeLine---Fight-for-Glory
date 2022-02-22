@@ -16,9 +16,9 @@ public class PlayerInventory : GenericInventory
     }
     private void Start()
     {
+        FindObjectOfType<Item>().itemPickUpEventInventory += AddItemToInventory;
         SetStartingItemsFromInspector();
         SetStartingEquipmentsFromInspector();
-        FindObjectOfType<Item>().itemPickUpEventInventory += AddItemToInventory;
     }
     public void EquipItem(GenericItemObject item)
     {
