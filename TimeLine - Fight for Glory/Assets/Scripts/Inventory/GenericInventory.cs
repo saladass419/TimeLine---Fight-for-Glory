@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class GenericInventory : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GenericInventory : MonoBehaviour
 
     [SerializeField] public List<ShowItemsInInspector> inventoryItems = new List<ShowItemsInInspector>();
 
+    public event Action InventoryChanged;
     public void RefreshInspector()
     {
         inventoryItems.Clear();
@@ -32,6 +34,10 @@ public class GenericInventory : MonoBehaviour
         else inventory.Add(item, putInAmount);
 
         RefreshInspector();
+        if (InventoryChanged != null)
+        {
+            InventoryChanged();
+        }
         return true;
     }
     public bool RemoveItemFromInventory(GenericItemObject item, int amount)
@@ -42,6 +48,10 @@ public class GenericInventory : MonoBehaviour
             if (!IsEnougItemsInInventory(item, 1)) inventory.Remove(item);
 
             RefreshInspector();
+            if (InventoryChanged != null)
+            {
+                InventoryChanged();
+            }
             return true;
         }
         return false;

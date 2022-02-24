@@ -5,6 +5,8 @@ using System;
 
 public class Item : MonoBehaviour
 {
+    public event Func<GenericItemObject, int, bool> itemPickUpEventInventory;
+
     [SerializeField] private GenericItemObject itemObject;
     [SerializeField] private int amount;
     public GenericItemObject ItemObject { get => itemObject; set => itemObject = value; }
@@ -13,7 +15,6 @@ public class Item : MonoBehaviour
     {
         if (amount < 1) amount = 1;
     }
-    public event Func<GenericItemObject, int, bool> itemPickUpEventInventory;
     public void ItemPickUp()
     {
         if(itemPickUpEventInventory != null)

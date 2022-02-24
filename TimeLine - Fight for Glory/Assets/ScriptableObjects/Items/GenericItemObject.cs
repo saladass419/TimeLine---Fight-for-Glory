@@ -26,6 +26,8 @@ public class GenericItemObject : ScriptableObject
     public bool IsStackable { get => isStackable; set => isStackable = value; }
     public int Price { get => price; set => price = value; }
     public RarityType RarityType { get => rarityType; private set => rarityType = value; }
+    public Sprite ItemSprite { get => itemSprite; set => itemSprite = value; }
+
     private void OnValidate()
     {
         switch (rarity)
