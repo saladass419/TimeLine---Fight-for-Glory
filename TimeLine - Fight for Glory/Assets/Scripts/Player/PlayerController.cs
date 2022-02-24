@@ -9,6 +9,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            GameObject item = isObjectCloseEnough("Item");
+            if (item != null)
+            {
+                item.GetComponent<Item>().ItemPickUp();
+            }
+        }
         //Open inventory
         if(Input.GetKeyDown(KeyCode.E))
         {
@@ -45,10 +54,11 @@ public class PlayerController : MonoBehaviour
 
     private GameObject isObjectCloseEnough(string tag)
     {
-        float minDistance = 100000000f;
+        float minDistance = float.MaxValue;
         GameObject[] objs = GameObject.FindGameObjectsWithTag(tag);
         float distance = 0f;
         GameObject objectToReturn = null;
+
         foreach(GameObject GO in objs)
         {
             distance = Vector3.Distance(transform.position, GO.transform.position);

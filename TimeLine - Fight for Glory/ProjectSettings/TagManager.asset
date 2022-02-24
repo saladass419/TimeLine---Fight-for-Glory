@@ -8,6 +8,7 @@ TagManager:
   - InventorySlot
   - InventoryItemPrefab
   - Chest
+  - Item
   layers:
   - Default
   - TransparentFX
