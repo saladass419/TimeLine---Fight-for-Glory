@@ -12,12 +12,11 @@ public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler
     [SerializeField] private GameObject[] slots;
     [SerializeField] private GenericInventory inventory;
 
-    [SerializeField]GameObject startInventory;
-    [SerializeField]GameObject destinationInventory;
+    private GameObject startInventory;
+    private GameObject destinationInventory;
 
-    [SerializeField] private GameObject objectHoveredOver;
-    [SerializeField] private GameObject objectBeingDragged;
-
+    private GameObject objectHoveredOver;
+    private GameObject objectBeingDragged;
     public GenericInventory Inventory { get => inventory; set => inventory = value; }
     public void OpenInventory(GameObject inventoryToOpen)
     {
@@ -54,7 +53,7 @@ public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (objectHoveredOver.GetComponent<ItemInUI>().Item != null)
+        if (objectHoveredOver!=null&&objectHoveredOver.GetComponent<ItemInUI>().Item != null)
         {
             objectBeingDragged = CreateTempItem(objectHoveredOver);
             startInventory = eventData.hovered.Find(a => a.CompareTag("InventoryItems"));
@@ -69,16 +68,19 @@ public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        destinationInventory = eventData.hovered.Find(a => a.CompareTag("InventoryItems"));
+        if (objectBeingDragged != null)
+        {
+            destinationInventory = eventData.hovered.Find(a => a.CompareTag("InventoryItems"));
 
-        destinationInventory.GetComponent<InventoryUIManager>().inventory.AddItemToInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount);
-        startInventory.GetComponent<InventoryUIManager>().inventory.RemoveItemFromInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount);
+            destinationInventory.GetComponent<InventoryUIManager>().inventory.AddItemToInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount);
+            startInventory.GetComponent<InventoryUIManager>().inventory.RemoveItemFromInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount);
 
-        Destroy(objectBeingDragged);
+            Destroy(objectBeingDragged);
 
-        objectBeingDragged = null;
-        destinationInventory = null;
-        startInventory = null;
+            objectBeingDragged = null;
+            destinationInventory = null;
+            startInventory = null;
+        }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
