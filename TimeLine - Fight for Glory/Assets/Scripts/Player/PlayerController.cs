@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float trashhold = 10f;
+    private float threshhold = 10f;
+    [SerializeField] private InventoryUIManager inventoryToOpen;
 
     void Update()
     {
         //Open inventory
         if(Input.GetKeyDown(KeyCode.E))
         {
-
+            inventoryToOpen.OpenInventory(gameObject);
         }
 
         //Open SkillTree
@@ -23,26 +24,26 @@ public class PlayerController : MonoBehaviour
         //Open Shop
         if (Input.GetKeyDown(KeyCode.H))
         {
-            GameObject shop = isShopCloseEnough("Shop");
+            GameObject shop = isObjectCloseEnough("Shop");
             if(shop != null)
             {
-                //Megnyitni a shophoz tartozó inventoryt - bezárni azt
+                inventoryToOpen.OpenInventory(shop);
             }
         }
 
         //Open Chest
         if (Input.GetKeyDown(KeyCode.L))
         {
-            GameObject chest = isShopCloseEnough("Chest");
+            GameObject chest = isObjectCloseEnough("Chest");
             if (chest != null)
             {
-                //Megnyitni a chesthez tartozó inventoryt - bezárni azt
+                inventoryToOpen.OpenInventory(chest);
             }
         }
 
     }
 
-    private GameObject isShopCloseEnough(string tag)
+    private GameObject isObjectCloseEnough(string tag)
     {
         float minDistance = 100000000f;
         GameObject[] objs = GameObject.FindGameObjectsWithTag(tag);
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(distance < trashhold)
+        if(distance < threshhold)
         {
             return objectToReturn;
         }

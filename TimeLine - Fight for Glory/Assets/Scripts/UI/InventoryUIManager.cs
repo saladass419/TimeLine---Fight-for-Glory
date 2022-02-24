@@ -20,7 +20,8 @@ public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler
     public GenericInventory Inventory { get => inventory; set => inventory = value; }
     public void OpenInventory(GameObject inventoryToOpen)
     {
-        Inventory = inventoryToOpen.GetComponent<PlayerInventory>();
+        Inventory = inventoryToOpen.GetComponent<GenericInventory>();
+        gameObject.SetActive(!gameObject.activeSelf);
     }
     private void Start()
     {
