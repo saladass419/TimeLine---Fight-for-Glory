@@ -13,6 +13,8 @@ public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler
     [SerializeField] private InventoryType inventoryType;
     [SerializeField] private GenericInventory inventory;
 
+    private GameObject shopObject;
+
     private GameObject startInventory;
     private GameObject destinationInventory;
 
@@ -83,11 +85,16 @@ public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler
                     PlayerEquipmentInventory equipment = (PlayerEquipmentInventory)destinationInventory.GetComponent<InventoryUIManager>().inventory;
                     equipment.EquipItem(objectBeingDragged.GetComponent<ItemInUI>().Item);
                 }
-                else if(startInventory.GetComponent<InventoryUIManager>().inventoryType == InventoryType.PlayerEquipment)
+                else if (startInventory.GetComponent<InventoryUIManager>().inventoryType == InventoryType.PlayerEquipment)
                 {
 
                     PlayerEquipmentInventory equipment = (PlayerEquipmentInventory)startInventory.GetComponent<InventoryUIManager>().inventory;
                     equipment.UnequipItem(objectBeingDragged.GetComponent<ItemInUI>().Item);
+                }
+                else if (startInventory.GetComponent<InventoryUIManager>().inventoryType == InventoryType.ShopInventory&&destinationInventory.GetComponent<InventoryUIManager>().inventoryType==InventoryType.PlayerInventory)
+                {
+                    ShopInventory shop = (ShopInventory)startInventory.GetComponent<InventoryUIManager>().inventory;
+                    shop.PurchaseItem(objectBeingDragged.GetComponent<ItemInUI>().Item, FindObjectOfType<PlayerInventory>().gameObject); //Not sure it works for multiplayer
                 }
                 else
                 {

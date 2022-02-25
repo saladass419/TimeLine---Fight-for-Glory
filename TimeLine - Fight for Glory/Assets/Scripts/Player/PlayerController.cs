@@ -10,16 +10,78 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject chestUI;
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject equipmentUI;
+    [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject informationUI;
+
+    private float distanceItem;
+    private float distanceChest;
+    private float distanceShop;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
             GameObject item = isObjectCloseEnough("Item");
-            if (item != null)
+            GameObject chest = isObjectCloseEnough("Chest");
+            GameObject shop = isObjectCloseEnough("Shop");
+
+            if (item != null) 
+            { 
+               distanceItem  = Vector3.Distance(item.transform.position, transform.position); 
+            }
+            else
             {
-                item.GetComponent<Item>().ItemPickUp();
+                distanceItem = float.MaxValue;
+            }
+            if (chest!=null) 
+            { 
+                distanceChest = Vector3.Distance(chest.transform.position, transform.position); 
+            }
+            else
+            {
+                distanceChest = float.MaxValue;
+            }
+            if (shop != null)
+            {
+                distanceShop = Vector3.Distance(shop.transform.position, transform.position);
+            }
+            else
+            {
+                distanceShop = float.MaxValue;
+            }
+
+            if (distanceItem<distanceChest&&distanceItem<distanceShop)
+            {
+                if (item != null)
+                {
+                    item.GetComponent<Item>().ItemPickUp();
+                }
+            }
+            else if(distanceChest<distanceShop)
+            {
+                if (!equipmentUI.activeInHierarchy&&!shopUI.activeInHierarchy)
+                {
+                    if (chest != null)
+                    {
+                        chestUI.GetComponent<InventoryUIManager>().OpenInventory(chest.GetComponent<ChestInventory>());
+
+                        chestUI.SetActive(!chestUI.activeSelf);
+                        inventoryUI.SetActive(!inventoryUI.activeSelf);
+                        informationUI.SetActive(!informationUI.activeSelf);
+                    }
+                }
+            }
+            else
+            {
+                if(!chestUI.activeInHierarchy&&!equipmentUI.activeInHierarchy)
+                if (shop != null)
+                {
+                    shopUI.GetComponent<InventoryUIManager>().OpenInventory(shop.GetComponent<GenericInventory>());
+
+                    shopUI.SetActive(!shopUI.activeSelf);
+                    inventoryUI.SetActive(!inventoryUI.activeSelf);
+                    informationUI.SetActive(!informationUI.activeSelf);
+                }
             }
         }
         //Open inventory
@@ -35,31 +97,6 @@ public class PlayerController : MonoBehaviour
         {
 
         }
-
-        //Open Shop
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            GameObject shop = isObjectCloseEnough("Shop");
-            if(shop != null)
-            {
-                //inventoryToOpen.OpenInventory(shop);
-            }
-        }
-
-        //Open Chest
-        if (Input.GetKeyDown(KeyCode.L)&&!equipmentUI.activeInHierarchy)
-        {
-            GameObject chest = isObjectCloseEnough("Chest");
-            if (chest != null)
-            {
-                chestUI.GetComponent<InventoryUIManager>().OpenInventory(chest.GetComponent<ChestInventory>());
-
-                chestUI.SetActive(!chestUI.activeSelf);
-                inventoryUI.SetActive(!inventoryUI.activeSelf);
-                informationUI.SetActive(!informationUI.activeSelf);
-            }
-        }
-
     }
 
     private GameObject isObjectCloseEnough(string tag)

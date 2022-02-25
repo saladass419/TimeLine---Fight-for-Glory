@@ -10,6 +10,7 @@ TagManager:
   - Item
   - PlayerInventoryUI
   - InventoryItems
+  - Shop
   layers:
   - Default
   - TransparentFX

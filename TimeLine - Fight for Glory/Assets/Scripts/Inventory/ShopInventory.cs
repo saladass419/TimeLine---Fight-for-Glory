@@ -4,35 +4,37 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class Shop : MonoBehaviour
+public class ShopInventory : GenericInventory
 {
     private System.Random rnd = new System.Random();
 
     [SerializeField] private int shopLevel;
-    [SerializeField] private List<GenericItemObject> supplies = new List<GenericItemObject>();
     private void Start()
     {
         RefreshShop();
     }
     public void RefreshShop()
     {
-        supplies.Clear();
+        inventory.Clear();
         for (int i = 0; i < Database.instance.ItemObjects.Count; i++)
         {
-            if (Database.instance.ItemObjects[i].itemTypes.Contains(ItemType.Shop)&&Database.instance.ItemObjects[i].ItemDimensionAvailable<=shopLevel) supplies.Add(Database.instance.ItemObjects[i]);
+            if (Database.instance.ItemObjects[i].itemTypes.Contains(ItemType.Shop)&&Database.instance.ItemObjects[i].ItemDimensionAvailable<=shopLevel) AddItemToInventory(Database.instance.ItemObjects[i],1);
         }
-        for (int i = 0; i < supplies.Count; i++)
+        for (int i = 0; i < inventory.Count; i++)
         {
-            if (rnd.Next(0, 100) > supplies[i].Rarity) supplies.Remove(supplies[i]);
+            if (rnd.Next(0, 100) > inventory.ElementAt(i).Key.Rarity) RemoveItemFromInventory(inventory.ElementAt(i).Key,inventory.ElementAt(i).Value);
         }
     }
     public void PurchaseItem(GenericItemObject item, GameObject player)
     {
         if(item.Price<=player.GetComponent<PlayerStats>().Currency)
         {
+            Debug.Log(item.Price);
             if(!player.GetComponent<PlayerInventory>().AddItemToInventory(item, 1)) return;
+
             player.GetComponent<PlayerStats>().Currency -= item.Price;
-            supplies.RemoveAt(supplies.FindIndex(a => a.ItemId == item.ItemId));
+
+            RemoveItemFromInventory(item,1);
         }
     }
 }
