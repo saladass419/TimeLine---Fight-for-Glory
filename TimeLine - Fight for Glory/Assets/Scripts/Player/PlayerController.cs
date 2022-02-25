@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
     private float threshhold = 10f;
-    [SerializeField] private InventoryUIManager inventoryToOpen;
+
+    [SerializeField] private GameObject playerInventory;
 
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.F))
         {
             GameObject item = isObjectCloseEnough("Item");
@@ -21,7 +22,12 @@ public class PlayerController : MonoBehaviour
         //Open inventory
         if(Input.GetKeyDown(KeyCode.E))
         {
-            inventoryToOpen.OpenInventory(gameObject);
+            if (playerInventory != null)
+            {
+                playerInventory.SetActive(!playerInventory.activeSelf);
+                GenericInventory inventory = FindObjectOfType<PlayerInventory>();
+                playerInventory.GetComponentInChildren<InventoryUIManager>().OpenInventory(inventory);
+            }
         }
 
         //Open SkillTree
@@ -36,7 +42,7 @@ public class PlayerController : MonoBehaviour
             GameObject shop = isObjectCloseEnough("Shop");
             if(shop != null)
             {
-                inventoryToOpen.OpenInventory(shop);
+                //inventoryToOpen.OpenInventory(shop);
             }
         }
 
@@ -46,7 +52,7 @@ public class PlayerController : MonoBehaviour
             GameObject chest = isObjectCloseEnough("Chest");
             if (chest != null)
             {
-                inventoryToOpen.OpenInventory(chest);
+                //inventoryToOpen.OpenInventory(chest);
             }
         }
 

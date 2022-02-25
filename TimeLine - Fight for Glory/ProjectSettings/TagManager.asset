@@ -4,11 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - InventoryItems
   - InventorySlot
   - InventoryItemPrefab
   - Chest
   - Item
+  - PlayerInventoryUI
+  - InventoryItems
   layers:
   - Default
   - TransparentFX

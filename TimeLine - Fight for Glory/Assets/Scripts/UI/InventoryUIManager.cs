@@ -18,10 +18,9 @@ public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler
     private GameObject objectHoveredOver;
     private GameObject objectBeingDragged;
     public GenericInventory Inventory { get => inventory; set => inventory = value; }
-    public void OpenInventory(GameObject inventoryToOpen)
+    public void OpenInventory(GenericInventory inventoryToOpen)
     {
-        Inventory = inventoryToOpen.GetComponent<GenericInventory>();
-        gameObject.SetActive(!gameObject.activeSelf);
+        Inventory = inventoryToOpen;
     }
     private void Start()
     {
@@ -72,10 +71,11 @@ public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler
         if (objectBeingDragged != null)
         {
             destinationInventory = eventData.hovered.Find(a => a.CompareTag("InventoryItems"));
-
-            destinationInventory.GetComponent<InventoryUIManager>().inventory.AddItemToInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount);
-            startInventory.GetComponent<InventoryUIManager>().inventory.RemoveItemFromInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount);
-
+            if (destinationInventory != null)
+            {
+                if(destinationInventory.GetComponent<InventoryUIManager>().inventory.AddItemToInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount))
+                    startInventory.GetComponent<InventoryUIManager>().inventory.RemoveItemFromInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount);
+            }
             Destroy(objectBeingDragged);
 
             objectBeingDragged = null;
