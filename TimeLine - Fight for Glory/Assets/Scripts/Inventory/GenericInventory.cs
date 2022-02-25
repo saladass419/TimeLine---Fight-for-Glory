@@ -34,6 +34,7 @@ public class GenericInventory : MonoBehaviour
         else inventory.Add(item, putInAmount);
 
         RefreshInspector();
+
         if (InventoryChanged != null)
         {
             InventoryChanged();
@@ -97,5 +98,5 @@ public class ShowItemsInInspector
 }
 public enum InventoryType
 {
-    PlayerInventory, ChestInventory
+    PlayerInventory, ChestInventory, PlayerEquipment
 }

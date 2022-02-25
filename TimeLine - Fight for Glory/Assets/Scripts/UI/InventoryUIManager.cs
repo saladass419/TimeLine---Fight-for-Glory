@@ -10,6 +10,7 @@ using System;
 public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject[] slots;
+    [SerializeField] private InventoryType inventoryType;
     [SerializeField] private GenericInventory inventory;
 
     private GameObject startInventory;
@@ -18,18 +19,22 @@ public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler
     private GameObject objectHoveredOver;
     private GameObject objectBeingDragged;
     public GenericInventory Inventory { get => inventory; set => inventory = value; }
-    public void OpenInventory(GenericInventory inventoryToOpen)
-    {
-        Inventory = inventoryToOpen;
-    }
     private void Start()
     {
         FindObjectOfType<GenericInventory>().InventoryChanged += RefreshInventory;
+
+        if (inventoryType == InventoryType.PlayerInventory) OpenInventory(FindObjectOfType<PlayerInventory>());
+        if (inventoryType == InventoryType.PlayerEquipment) OpenInventory(FindObjectOfType<PlayerEquipmentInventory>());
+
         RefreshInventory();
     }
     private void Update()
     {
         RefreshInventory();
+    }
+    public void OpenInventory(GenericInventory inventoryToOpen)
+    {
+        Inventory = inventoryToOpen;
     }
     public void RefreshInventory()
     {
@@ -73,9 +78,24 @@ public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler
             destinationInventory = eventData.hovered.Find(a => a.CompareTag("InventoryItems"));
             if (destinationInventory != null)
             {
-                if(destinationInventory.GetComponent<InventoryUIManager>().inventory.AddItemToInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount))
-                    startInventory.GetComponent<InventoryUIManager>().inventory.RemoveItemFromInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount);
+                if (destinationInventory.GetComponent<InventoryUIManager>().inventoryType == InventoryType.PlayerEquipment)
+                {
+                    PlayerEquipmentInventory equipment = (PlayerEquipmentInventory)destinationInventory.GetComponent<InventoryUIManager>().inventory;
+                    equipment.EquipItem(objectBeingDragged.GetComponent<ItemInUI>().Item);
+                }
+                else if(startInventory.GetComponent<InventoryUIManager>().inventoryType == InventoryType.PlayerEquipment)
+                {
+
+                    PlayerEquipmentInventory equipment = (PlayerEquipmentInventory)startInventory.GetComponent<InventoryUIManager>().inventory;
+                    equipment.UnequipItem(objectBeingDragged.GetComponent<ItemInUI>().Item);
+                }
+                else
+                {
+                    if (destinationInventory.GetComponent<InventoryUIManager>().inventory.AddItemToInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount))
+                        startInventory.GetComponent<InventoryUIManager>().inventory.RemoveItemFromInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount);
+                }
             }
+
             Destroy(objectBeingDragged);
 
             objectBeingDragged = null;

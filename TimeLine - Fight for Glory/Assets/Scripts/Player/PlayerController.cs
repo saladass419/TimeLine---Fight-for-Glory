@@ -7,7 +7,10 @@ public class PlayerController : MonoBehaviour
 {
     private float threshhold = 10f;
 
-    [SerializeField] private GameObject playerInventory;
+    [SerializeField] private GameObject chestUI;
+    [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private GameObject equipmentUI;
+    [SerializeField] private GameObject informationUI;
 
     void Update()
     {
@@ -20,14 +23,11 @@ public class PlayerController : MonoBehaviour
             }
         }
         //Open inventory
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E)&&!chestUI.activeInHierarchy)
         {
-            if (playerInventory != null)
-            {
-                playerInventory.SetActive(!playerInventory.activeSelf);
-                GenericInventory inventory = FindObjectOfType<PlayerInventory>();
-                playerInventory.GetComponentInChildren<InventoryUIManager>().OpenInventory(inventory);
-            }
+            inventoryUI.SetActive(!inventoryUI.activeSelf);
+            equipmentUI.SetActive(!equipmentUI.activeSelf);
+            informationUI.SetActive(!informationUI.activeSelf);
         }
 
         //Open SkillTree
@@ -47,12 +47,16 @@ public class PlayerController : MonoBehaviour
         }
 
         //Open Chest
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L)&&!equipmentUI.activeInHierarchy)
         {
             GameObject chest = isObjectCloseEnough("Chest");
             if (chest != null)
             {
-                //inventoryToOpen.OpenInventory(chest);
+                chestUI.GetComponent<InventoryUIManager>().OpenInventory(chest.GetComponent<ChestInventory>());
+
+                chestUI.SetActive(!chestUI.activeSelf);
+                inventoryUI.SetActive(!inventoryUI.activeSelf);
+                informationUI.SetActive(!informationUI.activeSelf);
             }
         }
 
