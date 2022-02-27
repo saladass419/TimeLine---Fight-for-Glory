@@ -25,63 +25,47 @@ public class PlayerController : MonoBehaviour
             GameObject chest = isObjectCloseEnough("Chest");
             GameObject shop = isObjectCloseEnough("Shop");
 
-            if (item != null) 
-            { 
-               distanceItem  = Vector3.Distance(item.transform.position, transform.position); 
-            }
-            else
-            {
-                distanceItem = float.MaxValue;
-            }
-            if (chest!=null) 
-            { 
-                distanceChest = Vector3.Distance(chest.transform.position, transform.position); 
-            }
-            else
-            {
-                distanceChest = float.MaxValue;
-            }
-            if (shop != null)
-            {
-                distanceShop = Vector3.Distance(shop.transform.position, transform.position);
-            }
-            else
-            {
-                distanceShop = float.MaxValue;
-            }
+            if (item != null) distanceItem  = Vector3.Distance(item.transform.position, transform.position); 
+            else distanceItem = float.MaxValue;
 
-            if (distanceItem<distanceChest&&distanceItem<distanceShop)
+            if (chest != null) distanceChest = Vector3.Distance(chest.transform.position, transform.position);
+            else distanceChest = float.MaxValue;
+
+            if (shop != null) distanceShop = Vector3.Distance(shop.transform.position, transform.position);
+            else distanceShop = float.MaxValue;
+
+            switch (Mathf.Min(Mathf.Min(distanceItem,distanceShop),distanceChest))
             {
-                if (item != null)
-                {
-                    item.GetComponent<Item>().ItemPickUp();
-                }
-            }
-            else if(distanceChest<distanceShop)
-            {
-                if (!equipmentUI.activeInHierarchy&&!shopUI.activeInHierarchy)
-                {
-                    if (chest != null)
+
+                case var value when value == distanceItem:
+                    if (item != null) item.GetComponent<Item>().ItemPickUp();
+                break;
+                case var value when value == distanceShop:
+                    if (!chestUI.activeInHierarchy && !equipmentUI.activeInHierarchy)
                     {
-                        chestUI.GetComponent<InventoryUIManager>().OpenInventory(chest.GetComponent<ChestInventory>());
+                        if (shop != null)
+                        {
+                            shopUI.GetComponent<InventoryUIManager>().OpenInventory(shop.GetComponent<GenericInventory>());
 
-                        chestUI.SetActive(!chestUI.activeSelf);
-                        inventoryUI.SetActive(!inventoryUI.activeSelf);
-                        informationUI.SetActive(!informationUI.activeSelf);
+                            shopUI.SetActive(!shopUI.activeSelf);
+                            inventoryUI.SetActive(!inventoryUI.activeSelf);
+                            informationUI.SetActive(!informationUI.activeSelf);
+                        }
                     }
-                }
-            }
-            else
-            {
-                if(!chestUI.activeInHierarchy&&!equipmentUI.activeInHierarchy)
-                if (shop != null)
-                {
-                    shopUI.GetComponent<InventoryUIManager>().OpenInventory(shop.GetComponent<GenericInventory>());
+                break;
+                case var value when value == distanceChest:
+                    if (!equipmentUI.activeInHierarchy && !shopUI.activeInHierarchy)
+                    {
+                        if (chest != null)
+                        {
+                            chestUI.GetComponent<InventoryUIManager>().OpenInventory(chest.GetComponent<ChestInventory>());
 
-                    shopUI.SetActive(!shopUI.activeSelf);
-                    inventoryUI.SetActive(!inventoryUI.activeSelf);
-                    informationUI.SetActive(!informationUI.activeSelf);
-                }
+                            chestUI.SetActive(!chestUI.activeSelf);
+                            inventoryUI.SetActive(!inventoryUI.activeSelf);
+                            informationUI.SetActive(!informationUI.activeSelf);
+                        }
+                    }
+                break;
             }
         }
         //Open inventory
