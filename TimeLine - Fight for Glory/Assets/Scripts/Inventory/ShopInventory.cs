@@ -25,15 +25,15 @@ public class ShopInventory : GenericInventory
             if (rnd.Next(0, 100) > inventory.ElementAt(i).Key.Rarity) RemoveItemFromInventory(inventory.ElementAt(i).Key,inventory.ElementAt(i).Value);
         }
     }
-    public void PurchaseItem(GenericItemObject item, GameObject player)
+    public void PurchaseItem(GenericItemObject item, int amount, GameObject player)
     {
         if(item.Price<=player.GetComponent<PlayerStats>().Currency)
         {
-            Debug.Log(item.Price);
-            if(!player.GetComponent<PlayerInventory>().AddItemToInventory(item, 1)) return;
+            if(!player.GetComponent<PlayerInventory>().AddItemToInventory(item, amount)) return;
 
-            player.GetComponent<PlayerStats>().Currency -= item.Price;
+            player.GetComponent<PlayerStats>().Currency -= (item.Price*amount);
 
+            Debug.Log(item.name+" for "+item.Price);
             RemoveItemFromInventory(item,1);
         }
     }

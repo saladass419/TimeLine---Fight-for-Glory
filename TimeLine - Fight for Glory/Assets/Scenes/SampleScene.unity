@@ -1973,6 +1973,7 @@ MonoBehaviour:
   - {fileID: 655580842}
   inventoryType: 1
   inventory: {fileID: 0}
+  sliderObject: {fileID: 0}
 --- !u!114 &494447049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3014,6 +3015,7 @@ MonoBehaviour:
   - {fileID: 1894963655}
   inventoryType: 3
   inventory: {fileID: 0}
+  sliderObject: {fileID: 0}
 --- !u!114 &900330118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4523,6 +4525,7 @@ MonoBehaviour:
   - {fileID: 132280438}
   inventoryType: 0
   inventory: {fileID: 0}
+  sliderObject: {fileID: 0}
 --- !u!114 &1324536224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6452,6 +6455,7 @@ MonoBehaviour:
   - {fileID: 1765456902}
   inventoryType: 2
   inventory: {fileID: 0}
+  sliderObject: {fileID: 0}
 --- !u!114 &1845502622
 MonoBehaviour:
   m_ObjectHideFlags: 0
