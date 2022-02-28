@@ -7,14 +7,17 @@ public class PlayerEquipmentInventory : GenericInventory
 {
     public event Action<AttributeName, float> itemEquipped;
     private PlayerInventory playerInventory;
+    public PlayerInventory PlayerInventory { get => playerInventory; set => playerInventory = value; }
+
     private void Awake()
     {
         inventoryType = InventoryType.PlayerEquipment;
         if (maxSlot == 0) maxSlot = 6;
+        playerInventory = gameObject.GetComponent<PlayerInventory>();
     }
     private void Start()
     {
-        playerInventory = gameObject.GetComponent<PlayerInventory>();
+        PlayerInventory = gameObject.GetComponent<PlayerInventory>();
 
         SetStartingEquipmentsFromInspector();
     }
@@ -26,7 +29,7 @@ public class PlayerEquipmentInventory : GenericInventory
             return;
         }
 
-        if (!playerInventory.RemoveItemFromInventory(item, 1)) return;
+        if (!PlayerInventory.RemoveItemFromInventory(item, 1)) return;
         AddItemToInventory(item,1);
 
         if (itemEquipped != null)
@@ -39,7 +42,7 @@ public class PlayerEquipmentInventory : GenericInventory
     }
     public void UnequipItem(GenericItemObject item)
     {
-        if (!playerInventory.AddItemToInventory(item, 1)) return;
+        if (!PlayerInventory.AddItemToInventory(item, 1)) return;
         RemoveItemFromInventory(item,1);
         if (itemEquipped != null)
         {

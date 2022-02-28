@@ -6,15 +6,32 @@ using System;
 
 public class PlayerInventory : GenericInventory
 {
+    private List<Item> foundItems;
+
+    private PlayerEquipmentInventory equipmentInventory;
+    public PlayerEquipmentInventory EquipmentInventory { get => equipmentInventory; set => equipmentInventory = value; }
+
     private void Awake()
     {
         inventoryType = InventoryType.PlayerInventory;
         if(maxSlot==0) maxSlot = 24;
+        equipmentInventory = gameObject.GetComponent<PlayerEquipmentInventory>();
     }
     private void Start()
     {
-        FindObjectOfType<Item>().itemPickUpEventInventory += AddItemToInventory;
+        foundItems = new List<Item>();
         SetStartingItemsFromInspector();
     }
-    
+    private void Update()
+    {
+        List<Item> tempItems = FindObjectsOfType<Item>().ToList();
+        for (int i = 0; i < tempItems.Count; i++)
+        {
+            if (!foundItems.Contains(tempItems[i]))
+            {
+                tempItems[i].itemPickUpEventInventory += AddItemToInventory;
+                foundItems.Add(tempItems[i]);
+            }
+        }
+    }
 }

@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
             if (shop != null) distanceShop = Vector3.Distance(shop.transform.position, transform.position);
             else distanceShop = float.MaxValue;
 
+            //Interact with buildings/items
             switch (Mathf.Min(Mathf.Min(distanceItem,distanceShop),distanceChest))
             {
 
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (shop != null)
                         {
-                            shopUI.GetComponent<InventoryUIManager>().OpenInventory(shop.GetComponent<GenericInventory>());
+                            shopUI.GetComponent<GenericInventoryUI>().Inventory = shop.GetComponent<GenericInventory>();
 
                             shopUI.SetActive(!shopUI.activeSelf);
                             inventoryUI.SetActive(!inventoryUI.activeSelf);
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (chest != null)
                         {
-                            chestUI.GetComponent<InventoryUIManager>().OpenInventory(chest.GetComponent<ChestInventory>());
+                            chestUI.GetComponent<GenericInventoryUI>().Inventory = chest.GetComponent<ChestInventory>();
 
                             chestUI.SetActive(!chestUI.activeSelf);
                             inventoryUI.SetActive(!inventoryUI.activeSelf);
