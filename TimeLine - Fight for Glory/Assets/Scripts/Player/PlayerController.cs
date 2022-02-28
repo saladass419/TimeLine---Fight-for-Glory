@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     private float threshhold = 10f;
 
+    private GameObject currentlyOpen;
+
     [SerializeField] private GameObject chestUI;
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject equipmentUI;
@@ -37,25 +39,11 @@ public class PlayerController : MonoBehaviour
             //Interact with buildings/items
             switch (Mathf.Min(Mathf.Min(distanceItem,distanceShop),distanceChest))
             {
-
                 case var value when value == distanceItem:
                     if (item != null) item.GetComponent<Item>().ItemPickUp();
                 break;
-                case var value when value == distanceShop:
-                    if (!chestUI.activeInHierarchy && !equipmentUI.activeInHierarchy)
-                    {
-                        if (shop != null)
-                        {
-                            shopUI.GetComponent<GenericInventoryUI>().Inventory = shop.GetComponent<GenericInventory>();
-
-                            shopUI.SetActive(!shopUI.activeSelf);
-                            inventoryUI.SetActive(!inventoryUI.activeSelf);
-                            informationUI.SetActive(!informationUI.activeSelf);
-                        }
-                    }
-                break;
                 case var value when value == distanceChest:
-                    if (!equipmentUI.activeInHierarchy && !shopUI.activeInHierarchy)
+                    if (currentlyOpen == null||currentlyOpen == chestUI)
                     {
                         if (chest != null)
                         {
@@ -64,17 +52,39 @@ public class PlayerController : MonoBehaviour
                             chestUI.SetActive(!chestUI.activeSelf);
                             inventoryUI.SetActive(!inventoryUI.activeSelf);
                             informationUI.SetActive(!informationUI.activeSelf);
+
+                            if (currentlyOpen == null) currentlyOpen = chestUI;
+                            else if (currentlyOpen == chestUI) currentlyOpen = null;
+                        }
+                    }
+                break;
+                case var value when value == distanceShop:
+                    if (currentlyOpen == null || currentlyOpen == shopUI)
+                    {
+                        if (shop != null)
+                        {
+                            shopUI.GetComponent<GenericInventoryUI>().Inventory = shop.GetComponent<GenericInventory>();
+
+                            shopUI.SetActive(!shopUI.activeSelf);
+                            inventoryUI.SetActive(!inventoryUI.activeSelf);
+                            informationUI.SetActive(!informationUI.activeSelf);
+
+                            if (currentlyOpen == null) currentlyOpen = shopUI;
+                            else if (currentlyOpen == shopUI) currentlyOpen = null;
                         }
                     }
                 break;
             }
         }
         //Open inventory
-        if(Input.GetKeyDown(KeyCode.E)&&!chestUI.activeInHierarchy)
+        if(Input.GetKeyDown(KeyCode.E)&&(currentlyOpen == null || currentlyOpen == equipmentUI))
         {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
             equipmentUI.SetActive(!equipmentUI.activeSelf);
             informationUI.SetActive(!informationUI.activeSelf);
+
+            if (currentlyOpen == null) currentlyOpen = equipmentUI;
+            else if (currentlyOpen == equipmentUI) currentlyOpen = null;
         }
 
         //Open SkillTree
