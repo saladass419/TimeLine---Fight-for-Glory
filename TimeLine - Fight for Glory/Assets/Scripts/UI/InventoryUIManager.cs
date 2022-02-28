@@ -73,6 +73,7 @@ public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler
     }
     public void OnEndDrag(PointerEventData eventData)
     {
+        ItemInUI item = objectBeingDragged.GetComponent<ItemInUI>();
         if (objectBeingDragged != null)
         {
             destinationInventory = eventData.hovered.Find(a => a.CompareTag("InventoryItems"));
@@ -81,25 +82,24 @@ public class InventoryUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler
                 if (destinationInventory.GetComponent<InventoryUIManager>().inventoryType == InventoryType.PlayerEquipment)
                 {
                     PlayerEquipmentInventory equipment = (PlayerEquipmentInventory)destinationInventory.GetComponent<InventoryUIManager>().inventory;
-                    equipment.EquipItem(objectBeingDragged.GetComponent<ItemInUI>().Item);
+                    equipment.EquipItem(item.Item);
                 }
                 else if (startInventory.GetComponent<InventoryUIManager>().inventoryType == InventoryType.PlayerEquipment)
                 {
                     PlayerEquipmentInventory equipment = (PlayerEquipmentInventory)startInventory.GetComponent<InventoryUIManager>().inventory;
-                    equipment.UnequipItem(objectBeingDragged.GetComponent<ItemInUI>().Item);
+                    equipment.UnequipItem(item.Item);
                 }
-                else if (startInventory.GetComponent<InventoryUIManager>().inventoryType == InventoryType.ShopInventory&&destinationInventory.GetComponent<InventoryUIManager>().inventoryType==InventoryType.PlayerInventory)
+                else if (startInventory.GetComponent<InventoryUIManager>().inventoryType == InventoryType.ShopInventory && destinationInventory.GetComponent<InventoryUIManager>().inventoryType == InventoryType.PlayerInventory)
                 {
                     ShopInventory shop = (ShopInventory)startInventory.GetComponent<InventoryUIManager>().inventory;
-                    shop.PurchaseItem(objectBeingDragged.GetComponent<ItemInUI>().Item,1, FindObjectOfType<PlayerInventory>().gameObject); //Not sure it works for multiplayer
+                    shop.PurchaseItem(item.Item, 1, FindObjectOfType<PlayerInventory>().gameObject); //Not sure it works for multiplayer
                 }
                 else
                 {
-                    if (destinationInventory.GetComponent<InventoryUIManager>().inventory.AddItemToInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount))
-                        startInventory.GetComponent<InventoryUIManager>().inventory.RemoveItemFromInventory(objectBeingDragged.GetComponent<ItemInUI>().Item, objectBeingDragged.GetComponent<ItemInUI>().Amount);
+                    if (destinationInventory.GetComponent<InventoryUIManager>().inventory.AddItemToInventory(item.Item, item.Amount))
+                        startInventory.GetComponent<InventoryUIManager>().inventory.RemoveItemFromInventory(item.Item, item.Amount);
                 }
             }
-
             Destroy(objectBeingDragged);
 
             objectBeingDragged = null;
