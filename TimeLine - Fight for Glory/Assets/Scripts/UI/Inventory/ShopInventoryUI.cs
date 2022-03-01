@@ -22,7 +22,6 @@ public class ShopInventoryUI : GenericInventoryUI
                     break;
                 default:
                     DestroyItemBeingDragged();
-                    RefreshInventory();
                     break;
             }
         }
@@ -41,6 +40,5 @@ public class ShopInventoryUI : GenericInventoryUI
         shop.PurchaseItem(ItemBeingDragged.Item, ItemAmount, player.gameObject);
 
         DestroyItemBeingDragged();
-        RefreshInventory();
     }
 }

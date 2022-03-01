@@ -22,7 +22,6 @@ public class ChestInventoryUI : GenericInventoryUI
                     break;
                 default:
                     DestroyItemBeingDragged();
-                    RefreshInventory();
                     break;
             }
         }
@@ -42,6 +41,5 @@ public class ChestInventoryUI : GenericInventoryUI
             chest.RemoveItemFromInventory(ItemBeingDragged.Item, ItemAmount);
 
         DestroyItemBeingDragged();
-        RefreshInventory();
     }
 }

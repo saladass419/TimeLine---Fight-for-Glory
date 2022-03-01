@@ -19,9 +19,10 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
 
     private GameObject objectHoveredOver;
     private GameObject objectBeingDragged;
-
     private ItemInUI itemBeingDragged;
+
     [SerializeField] private SliderUI slider;
+    [SerializeField] private GameObject informationTab;
     private int itemAmount;
 
     public GenericInventory Inventory { get => inventory; set => inventory = value; }
@@ -38,12 +39,12 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
 
     private void Start()
     {
-        FindObjectOfType<GenericInventory>().InventoryChanged += RefreshInventory;
+        GenericInventory[] inventoriesInScene = FindObjectsOfType<GenericInventory>();
+        for (int i = 0; i < inventoriesInScene.Length; i++)
+        {
+            inventoriesInScene[i].InventoryChanged += RefreshInventory;
+        }
         GetSlots();
-        RefreshInventory();
-    }
-    private void Update()
-    {
         RefreshInventory();
     }
     private void GetSlots()
@@ -95,7 +96,17 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
     public virtual void OnEndDrag(PointerEventData eventData)
     {
         DestinationInventory = eventData.hovered.Find(a => a.CompareTag("InventoryItems"));
-        DestType = DestinationInventory.GetComponent<GenericInventoryUI>().InventoryType;
+        if (objectBeingDragged != null) objectBeingDragged.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+        if (destinationInventory != null) DestType = DestinationInventory.GetComponent<GenericInventoryUI>().InventoryType;
+        else DestroyItemBeingDragged();
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ObjectHoveredOver = eventData.hovered.Find(a => a.CompareTag("InventoryItemPrefab"));
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ObjectHoveredOver = null;
     }
     public void DestroyItemBeingDragged()
     {
@@ -107,15 +118,6 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
         DestinationInventory = null;
         StartInventory = null;
     }
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        ObjectHoveredOver = eventData.hovered.Find(a => a.CompareTag("InventoryItemPrefab"));
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        ObjectHoveredOver = null;
-    }
-
     public GameObject CreateTempItem(GameObject obj)
     {
         GameObject tempItem = null;
@@ -128,6 +130,7 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
         var image = tempItem.AddComponent<Image>();
         image.sprite = obj.GetComponent<ItemInUI>().Item.ItemSprite;
         image.raycastTarget = false;
+        image.transform.localScale *= 2;
 
         var item = tempItem.AddComponent<ItemInUI>();
         item.Item = obj.GetComponent<ItemInUI>().Item;

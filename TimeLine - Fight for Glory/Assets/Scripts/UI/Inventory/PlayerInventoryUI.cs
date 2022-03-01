@@ -28,15 +28,12 @@ public class PlayerInventoryUI : GenericInventoryUI
                     equipment.EquipItem(ItemBeingDragged.Item);
 
                     DestroyItemBeingDragged();
-                    RefreshInventory();
                     break;
                 default:
                     DestroyItemBeingDragged();
-                    RefreshInventory();
                     break;
             }
         }
-        
     }
     public IEnumerator WaitForValue()
     {
@@ -52,6 +49,5 @@ public class PlayerInventoryUI : GenericInventoryUI
             player.RemoveItemFromInventory(ItemBeingDragged.Item, ItemAmount);
 
         DestroyItemBeingDragged();
-        RefreshInventory();
     }
 }

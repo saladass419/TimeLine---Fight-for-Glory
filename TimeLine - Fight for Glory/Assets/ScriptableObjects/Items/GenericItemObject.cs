@@ -27,6 +27,8 @@ public class GenericItemObject : ScriptableObject
     public int Price { get => price; set => price = value; }
     public RarityType RarityType { get => rarityType; private set => rarityType = value; }
     public Sprite ItemSprite { get => itemSprite; set => itemSprite = value; }
+    public string ItemName { get => itemName; set => itemName = value; }
+    public string ItemDescription { get => itemDescription; set => itemDescription = value; }
 
     private void OnValidate()
     {

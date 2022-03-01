@@ -7,7 +7,7 @@ public class EquipmentInventoryUI : GenericInventoryUI
 {
     void Awake()
     {
-        Inventory =FindObjectOfType<PlayerEquipmentInventory>();
+        Inventory = FindObjectOfType<PlayerEquipmentInventory>();
         InventoryType = InventoryType.PlayerEquipment;
     }
     public override void OnEndDrag(PointerEventData eventData)
@@ -28,6 +28,5 @@ public class EquipmentInventoryUI : GenericInventoryUI
             }
         }
         DestroyItemBeingDragged();
-        RefreshInventory();
     }
 }

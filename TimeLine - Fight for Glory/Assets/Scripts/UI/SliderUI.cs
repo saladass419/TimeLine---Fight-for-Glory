@@ -16,6 +16,12 @@ public class SliderUI : MonoBehaviour
     }
     public void SetBasics(int maxValue)
     {
+        if (maxValue == 1)
+        {
+            value = 1;
+            ReturnValue();
+            return;
+        }
         slider = gameObject.GetComponent<Slider>();
         displayValue = gameObject.GetComponentInChildren<Text>();
         slider.wholeNumbers = true;

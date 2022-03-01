@@ -10,7 +10,6 @@ public class GenericInventory : MonoBehaviour
     public int maxSlot;
 
     public Dictionary<GenericItemObject, int> inventory = new Dictionary<GenericItemObject, int>();
-
     [SerializeField] public List<ShowItemsInInspector> inventoryItems = new List<ShowItemsInInspector>();
 
     public event Action InventoryChanged;
