@@ -18,16 +18,28 @@ public class ChestInventoryUI : GenericInventoryUI
             switch (DestType)
             {
                 case InventoryType.PlayerInventory:
-                    PlayerInventory player = (PlayerInventory)DestinationInventory.GetComponent<GenericInventoryUI>().Inventory;
-                    ChestInventory chest = (ChestInventory)StartInventory.GetComponent<GenericInventoryUI>().Inventory;
-
-                    if (player.AddItemToInventory(ItemBeingDragged.Item, ItemBeingDragged.Amount))
-                        chest.RemoveItemFromInventory(ItemBeingDragged.Item, ItemBeingDragged.Amount);
+                    StartCoroutine(WaitForValue());
                     break;
                 default:
+                    DestroyItemBeingDragged();
+                    RefreshInventory();
                     break;
             }
         }
+    }
+    public IEnumerator WaitForValue()
+    {
+        PlayerInventory player = (PlayerInventory)DestinationInventory.GetComponent<GenericInventoryUI>().Inventory;
+        ChestInventory chest = (ChestInventory)StartInventory.GetComponent<GenericInventoryUI>().Inventory;
+
+        Slider.gameObject.SetActive(true);
+        Slider.SetBasics(ItemBeingDragged.Amount);
+
+        yield return new WaitUntil(() => SliderUI.isValueSet);
+
+        ItemAmount = SliderUI.value;
+        if (player.AddItemToInventory(ItemBeingDragged.Item, ItemAmount))
+            chest.RemoveItemFromInventory(ItemBeingDragged.Item, ItemAmount);
 
         DestroyItemBeingDragged();
         RefreshInventory();

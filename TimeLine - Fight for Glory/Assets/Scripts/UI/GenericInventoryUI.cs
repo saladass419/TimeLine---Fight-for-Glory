@@ -21,6 +21,8 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
     private GameObject objectBeingDragged;
 
     private ItemInUI itemBeingDragged;
+    [SerializeField] private SliderUI slider;
+    private int itemAmount;
 
     public GenericInventory Inventory { get => inventory; set => inventory = value; }
     public GameObject StartInventory { get => startInventory; set => startInventory = value; }
@@ -31,6 +33,8 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
     public ItemInUI ItemBeingDragged { get => itemBeingDragged; set => itemBeingDragged = value; }
     public InventoryType StartType { get => startType; set => startType = value; }
     public InventoryType DestType { get => destType; set => destType = value; }
+    public SliderUI Slider { get => slider; set => slider = value; }
+    public int ItemAmount { get => itemAmount; set => itemAmount = value; }
 
     private void Start()
     {

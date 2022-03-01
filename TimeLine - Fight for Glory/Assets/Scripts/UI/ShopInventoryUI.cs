@@ -18,15 +18,27 @@ public class ShopInventoryUI : GenericInventoryUI
             switch (DestType)
             {
                 case InventoryType.PlayerInventory:
-                    ShopInventory shop = (ShopInventory)StartInventory.GetComponent<GenericInventoryUI>().Inventory;
-                    PlayerInventory player = (PlayerInventory)DestinationInventory.GetComponent<GenericInventoryUI>().Inventory;
-
-                    shop.PurchaseItem(ItemBeingDragged.Item, 1, player.gameObject);
+                    StartCoroutine(WaitForValue());
                     break;
                 default:
+                    DestroyItemBeingDragged();
+                    RefreshInventory();
                     break;
             }
         }
+    }
+    public IEnumerator WaitForValue()
+    {
+        ShopInventory shop = (ShopInventory)StartInventory.GetComponent<GenericInventoryUI>().Inventory;
+        PlayerInventory player = (PlayerInventory)DestinationInventory.GetComponent<GenericInventoryUI>().Inventory;
+
+        Slider.gameObject.SetActive(true);
+        Slider.SetBasics(ItemBeingDragged.Amount);
+
+        yield return new WaitUntil(() => SliderUI.isValueSet);
+
+        ItemAmount = SliderUI.value;
+        shop.PurchaseItem(ItemBeingDragged.Item, ItemAmount, player.gameObject);
 
         DestroyItemBeingDragged();
         RefreshInventory();

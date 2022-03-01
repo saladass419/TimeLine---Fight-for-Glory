@@ -35,14 +35,14 @@ public class ShopInventory : GenericInventory
     }
     public void PurchaseItem(GenericItemObject item, int amount, GameObject player)
     {
-        if(item.Price<=player.GetComponent<PlayerStats>().Currency)
+        if(item.Price*amount<=player.GetComponent<PlayerStats>().Currency)
         {
             if(!player.GetComponent<PlayerInventory>().AddItemToInventory(item, amount)) return;
 
-            player.GetComponent<PlayerStats>().Currency -= item.Price;
+            player.GetComponent<PlayerStats>().Currency -= item.Price*amount;
 
-            Debug.Log(item.name+" for "+item.Price);
-            RemoveItemFromInventory(item,1);
+            Debug.Log(amount +" "+item.name+" for "+(item.Price*amount));
+            RemoveItemFromInventory(item,amount);
         }
     }
 }
