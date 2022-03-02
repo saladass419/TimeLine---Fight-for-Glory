@@ -15,6 +15,14 @@ public class Item : MonoBehaviour
     {
         if (amount < 1) amount = 1;
     }
+    private void Awake()
+    {
+        PlayerInventory[] players = FindObjectsOfType<PlayerInventory>();
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].SubscribeToItems(this.GetComponent<Item>());
+        }
+    }
     public void ItemPickUp()
     {
         if(itemPickUpEventInventory != null)

@@ -11,7 +11,6 @@ public class Skill : ScriptableObject
     [SerializeField] private int upgradeAttributeValueNumber = 20;
 
     [SerializeField] private SkillData[] skillData = new SkillData[3];
-
     public SkillData[] SkillData { get => skillData; set => skillData = value; }
     private void OnValidate()
     {
@@ -26,7 +25,7 @@ public class Skill : ScriptableObject
         UpgradeAttributes();
         UpdateUpgradeCost();
     }
-    private void Start()
+    private void Awake()
     {
         FindObjectOfType<PlayerSkills>().upgradeSkillLevel += UpgradeSkill;
     }

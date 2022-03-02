@@ -70,28 +70,4 @@ public class ChestInventory : GenericInventory
             }
         }
     }
-    public bool PutItemsInChest(GenericInventory inventoryFrom, GenericItemObject item, int amount) // needs a interaction managers of some sort
-    {
-        if (IsEnoughSpaceInInventory(item,amount)==amount)
-        {
-            if (inventoryFrom.RemoveItemFromInventory(item, amount))
-            {
-                AddItemToInventory(item, amount);
-                return true;
-            }
-        }
-        return false;
-    }
-    public bool TakeItemsFronChest(GenericInventory inventoryTo, GenericItemObject item, int amount) // needs a interaction managers of some sort
-    {
-        if (IsEnougItemsInInventory(item, amount))
-        {
-            if (inventoryTo.AddItemToInventory(item, amount))
-            {
-                RemoveItemFromInventory(item, amount);
-                return true;
-            }
-        }
-        return false;
-    }
 }

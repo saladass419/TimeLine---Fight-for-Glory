@@ -26,6 +26,8 @@ public class GenericInventory : MonoBehaviour
     }
     public bool AddItemToInventory(GenericItemObject item, int amount)
     {
+        if (amount == 0) return true;
+
         int putInAmount = IsEnoughSpaceInInventory(item, amount);
         if (putInAmount<1) return false;
 
@@ -42,6 +44,8 @@ public class GenericInventory : MonoBehaviour
     }
     public bool RemoveItemFromInventory(GenericItemObject item, int amount)
     {
+        if(amount == 0) return true;
+
         if (IsEnougItemsInInventory(item, amount))
         {
             inventory[item] -= amount;
