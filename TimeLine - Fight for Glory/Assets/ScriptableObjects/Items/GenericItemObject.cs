@@ -18,6 +18,7 @@ public class GenericItemObject : ScriptableObject
     [SerializeField] private Sprite itemSprite;
     [SerializeField] private bool isStackable;
     [SerializeField] private Attribute[] attributes;
+    [SerializeField] private Sprite backGround;
     public int ItemId { get => itemId; set => itemId = value; }
     public bool IsItemUnlocked { get => isItemUnlocked; set => isItemUnlocked = value; }
     public Attribute[] Attributes { get => attributes; set => attributes = value; }
@@ -29,6 +30,7 @@ public class GenericItemObject : ScriptableObject
     public Sprite ItemSprite { get => itemSprite; set => itemSprite = value; }
     public string ItemName { get => itemName; set => itemName = value; }
     public string ItemDescription { get => itemDescription; set => itemDescription = value; }
+    public Sprite BackGround { get => backGround; set => backGround = value; }
 
     private void OnValidate()
     {

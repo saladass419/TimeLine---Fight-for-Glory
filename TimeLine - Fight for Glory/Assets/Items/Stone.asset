@@ -21,6 +21,7 @@ MonoBehaviour:
   itemDescription: 
   itemTypes: 0200000000000000
   price: 20
-  itemSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  itemSprite: {fileID: 21300000, guid: 5513d62a52900c94fb29cd9f3c85862d, type: 3}
   isStackable: 1
   attributes: []
+  backGround: {fileID: 21300000, guid: bbc355b1c56ff4a4b9c250fbbfd2e61d, type: 3}
