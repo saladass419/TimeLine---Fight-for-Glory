@@ -14,6 +14,11 @@ public class SliderUI : MonoBehaviour
         value = (int)slider.value;
         ReturnValue();
     }
+    public void SetValueToMax()
+    {
+        value = (int)slider.maxValue;
+        ReturnValue();
+    }
     public void SetBasics(int maxValue)
     {
         if (maxValue == 1)

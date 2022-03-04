@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using System;
 
 [CreateAssetMenu(menuName = "Skill")]
 public class Skill : ScriptableObject
@@ -25,7 +27,7 @@ public class Skill : ScriptableObject
         UpgradeAttributes();
         UpdateUpgradeCost();
     }
-    private void Awake()
+    private void SubscribeToPlayer()
     {
         FindObjectOfType<PlayerSkills>().upgradeSkillLevel += UpgradeSkill;
     }
