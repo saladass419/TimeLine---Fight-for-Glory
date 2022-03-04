@@ -8,51 +8,72 @@ using System;
 public class Skill : ScriptableObject
 {
     [SerializeField] private SkillType skillType;
+    [SerializeField] private SkillLevel skillLevel;
+    [SerializeField] private SkillData skillData = new SkillData();
 
     [SerializeField] private int upgradeCostNumber = 2000;
     [SerializeField] private int upgradeAttributeValueNumber = 20;
 
-    [SerializeField] private SkillData[] skillData = new SkillData[3];
-    public SkillData[] SkillData { get => skillData; set => skillData = value; }
+    public SkillData SkillData { get => skillData; set => skillData = value; }
+    public SkillLevel SkillLevel { get => skillLevel; set => skillLevel = value; }
+    public SkillType SkillType { get => skillType; set => skillType = value; }
+
     private void OnValidate()
     {
-        SkillData[0].SkillLevel = SkillLevel.Basic;
-        SkillData[1].SkillLevel = SkillLevel.Advanced_a;
-        SkillData[2].SkillLevel = SkillLevel.Advanced_b;
-
-        SkillData[0].Level = Mathf.Clamp(SkillData[0].Level, 1, 5);
-        SkillData[1].Level = Mathf.Clamp(SkillData[1].Level, 1, 2);
-        SkillData[2].Level = Mathf.Clamp(SkillData[2].Level, 1, 2);
-
-        UpgradeAttributes();
+        switch (SkillLevel)
+        {
+            case SkillLevel.Basic:
+                SkillData.Level = Mathf.Clamp(SkillData.Level, 0, skillData.MaxLevel);
+                break;
+            case SkillLevel.Advanced_a:
+                SkillData.Level = Mathf.Clamp(SkillData.Level, 0, skillData.MaxLevel);
+                break;
+            case SkillLevel.Advanced_b:
+                SkillData.Level = Mathf.Clamp(SkillData.Level, 0, skillData.MaxLevel);
+                break;
+            default:
+                break;
+        }
         UpdateUpgradeCost();
-    }
-    private void SubscribeToPlayer()
-    {
-        FindObjectOfType<PlayerSkills>().upgradeSkillLevel += UpgradeSkill;
+        UpgradeAttributes();
     }
     public void UpdateUpgradeCost()
     {
-        SkillData[0].UpgradeCost = (upgradeCostNumber/10) * SkillData[0].Level + (SkillData[0].Level - 1) * (upgradeCostNumber/4); 
-        SkillData[1].UpgradeCost = upgradeCostNumber * SkillData[1].Level;
-        SkillData[2].UpgradeCost = upgradeCostNumber * SkillData[2].Level;
+        switch (SkillLevel)
+        {
+            case SkillLevel.Basic:
+                SkillData.UpgradeCost = (upgradeCostNumber / 10) * SkillData.Level + (skillData.Level>0?((SkillData.Level-1) * (upgradeCostNumber / 4)):0);
+                break;
+            case SkillLevel.Advanced_a:
+                SkillData.UpgradeCost = upgradeCostNumber * SkillData.Level;
+                break;
+            case SkillLevel.Advanced_b:
+                SkillData.UpgradeCost = upgradeCostNumber * SkillData.Level;
+                break;
+            default:
+                break;
+        }
     }
     public void UpgradeAttributes()
     {
-        foreach (SkillData skill in skillData)
+        foreach (Attribute attribute in SkillData.Attributes)
         {
-            foreach (Attribute attribute in skill.Attributes)
-            {
-                attribute.Value = upgradeAttributeValueNumber * (skill.UpgradeCost / 100);
-            }
+            attribute.Value = upgradeAttributeValueNumber * (SkillData.UpgradeCost/ 100);
         }
     }
-    public void UpgradeSkill(Skill skill, SkillLevel skillLevel)
+    [ContextMenu("UpgradeSkill")]
+    public void UpgradeSkill()
     {
-        skill.SkillData[((int)skillLevel)].Level++;
-        UpdateUpgradeCost();
-        UpgradeAttributes();
-
+        if (SkillData.Level < skillData.MaxLevel)
+        {
+            SkillData.Level++;
+            UpdateUpgradeCost();
+            UpgradeAttributes();
+            foreach (Attribute attribute in SkillData.Attributes)
+            {
+                FindObjectOfType<PlayerStats>().ChangeAttributeValue(attribute.AttributeName, attribute.Value);
+            }
+        }
     }
 }
 [System.Serializable]
@@ -60,15 +81,15 @@ public class SkillData
 {
     [SerializeField] private string skillName;
     [SerializeField] private string description;
-    [SerializeField] private SkillLevel skillLevel;
     [SerializeField] private int level;
+    [SerializeField] private int maxLevel;
     [SerializeField] private float upgradeCost;
     [SerializeField] private Sprite sprite;
     [SerializeField] private List<Attribute> attributes;
     public List<Attribute> Attributes { get => attributes; set => attributes = value; }
     public int Level { get => level; set => level = value; }
     public float UpgradeCost { get => upgradeCost; set => upgradeCost = value; }
-    public SkillLevel SkillLevel { get => skillLevel; set => skillLevel = value; }
+    public int MaxLevel { get => maxLevel; set => maxLevel = value; }
 }
 public enum SkillType
 {
