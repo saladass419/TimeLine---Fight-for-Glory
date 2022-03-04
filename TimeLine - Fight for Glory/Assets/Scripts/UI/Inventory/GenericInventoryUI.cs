@@ -65,9 +65,9 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
             slots[i].GetComponentInChildren<ItemInUI>().Item = item.Key;
             slots[i].GetComponentInChildren<ItemInUI>().Amount = item.Value;
 
-            images[0].sprite = item.Key.BackGround;
+            images[1].sprite = item.Key.BackGround;
 
-            images[1].sprite = item.Key.ItemSprite;
+            images[2].sprite = item.Key.ItemSprite;
             slots[i].GetComponentInChildren<TextMeshProUGUI>().text = item.Value.ToString();
 
             i++;
@@ -76,11 +76,11 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
         {
             Image[] images = slots[j].GetComponentsInChildren<Image>();
 
-            images[0].sprite = null;
+            images[1].sprite = null;
 
             slots[j].GetComponentInChildren<ItemInUI>().Item = null;
 
-            images[1].sprite = null;
+            images[2].sprite = null;
             slots[j].GetComponentInChildren<TextMeshProUGUI>().text = null;
         }
     }
