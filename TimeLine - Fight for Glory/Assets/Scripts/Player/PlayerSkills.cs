@@ -8,6 +8,6 @@ public class PlayerSkills : MonoBehaviour
     [SerializeField] private List<Skill> skills = new List<Skill>();
     public void OnButtonPressed(Skill skill)
     {
-        skill.UpgradeSkill();
+        skills.Find(a => skill).UpgradeSkill();
     }
 }

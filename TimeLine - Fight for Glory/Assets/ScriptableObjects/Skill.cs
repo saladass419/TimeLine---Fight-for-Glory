@@ -42,7 +42,7 @@ public class Skill : ScriptableObject
         switch (SkillLevel)
         {
             case SkillLevel.Basic:
-                SkillData.UpgradeCost = (upgradeCostNumber / 10) * SkillData.Level + (skillData.Level>0?((SkillData.Level-1) * (upgradeCostNumber / 4)):0);
+                SkillData.UpgradeCost = (upgradeCostNumber / 10) * SkillData.Level + (skillData.Level > 0 ? ((SkillData.Level - 1) * (upgradeCostNumber / 4)) : 0);
                 break;
             case SkillLevel.Advanced_a:
                 SkillData.UpgradeCost = upgradeCostNumber * SkillData.Level;

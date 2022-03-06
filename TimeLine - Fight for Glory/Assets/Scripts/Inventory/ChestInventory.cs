@@ -41,6 +41,7 @@ public class ChestInventory : GenericInventory
         inventoryItems.Clear();
 
         GenericItemObject tempItem = possibleItems.First(a => a.RarityType == rarityType);
+        if (tempItem == null) return;
         if (tempItem.IsStackable)
         {
             amount = rnd.Next(1, (Mathf.FloorToInt(tempItem.Rarity) / 10));
