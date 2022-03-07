@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillUI : MonoBehaviour
 {
@@ -10,18 +11,38 @@ public class SkillUI : MonoBehaviour
 
     [SerializeField] private Skill currentSkill;
     [SerializeField] private SkillData currentSkillData;
+    [SerializeField] private int currentSkillLevelToUpgradeTo;
     [SerializeField] private GameObject player;
 
-    public void SetCurrentSkill(int currentSkillID)
+    private void Start()
     {
-        currentSkill = Database.instance.skillObjects.Find(a => a.SkillID == currentSkillID);
+        foreach(var item in FindObjectsOfType<CurrentSkillOnUI>())
+        {
+            item.onButtonClicked += SetCurrentSkill;
+        }
+        foreach (var item in FindObjectsOfType<CurrentSkillDataOnUI>())
+        {
+            item.onButtonClicked += SetCurrentSkillData;
+        }
     }
-    public void SetCurrentSkillData(int currentSkillDataID)
+    private void OnValidate()
     {
-        currentSkillData = currentSkill.SkillData.Find(a => a.DataID == currentSkillDataID);
+        for (int i = 0; i < transform.childCount; i++)
+        {
+           // transform.GetChild(i).gameObject.GetComponent<Image>().sprite = ;
+        }
+    }
+    public void SetCurrentSkill(Skill skill)
+    {
+        currentSkill = skill;
+    }
+    public void SetCurrentSkillData(SkillData skillData, int level)
+    {
+        currentSkillData = skillData;
+        currentSkillLevelToUpgradeTo = level;
     }
     public void UpgradeSkill()
     {
-        player.GetComponent<PlayerSkills>().OnButtonPressed(currentSkillData);
+        player.GetComponent<PlayerSkills>().OnButtonPressed(currentSkillData, currentSkillLevelToUpgradeTo);
     }
 }

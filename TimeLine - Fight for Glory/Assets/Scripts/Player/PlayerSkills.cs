@@ -14,23 +14,23 @@ public class PlayerSkills : MonoBehaviour
             item.SetSkill();
         }
     }
-    public void OnButtonPressed(SkillData skillData)
+    public void OnButtonPressed(SkillData skillData,int level)
     {
         foreach (SkillTrio _skill in skillTrio)
         {
             if (_skill.SkillData.SkillName == skillData.SkillName)
             {
-                UpgradeSkill(skillData, _skill);
+                UpgradeSkill(skillData, _skill,level);
                 return;
             }
         }
     }
-    public void UpgradeSkill(SkillData _skillData,SkillTrio skill)
+    public void UpgradeSkill(SkillData _skillData,SkillTrio skill, int level)
     {
-        if (skill.Level < _skillData.MaxLevel)
+        if (skill.Level < _skillData.MaxLevel&&level>skill.Level)
         {
-            skill.Level++;
-            skill.Cost = _skillData.CalculateCost(skill.SkillAdvancemenLevel, skill.Level);
+            skill.Level = level;
+            skill.Cost = _skillData.CalculateCost(skill.SkillAdvancemenLevel, level);
             List<Attribute> newAttributes = _skillData.CalculateAttribute(skill.SkillData,skill.Cost);
             foreach (Attribute attribute in newAttributes)
             {
@@ -46,7 +46,7 @@ public class SkillTrio
     [SerializeField] private int level;
     [SerializeField] private int cost;
     [SerializeField] private Skill skill;
-    [SerializeField] private SkillData skillData;
+    private SkillData skillData;
     public void SetSkill()
     {
         skillData = skill.SkillData.Find(a => a.SkillLevel == skillAdvancemenLevel);

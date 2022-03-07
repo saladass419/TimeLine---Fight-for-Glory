@@ -7,20 +7,18 @@ using System;
 [System.Serializable]
 [CreateAssetMenu(menuName = "Skill")]
 public class Skill : ScriptableObject
-{
-    [SerializeField] private int skillID;
-
+{ 
     [SerializeField] private SkillType skillType;
     [SerializeField] private List<SkillData> skillData;
+    [SerializeField] private Sprite sprite;
 
     public SkillType SkillType { get => skillType; set => skillType = value; }
     public List<SkillData> SkillData { get => skillData; set => skillData = value; }
-    public int SkillID { get => skillID; set => skillID = value; }
+    public Sprite Sprite { get => sprite; set => sprite = value; }
 }
 [System.Serializable]
 public class SkillData
 {
-    [SerializeField] private int dataID;
     [SerializeField] private string skillName;
     [SerializeField] private string description;
     [SerializeField] private SkillAdvancemenLevel skillLevel;
@@ -37,20 +35,19 @@ public class SkillData
     public string SkillName { get => skillName; set => skillName = value; }
     public string Description { get => description; set => description = value; }
     public Sprite Sprite { get => sprite; set => sprite = value; }
-    public int DataID { get => dataID; set => dataID = value; }
 
     [SerializeField] private int upgradeCostNumber = 2000;
     [SerializeField] private int upgradeAttributeValueNumber = 20;
-    public int CalculateCost(SkillAdvancemenLevel skillAdvancementLevel, int level)
+    public int CalculateCost(SkillAdvancemenLevel skillAdvancementLevel,int _level)
     {
         switch (skillAdvancementLevel)
         {
             case SkillAdvancemenLevel.Basic:
-                return upgradeCostNumber / 10 * level + (level > 0 ? (level - 1) * (upgradeCostNumber / 4) : 0);
+                return upgradeCostNumber / 10 * _level + (_level > 0 ? (_level - 1) * (upgradeCostNumber / 4) : 0);
             case SkillAdvancemenLevel.Advanced_a:
-                return upgradeCostNumber * level;
+                return upgradeCostNumber * _level;
             case SkillAdvancemenLevel.Advanced_b:
-                return upgradeCostNumber * level;
+                return upgradeCostNumber * _level;
         }
         return int.MaxValue;
     }
