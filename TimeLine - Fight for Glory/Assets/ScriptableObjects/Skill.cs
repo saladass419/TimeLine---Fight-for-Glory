@@ -9,8 +9,8 @@ using System;
 public class Skill : ScriptableObject
 { 
     [SerializeField] private SkillType skillType;
-    [SerializeField] private List<SkillData> skillData;
     [SerializeField] private Sprite sprite;
+    [SerializeField] private List<SkillData> skillData;
 
     public SkillType SkillType { get => skillType; set => skillType = value; }
     public List<SkillData> SkillData { get => skillData; set => skillData = value; }
@@ -21,8 +21,8 @@ public class SkillData
 {
     [SerializeField] private string skillName;
     [SerializeField] private string description;
+    private int level;
     [SerializeField] private SkillAdvancemenLevel skillLevel;
-    [SerializeField] private int level;
     [SerializeField] private int maxLevel;
     [SerializeField] private float upgradeCost;
     [SerializeField] private Sprite sprite;
@@ -37,7 +37,6 @@ public class SkillData
     public Sprite Sprite { get => sprite; set => sprite = value; }
 
     [SerializeField] private int upgradeCostNumber = 2000;
-    [SerializeField] private int upgradeAttributeValueNumber = 20;
     public int CalculateCost(SkillAdvancemenLevel skillAdvancementLevel,int _level)
     {
         switch (skillAdvancementLevel)
@@ -57,7 +56,8 @@ public class SkillData
         for (int i = 0; i < skill.attributes.Count; i++)
         {
             Attribute tempAtt = new Attribute();
-            tempAtt.Value = upgradeAttributeValueNumber * (cost / 100);
+            tempAtt.AttributeName = skill.attributes[i].AttributeName;
+            tempAtt.Value = skill.attributes[i].Value * (cost / 100);
             tempAttributes.Add(tempAtt);
         }
         return tempAttributes;

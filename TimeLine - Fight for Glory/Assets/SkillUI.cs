@@ -25,13 +25,6 @@ public class SkillUI : MonoBehaviour
             item.onButtonClicked += SetCurrentSkillData;
         }
     }
-    private void OnValidate()
-    {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-           // transform.GetChild(i).gameObject.GetComponent<Image>().sprite = ;
-        }
-    }
     public void SetCurrentSkill(Skill skill)
     {
         currentSkill = skill;

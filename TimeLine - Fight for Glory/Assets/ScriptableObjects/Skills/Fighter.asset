@@ -12,39 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c35481b43c348a644accf8fde3d9ed61, type: 3}
   m_Name: Fighter
   m_EditorClassIdentifier: 
-  skillID: 1
   skillType: 0
+  sprite: {fileID: 21300000, guid: c0cf5206b1c3d7444aa30bbc731142f8, type: 3}
   skillData:
-  - dataID: 0
-    skillName: 
+  - skillName: Damage1
     description: 
     skillLevel: 0
-    level: 0
-    maxLevel: 0
+    maxLevel: 5
     upgradeCost: 0
-    sprite: {fileID: 0}
-    attributes: []
-    upgradeCostNumber: 0
-    upgradeAttributeValueNumber: 0
-  - dataID: 1
-    skillName: 
+    sprite: {fileID: 21300000, guid: 7b9222c3ab81c68418d40b171e78656f, type: 3}
+    attributes:
+    - attributeName: 1
+      value: 10
+    upgradeCostNumber: 1500
+    upgradeAttributeValueNumber: 10
+  - skillName: Damage2
     description: 
     skillLevel: 1
-    level: 0
-    maxLevel: 0
+    maxLevel: 2
     upgradeCost: 0
-    sprite: {fileID: 0}
-    attributes: []
-    upgradeCostNumber: 0
-    upgradeAttributeValueNumber: 0
-  - dataID: 2
-    skillName: 
+    sprite: {fileID: 21300000, guid: 94d26e6f21a632e42b70cd8a086007aa, type: 3}
+    attributes:
+    - attributeName: 1
+      value: 10
+    upgradeCostNumber: 2000
+    upgradeAttributeValueNumber: 15
+  - skillName: Damage3
     description: 
     skillLevel: 2
-    level: 0
-    maxLevel: 0
+    maxLevel: 2
     upgradeCost: 0
-    sprite: {fileID: 0}
-    attributes: []
-    upgradeCostNumber: 0
-    upgradeAttributeValueNumber: 0
+    sprite: {fileID: 21300000, guid: 4fa2836ebd3c61c4b80c43eab3c5cda9, type: 3}
+    attributes:
+    - attributeName: 0
+      value: 20
+    - attributeName: 1
+      value: 10
+    upgradeCostNumber: 2000
+    upgradeAttributeValueNumber: 15

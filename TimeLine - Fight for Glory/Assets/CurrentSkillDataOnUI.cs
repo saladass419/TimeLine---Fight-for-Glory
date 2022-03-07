@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class CurrentSkillDataOnUI : MonoBehaviour
 {
@@ -42,6 +42,7 @@ public class CurrentSkillDataOnUI : MonoBehaviour
             if (data.SkillLevel == skillAdvancemenLevel)
             {
                 skillData = data;
+                gameObject.GetComponent<Image>().sprite = skillData.Sprite;
             }
         }
     }
