@@ -12,13 +12,13 @@ public class PlayerStats : MonoBehaviour
     {
         FindObjectOfType<PlayerEquipmentInventory>().itemEquipped += ChangeAttributeValue;
     }
-    public void ChangeAttributeValue(AttributeName attribute, float value)
+    public void ChangeAttributeValue(AttributeName _attribute, float value)
     {
-        foreach (Attribute item in attributes)
+        foreach (Attribute attribute in attributes)
         {
-            if (item.AttributeName == attribute)
+            if (attribute.AttributeName == _attribute)
             {
-                item.ModifyValue(value);
+                attribute.ModifyValue(value);
                 break;
             }
         }

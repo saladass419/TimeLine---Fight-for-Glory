@@ -2,12 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class PlayerSkills : MonoBehaviour
 {
-    [SerializeField] private List<Skill> skills = new List<Skill>();
-    public void OnButtonPressed(Skill skill)
+    [SerializeField] private List<SkillTrio> skillTrio = new List<SkillTrio>();
+    private void Start()
     {
-        skills.Find(a => skill).UpgradeSkill();
+        foreach (var item in skillTrio)
+        {
+            item.SetSkill();
+        }
     }
+    public void OnButtonPressed(SkillData skillData)
+    {
+        foreach (SkillTrio _skill in skillTrio)
+        {
+            if (_skill.SkillData.SkillName == skillData.SkillName)
+            {
+                UpgradeSkill(skillData, _skill);
+                return;
+            }
+        }
+    }
+    public void UpgradeSkill(SkillData _skillData,SkillTrio skill)
+    {
+        if (skill.Level < _skillData.MaxLevel)
+        {
+            skill.Level++;
+            skill.Cost = _skillData.CalculateCost(skill.SkillAdvancemenLevel, skill.Level);
+            List<Attribute> newAttributes = _skillData.CalculateAttribute(skill.SkillData,skill.Cost);
+            foreach (Attribute attribute in newAttributes)
+            {
+                gameObject.GetComponent<PlayerStats>().ChangeAttributeValue(attribute.AttributeName, attribute.Value);
+            }
+        }
+    }
+}
+[System.Serializable]
+public class SkillTrio
+{
+    [SerializeField] private SkillAdvancemenLevel skillAdvancemenLevel;
+    [SerializeField] private int level;
+    [SerializeField] private int cost;
+    [SerializeField] private Skill skill;
+    [SerializeField] private SkillData skillData;
+    public void SetSkill()
+    {
+        skillData = skill.SkillData.Find(a => a.SkillLevel == skillAdvancemenLevel);
+    }
+    public SkillAdvancemenLevel SkillAdvancemenLevel { get => skillAdvancemenLevel; set => skillAdvancemenLevel = value; }
+    public int Level { get => level; set => level = value; }
+    public int Cost { get => cost; set => cost = value; }
+    public SkillData SkillData { get => skillData; set => skillData = value; }
+    public Skill Skill { get => skill; set => skill = value; }
 }

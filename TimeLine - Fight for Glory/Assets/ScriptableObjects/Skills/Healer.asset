@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35481b43c348a644accf8fde3d9ed61, type: 3}
+  m_Name: Healer
+  m_EditorClassIdentifier: 
+  skillID: 0
+  skillType: 0
+  skillData:
+  - dataID: 0
+    skillName: Heal1
+    description: 
+    skillLevel: 0
+    level: 0
+    maxLevel: 5
+    upgradeCost: 0
+    sprite: {fileID: 0}
+    attributes:
+    - attributeName: 0
+      value: 0
+    upgradeCostNumber: 2000
+    upgradeAttributeValueNumber: 20
+  - dataID: 1
+    skillName: Heal2
+    description: 
+    skillLevel: 1
+    level: 0
+    maxLevel: 2
+    upgradeCost: 0
+    sprite: {fileID: 0}
+    attributes:
+    - attributeName: 0
+      value: 0
+    upgradeCostNumber: 2000
+    upgradeAttributeValueNumber: 20
+  - dataID: 2
+    skillName: Heal3
+    description: 
+    skillLevel: 2
+    level: 0
+    maxLevel: 2
+    upgradeCost: 0
+    sprite: {fileID: 0}
+    attributes:
+    - attributeName: 0
+      value: 0
+    upgradeCostNumber: 2000
+    upgradeAttributeValueNumber: 20
