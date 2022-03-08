@@ -16,7 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: e6cbb0e155e88f64981f8e1b1537b58e, type: 3}
   skillData:
   - skillName: Heal1
-    description: 
+    description: Boosts you health permanently
     skillLevel: 0
     maxLevel: 5
     upgradeCost: 0

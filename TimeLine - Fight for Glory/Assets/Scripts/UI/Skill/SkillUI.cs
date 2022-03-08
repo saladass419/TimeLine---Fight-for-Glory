@@ -9,25 +9,17 @@ public class SkillUI : MonoBehaviour
     [SerializeField] private GameObject skillsUI;
     [SerializeField] private GameObject skillInformationUI;
 
-    [SerializeField] private Skill currentSkill;
-    [SerializeField] private SkillData currentSkillData;
-    [SerializeField] private int currentSkillLevelToUpgradeTo;
-    [SerializeField] private GameObject player;
+    private SkillData currentSkillData;
+    private int currentSkillLevelToUpgradeTo;
+    private GameObject player;
+    public GameObject Player { get => player; set => player = value; }
 
     private void Start()
     {
-        foreach(var item in FindObjectsOfType<CurrentSkillOnUI>())
-        {
-            item.onButtonClicked += SetCurrentSkill;
-        }
         foreach (var item in FindObjectsOfType<CurrentSkillDataOnUI>())
         {
             item.onButtonClicked += SetCurrentSkillData;
         }
-    }
-    public void SetCurrentSkill(Skill skill)
-    {
-        currentSkill = skill;
     }
     public void SetCurrentSkillData(SkillData skillData, int level)
     {

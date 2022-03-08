@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject equipmentUI;
     [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject informationUI;
+    [SerializeField] private GameObject skillUI;
 
     private float distanceItem;
     private float distanceChest;
@@ -90,7 +91,8 @@ public class PlayerController : MonoBehaviour
         //Open SkillTree
         if(Input.GetKeyDown(KeyCode.Y))
         {
-
+            skillUI.SetActive(!skillUI.activeSelf);
+            skillUI.GetComponent<SkillUI>().Player = gameObject;
         }
     }
 

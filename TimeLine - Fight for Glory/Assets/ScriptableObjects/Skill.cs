@@ -47,6 +47,8 @@ public class SkillData
                 return upgradeCostNumber * _level;
             case SkillAdvancemenLevel.Advanced_b:
                 return upgradeCostNumber * _level;
+            default:
+                break;
         }
         return int.MaxValue;
     }
@@ -69,5 +71,5 @@ public enum SkillType
 }
 public enum SkillAdvancemenLevel
 {
-    Basic, Advanced_a, Advanced_b
+    Basic, Advanced_a, Advanced_b, Automatic
 }
