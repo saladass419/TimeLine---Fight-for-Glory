@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using System.Linq;
 public class PlayerEquipmentInventory : GenericInventory
 {
     public event Action<AttributeName, float> itemEquipped;
@@ -23,12 +23,11 @@ public class PlayerEquipmentInventory : GenericInventory
     }
     public void EquipItem(GenericItemObject item)
     {
-        if (inventory.ContainsKey(item))
+        if (!item.itemTypes.Contains(ItemType.Equipment)&&item.EquipmentType==EquipmentType.None) return;
+        foreach (var key in inventory.Keys)
         {
-            Debug.Log("Item already equipped!");
-            return;
+            if (key.EquipmentType == item.EquipmentType) return;
         }
-
         if (!PlayerInventory.RemoveItemFromInventory(item, 1)) return;
         AddItemToInventory(item,1);
 

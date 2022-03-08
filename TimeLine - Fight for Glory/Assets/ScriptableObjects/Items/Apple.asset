@@ -10,18 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d73420c41c05f13439095b4fe5b9d29a, type: 3}
-  m_Name: Stone
+  m_Name: Apple
   m_EditorClassIdentifier: 
-  itemId: 0
+  itemId: 3
   itemDimensionAvailable: 0
   isItemUnlocked: 0
   rarity: 100
   rarityType: 0
-  itemName: Stone
+  itemName: Apple
   itemDescription: 
-  itemTypes: 0200000000000000
-  price: 20
-  itemSprite: {fileID: 21300000, guid: 5513d62a52900c94fb29cd9f3c85862d, type: 3}
+  itemTypes: 00000000
+  equipmentType: 0
+  price: 0
+  itemSprite: {fileID: 21300000, guid: 35cd4893760e34a4ba01d85b291c57a3, type: 3}
   isStackable: 1
-  attributes: []
-  backGround: {fileID: 21300000, guid: bbc355b1c56ff4a4b9c250fbbfd2e61d, type: 3}
+  attributes:
+  - attributeName: 0
+    value: 10
+  backGround: {fileID: 21300000, guid: f13c211ac7d883d4980e3d468e5368ff, type: 3}

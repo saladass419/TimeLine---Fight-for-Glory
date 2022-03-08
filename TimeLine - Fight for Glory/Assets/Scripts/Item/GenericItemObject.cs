@@ -14,11 +14,13 @@ public class GenericItemObject : ScriptableObject
     [SerializeField] private string itemName;
     [SerializeField] private string itemDescription;
     [SerializeField] public List <ItemType> itemTypes;
+    [SerializeField] private EquipmentType equipmentType;
     [SerializeField] private int price;
     [SerializeField] private Sprite itemSprite;
     [SerializeField] private bool isStackable;
     [SerializeField] private Attribute[] attributes;
     [SerializeField] private Sprite backGround;
+    public EquipmentType EquipmentType { get => equipmentType; set => equipmentType = value; }
     public int ItemId { get => itemId; set => itemId = value; }
     public bool IsItemUnlocked { get => isItemUnlocked; set => isItemUnlocked = value; }
     public Attribute[] Attributes { get => attributes; set => attributes = value; }
@@ -59,7 +61,7 @@ public class GenericItemObject : ScriptableObject
 }
 public enum ItemType
 {
-    Generic, Craftable, Shop
+    Generic, Craftable, Shop, Equipment
 }
 public enum RarityType
 {

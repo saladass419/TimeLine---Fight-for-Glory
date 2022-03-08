@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e398e537bd4c444f930b6cb264b746c, type: 3}
   m_Name: ChestPlate
   m_EditorClassIdentifier: 
-  itemId: 0
+  itemId: 4
   itemDimensionAvailable: 0
   isItemUnlocked: 0
-  rarity: 0
-  rarityType: 0
-  itemName: 
+  rarity: 52
+  rarityType: 3
+  itemName: ChestPlate
   itemDescription: 
-  itemTypes: 
+  itemTypes: 0100000003000000
+  equipmentType: 2
   price: 0
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: e1e4059959f1141478da169d86738095, type: 3}
   isStackable: 0
-  attributes: []
-  backGround: {fileID: 0}
+  attributes:
+  - attributeName: 0
+    value: 30
+  backGround: {fileID: 21300000, guid: bbc355b1c56ff4a4b9c250fbbfd2e61d, type: 3}
   craftingRecipe: []
