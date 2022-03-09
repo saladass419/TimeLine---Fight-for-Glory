@@ -21,6 +21,7 @@ public class SliderUI : MonoBehaviour
     }
     public void SetBasics(int maxValue)
     {
+        isValueSet = false;
         if (maxValue == 1)
         {
             value = 1;
@@ -30,9 +31,9 @@ public class SliderUI : MonoBehaviour
         slider = gameObject.GetComponent<Slider>();
         displayValue = gameObject.GetComponentInChildren<Text>();
         slider.wholeNumbers = true;
+        slider.minValue = 1;
         slider.maxValue = maxValue;
-        slider.value = 0;
-        isValueSet = false;
+        slider.value = 1;
     }
     private void Update()
     {
