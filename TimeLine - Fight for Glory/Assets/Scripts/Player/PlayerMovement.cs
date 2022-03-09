@@ -13,6 +13,14 @@ public class PlayerMovement : MonoBehaviour
 
     private float smoothDampTime = 0.1f;
     private float refVelocity;
+
+    private Vector3 gravityForce;
+    [SerializeField] private float gravity = -9.81f;
+
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private bool isGrounded;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float jumpHeight = 2f;
     
     private void Start()
     {
@@ -24,8 +32,15 @@ public class PlayerMovement : MonoBehaviour
         if (velocity.magnitude >= 0.05f)
         {
             SetRotation();
-            MovePlayer();
+            if (!UIOpen.isAnythingOpen) MovePlayer();
         }
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundLayer);
+        if (isGrounded && gravityForce.y < 0) gravityForce.y = -1f;
+        if (Input.GetButtonDown("Jump") && isGrounded && !UIOpen.isAnythingOpen)
+        {
+            gravityForce.y = Mathf.Sqrt(jumpHeight * (-2) * gravity);
+        }
+        ApplyGravity();
     }
     private void GetPlayerInput()
     {
@@ -45,5 +60,10 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
         controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
+    }
+    private void ApplyGravity()
+    {
+        gravityForce.y += gravity * Time.deltaTime;
+        controller.Move(gravityForce * Time.deltaTime);
     }
 }

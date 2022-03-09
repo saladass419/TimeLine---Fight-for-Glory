@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
                             chestUI.SetActive(!chestUI.activeSelf);
                             inventoryUI.SetActive(!inventoryUI.activeSelf);
                             informationUI.SetActive(!informationUI.activeSelf);
+                            UIOpen.isAnythingOpen = !UIOpen.isAnythingOpen;
 
                             if (currentlyOpen == null) currentlyOpen = chestUI;
                             else if (currentlyOpen == chestUI) currentlyOpen = null;
@@ -69,6 +70,7 @@ public class PlayerController : MonoBehaviour
                             shopUI.SetActive(!shopUI.activeSelf);
                             inventoryUI.SetActive(!inventoryUI.activeSelf);
                             informationUI.SetActive(!informationUI.activeSelf);
+                            UIOpen.isAnythingOpen = !UIOpen.isAnythingOpen;
 
                             if (currentlyOpen == null) currentlyOpen = shopUI;
                             else if (currentlyOpen == shopUI) currentlyOpen = null;
@@ -83,6 +85,7 @@ public class PlayerController : MonoBehaviour
             inventoryUI.SetActive(!inventoryUI.activeSelf);
             equipmentUI.SetActive(!equipmentUI.activeSelf);
             informationUI.SetActive(!informationUI.activeSelf);
+            UIOpen.isAnythingOpen = !UIOpen.isAnythingOpen;
 
             if (currentlyOpen == null) currentlyOpen = equipmentUI;
             else if (currentlyOpen == equipmentUI) currentlyOpen = null;
@@ -93,6 +96,7 @@ public class PlayerController : MonoBehaviour
         {
             skillUI.SetActive(!skillUI.activeSelf);
             skillUI.GetComponent<SkillUI>().Player = gameObject;
+            UIOpen.isAnythingOpen = !UIOpen.isAnythingOpen;
         }
     }
 
