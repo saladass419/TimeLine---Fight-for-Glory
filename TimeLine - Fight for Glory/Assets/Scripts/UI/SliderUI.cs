@@ -37,6 +37,10 @@ public class SliderUI : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            SetValueToMax();
+        }
         displayValue.text = slider.value.ToString();
     }
     public void ReturnValue()

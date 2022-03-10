@@ -28,6 +28,7 @@ public class PlayerEquipmentInventory : GenericInventory
         {
             if (key.EquipmentType == item.EquipmentType) return;
         }
+
         if (!PlayerInventory.RemoveItemFromInventory(item, 1)) return;
         AddItemToInventory(item,1);
 

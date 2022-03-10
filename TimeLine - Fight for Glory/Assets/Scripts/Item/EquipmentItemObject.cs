@@ -12,5 +12,5 @@ public class EquipmentItemObject : GenericItemObject
 }
 public enum EquipmentType
 {
-    None, Helmet,Chestplate, Leggings, Shoes, Shield, Sword
+    None, Helmet,Chestplate, Leggings, Shoes, Sword, Shield
 }

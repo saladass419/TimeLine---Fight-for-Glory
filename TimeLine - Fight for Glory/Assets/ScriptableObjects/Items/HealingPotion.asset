@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ecad830a55212345813c016eda5d4ae, type: 3}
   m_Name: HealingPotion
   m_EditorClassIdentifier: 
-  itemId: 0
+  itemId: 5
   itemDimensionAvailable: 0
   isItemUnlocked: 0
-  rarity: 0
+  rarity: 20
   rarityType: 2
   itemName: Potion Of Healing
   itemDescription: 
   itemTypes: 02000000
+  equipmentType: 0
   price: 300
   itemSprite: {fileID: 0}
   isStackable: 0

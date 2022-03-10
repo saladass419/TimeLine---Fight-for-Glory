@@ -20,7 +20,7 @@ MonoBehaviour:
   itemName: Sword
   itemDescription: 
   itemTypes: 010000000200000003000000
-  equipmentType: 6
+  equipmentType: 5
   price: 600
   itemSprite: {fileID: 21300000, guid: f596a2d48c8a0824e9241202ee8f021e, type: 3}
   isStackable: 0
