@@ -26,7 +26,21 @@ public class PlayerEquipmentInventory : GenericInventory
         if (!item.itemTypes.Contains(ItemType.Equipment)&&item.EquipmentType==EquipmentType.None) return;
         foreach (var key in inventory.Keys)
         {
-            if (key.EquipmentType == item.EquipmentType) return;
+            if (key.EquipmentType == item.EquipmentType)
+            {
+                playerInventory.RemoveItemFromInventory(item, 1);
+                UnequipItem(key);
+                AddItemToInventory(item, 1);
+
+                if (itemEquipped != null)
+                {
+                    foreach (Attribute attribute in item.Attributes)
+                    {
+                        itemEquipped(attribute.AttributeName, attribute.Value);
+                    }
+                }
+                return;
+            }
         }
 
         if (!PlayerInventory.RemoveItemFromInventory(item, 1)) return;
