@@ -13,7 +13,7 @@ public class GenericItemObject : ScriptableObject
     [SerializeField] private RarityType rarityType;
     [SerializeField] private string itemName;
     [SerializeField] private string itemDescription;
-    [SerializeField] public List <ItemType> itemTypes;
+    [SerializeField] private List<ItemType> itemTypes;
     [SerializeField] private EquipmentType equipmentType;
     [SerializeField] private int price;
     [SerializeField] private Sprite itemSprite;
@@ -33,6 +33,7 @@ public class GenericItemObject : ScriptableObject
     public string ItemName { get => itemName; set => itemName = value; }
     public string ItemDescription { get => itemDescription; set => itemDescription = value; }
     public Sprite BackGround { get => backGround; set => backGround = value; }
+    public List<ItemType> ItemTypes { get => itemTypes; set => itemTypes = value; }
 
     private void OnValidate()
     {
