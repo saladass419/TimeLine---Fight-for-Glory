@@ -60,17 +60,29 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
         int i = 0;
         foreach (var item in Inventory.inventory)
         {
-            Image[] images = slots[i].GetComponentsInChildren<Image>();
-
-            slots[i].GetComponentInChildren<ItemInUI>().Item = item.Key;
-            slots[i].GetComponentInChildren<ItemInUI>().Amount = item.Value;
-
-            images[1].sprite = item.Key.BackGround;
-
-            images[2].sprite = item.Key.ItemSprite;
-            slots[i].GetComponentInChildren<TextMeshProUGUI>().text = item.Value.ToString();
-
-            i++;
+            if (!item.Key.IsStackable)
+            {
+                for (int j = 0; j < item.Value; j++)
+                {
+                    Image[] images = slots[i].GetComponentsInChildren<Image>();
+                    slots[i].GetComponentInChildren<ItemInUI>().Item = item.Key;
+                    slots[i].GetComponentInChildren<ItemInUI>().Amount = 1;
+                    images[1].sprite = item.Key.BackGround;
+                    images[2].sprite = item.Key.ItemSprite;
+                    slots[i].GetComponentInChildren<TextMeshProUGUI>().text = "1";
+                    i++;
+                }
+            }
+            else
+            {
+                Image[] images = slots[i].GetComponentsInChildren<Image>();
+                slots[i].GetComponentInChildren<ItemInUI>().Item = item.Key;
+                slots[i].GetComponentInChildren<ItemInUI>().Amount = item.Value;
+                images[1].sprite = item.Key.BackGround;
+                images[2].sprite = item.Key.ItemSprite;
+                slots[i].GetComponentInChildren<TextMeshProUGUI>().text = item.Value.ToString();
+                i++;
+            }
         }
         for (int j = i; j < slots.Length; j++)
         {

@@ -62,15 +62,21 @@ public class GenericInventory : MonoBehaviour
     }
     public int IsEnoughSpaceInInventory(GenericItemObject item, int amount)
     {
+        int currentInventoryAmount = 0;
+        foreach (var pair in inventory)
+        {
+            if (!pair.Key.IsStackable) currentInventoryAmount += pair.Value;
+            else currentInventoryAmount++;
+        }
         for (int i = 0; i < amount; i++)
         {
             if (item.IsStackable)
             {
-                if (inventory.Keys.Count() < maxSlot) return amount;
+                if (currentInventoryAmount < maxSlot) return amount;
                 if (inventory.ContainsKey(item)) return amount;
             }else if (!item.IsStackable)
             {
-                int _amount = Mathf.Clamp(maxSlot - inventory.Keys.Count,0,amount);
+                int _amount = Mathf.Clamp(maxSlot - currentInventoryAmount, 0, amount);
                 return _amount;
             }
         }

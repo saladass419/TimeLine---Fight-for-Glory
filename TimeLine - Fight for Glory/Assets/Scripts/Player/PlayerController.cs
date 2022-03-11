@@ -5,7 +5,7 @@ using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
-    private float threshhold = 10f;
+    [SerializeField] private float range = 10f;
 
     private GameObject currentlyOpen;
 
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(distance < threshhold)
+        if(distance < range)
         {
             return objectToReturn;
         }
