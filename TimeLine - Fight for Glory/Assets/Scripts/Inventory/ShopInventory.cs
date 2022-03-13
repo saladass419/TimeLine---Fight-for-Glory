@@ -18,7 +18,7 @@ public class ShopInventory : GenericInventory
         for (int i = 0; i < Database.instance.ItemObjects.Count; i++)
         {
             item = Database.instance.ItemObjects[i];
-            if (item.itemTypes.Contains(ItemType.Shop) && item.ItemDimensionAvailable <= shopLevel)
+            if (item.ItemTypes.Contains(ItemType.Shop) && item.ItemDimensionAvailable <= shopLevel)
             {
                 int amount;
                 if (item.IsStackable)

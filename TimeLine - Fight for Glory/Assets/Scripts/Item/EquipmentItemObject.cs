@@ -6,8 +6,8 @@ public class EquipmentItemObject : GenericItemObject
 {
     private void OnValidate()
     {
-        if (!itemTypes.Contains(ItemType.Equipment))
-            itemTypes.Add(ItemType.Equipment);
+        if (!ItemTypes.Contains(ItemType.Equipment))
+            ItemTypes.Add(ItemType.Equipment);
     }
 }
 public enum EquipmentType

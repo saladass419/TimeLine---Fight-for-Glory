@@ -23,7 +23,7 @@ public class PlayerEquipmentInventory : GenericInventory
     }
     public void EquipItem(GenericItemObject item)
     {
-        if (!item.itemTypes.Contains(ItemType.Equipment)&&item.EquipmentType==EquipmentType.None) return;
+        if (!item.ItemTypes.Contains(ItemType.Equipment)&&item.EquipmentType==EquipmentType.None) return;
         foreach (var key in inventory.Keys)
         {
             if (key.EquipmentType == item.EquipmentType)

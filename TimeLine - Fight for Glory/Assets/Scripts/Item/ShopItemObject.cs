@@ -7,7 +7,7 @@ public class ShopItemObject : GenericItemObject
 {
     private void OnValidate()
     {
-        if (!itemTypes.Contains(ItemType.Shop))
-            itemTypes.Add(ItemType.Shop);
+        if (!ItemTypes.Contains(ItemType.Shop))
+            ItemTypes.Add(ItemType.Shop);
     }
 }
