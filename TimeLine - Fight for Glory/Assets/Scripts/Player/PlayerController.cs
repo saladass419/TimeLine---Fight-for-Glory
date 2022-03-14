@@ -6,16 +6,6 @@ using System.Linq;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float range = 10f;
-
-    private GameObject currentlyOpen;
-
-    [SerializeField] private GameObject chestUI;
-    [SerializeField] private GameObject inventoryUI;
-    [SerializeField] private GameObject equipmentUI;
-    [SerializeField] private GameObject shopUI;
-    [SerializeField] private GameObject informationUI;
-    [SerializeField] private GameObject skillUI;
-
     private float distanceItem;
     private float distanceChest;
     private float distanceShop;
@@ -44,59 +34,23 @@ public class PlayerController : MonoBehaviour
                     if (item != null) item.GetComponent<Item>().ItemPickUp();
                 break;
                 case var value when value == distanceChest:
-                    if (currentlyOpen == null||currentlyOpen == chestUI)
-                    {
-                        if (chest != null)
-                        {
-                            chestUI.GetComponent<GenericInventoryUI>().Inventory = chest.GetComponent<ChestInventory>();
-
-                            chestUI.SetActive(!chestUI.activeSelf);
-                            inventoryUI.SetActive(!inventoryUI.activeSelf);
-                            informationUI.SetActive(!informationUI.activeSelf);
-                            UIOpen.isAnythingOpen = !UIOpen.isAnythingOpen;
-
-                            if (currentlyOpen == null) currentlyOpen = chestUI;
-                            else if (currentlyOpen == chestUI) currentlyOpen = null;
-                        }
-                    }
+                    UIManager.instance.SetChest(chest,gameObject);
                 break;
                 case var value when value == distanceShop:
-                    if (currentlyOpen == null || currentlyOpen == shopUI)
-                    {
-                        if (shop != null)
-                        {
-                            shopUI.GetComponent<GenericInventoryUI>().Inventory = shop.GetComponent<GenericInventory>();
-
-                            shopUI.SetActive(!shopUI.activeSelf);
-                            inventoryUI.SetActive(!inventoryUI.activeSelf);
-                            informationUI.SetActive(!informationUI.activeSelf);
-                            UIOpen.isAnythingOpen = !UIOpen.isAnythingOpen;
-
-                            if (currentlyOpen == null) currentlyOpen = shopUI;
-                            else if (currentlyOpen == shopUI) currentlyOpen = null;
-                        }
-                    }
-                break;
+                    UIManager.instance.SetShop(shop,gameObject);
+                    break;
             }
         }
         //Open inventory
-        if(Input.GetKeyDown(KeyCode.E)&&(currentlyOpen == null || currentlyOpen == equipmentUI))
+        if(Input.GetKeyDown(KeyCode.E))
         {
-            inventoryUI.SetActive(!inventoryUI.activeSelf);
-            equipmentUI.SetActive(!equipmentUI.activeSelf);
-            informationUI.SetActive(!informationUI.activeSelf);
-            UIOpen.isAnythingOpen = !UIOpen.isAnythingOpen;
-
-            if (currentlyOpen == null) currentlyOpen = equipmentUI;
-            else if (currentlyOpen == equipmentUI) currentlyOpen = null;
+            UIManager.instance.SetEquipment(gameObject);
         }
 
         //Open SkillTree
         if(Input.GetKeyDown(KeyCode.Y))
         {
-            skillUI.SetActive(!skillUI.activeSelf);
-            skillUI.GetComponent<SkillUI>().Player = gameObject;
-            UIOpen.isAnythingOpen = !UIOpen.isAnythingOpen;
+            UIManager.instance.SetSkillTree(gameObject);
         }
     }
 

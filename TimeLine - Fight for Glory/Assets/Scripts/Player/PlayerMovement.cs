@@ -32,11 +32,11 @@ public class PlayerMovement : MonoBehaviour
         if (velocity.magnitude >= 0.05f)
         {
             SetRotation();
-            if (!UIOpen.isAnythingOpen) MovePlayer();
+            if (!UIManager.instance.IsAnythingOpenInUI()) MovePlayer();
         }
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundLayer);
         if (isGrounded && gravityForce.y < 0) gravityForce.y = -1f;
-        if (Input.GetButtonDown("Jump") && isGrounded && !UIOpen.isAnythingOpen)
+        if (Input.GetButtonDown("Jump") && isGrounded && !UIManager.instance.IsAnythingOpenInUI())
         {
             gravityForce.y = Mathf.Sqrt(jumpHeight * (-2) * gravity);
         }

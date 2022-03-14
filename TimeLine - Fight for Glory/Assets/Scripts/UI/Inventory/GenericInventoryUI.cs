@@ -124,10 +124,14 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
     public void OnPointerEnter(PointerEventData eventData)
     {
         ObjectHoveredOver = eventData.hovered.Find(a => a.CompareTag("InventoryItemPrefab"));
+        if (ObjectHoveredOver == null) return;
+        if (ObjectHoveredOver.GetComponent<ItemInUI>().Item != null && ObjectBeingDragged == null)
+            UIManager.instance.SetInformation(ObjectHoveredOver); 
     }
     public void OnPointerExit(PointerEventData eventData)
     {
         ObjectHoveredOver = null;
+        UIManager.instance.SetInformation(null);
     }
     public void DestroyItemBeingDragged()
     {

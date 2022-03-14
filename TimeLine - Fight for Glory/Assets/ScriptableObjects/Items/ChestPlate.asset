@@ -18,7 +18,7 @@ MonoBehaviour:
   rarity: 52
   rarityType: 3
   itemName: ChestPlate
-  itemDescription: 
+  itemDescription: It is a chestplate
   itemTypes: 0100000003000000
   equipmentType: 2
   price: 0
