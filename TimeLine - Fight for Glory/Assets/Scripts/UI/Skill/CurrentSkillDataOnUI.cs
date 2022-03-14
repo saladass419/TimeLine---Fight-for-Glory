@@ -28,7 +28,7 @@ public class CurrentSkillDataOnUI : MonoBehaviour
                 break;
         }
     }
-    private void Start()
+    private void Awake()
     {
         foreach (var item in FindObjectsOfType<CurrentSkillOnUI>())
         {
@@ -53,7 +53,6 @@ public class CurrentSkillDataOnUI : MonoBehaviour
         if (onButtonClicked != null)
         {
             onButtonClicked.Invoke(skillData, level);
-            Debug.Log("asfasfasf");
         }
     }
 }

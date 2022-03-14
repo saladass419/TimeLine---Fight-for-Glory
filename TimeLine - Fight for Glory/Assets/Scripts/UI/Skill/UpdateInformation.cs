@@ -9,15 +9,15 @@ public class UpdateInformation : MonoBehaviour
     private Image image;
     private TextMeshProUGUI nameTxt;
     private TextMeshProUGUI descText;
-    private void Start()
+    private void Awake()
     {
-        image = GetComponentsInChildren<Image>()[1];
-        nameTxt = GetComponentsInChildren<TextMeshProUGUI>()[0];
-        descText = GetComponentsInChildren<TextMeshProUGUI>()[1];
         foreach (var item in FindObjectsOfType<CurrentSkillDataOnUI>())
         {
             item.onButtonClicked += UpdateInformationInUI;
         }
+        image = GetComponentsInChildren<Image>()[1];
+        nameTxt = GetComponentsInChildren<TextMeshProUGUI>()[0];
+        descText = GetComponentsInChildren<TextMeshProUGUI>()[1];
     }
     private void UpdateInformationInUI(SkillData skill, int level)
     {

@@ -11,7 +11,7 @@ public class SkillUI : MonoBehaviour
 
     public GameObject Player { get => player; set => player = value; }
 
-    private void Start()
+    private void Awake()
     {
         foreach (var item in FindObjectsOfType<CurrentSkillDataOnUI>())
         {

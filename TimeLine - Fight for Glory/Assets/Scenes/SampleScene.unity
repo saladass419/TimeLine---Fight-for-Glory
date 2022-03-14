@@ -321,6 +321,8 @@ MonoBehaviour:
   equipmentUI: {fileID: 1845502618}
   shopUI: {fileID: 900330114}
   informationUI: {fileID: 255132347}
+  skillInformationUI: {fileID: 2114128271}
+  skillDataUI: {fileID: 2071132997}
   skillUI: {fileID: 40997394}
 --- !u!1 &40997394
 GameObject:
@@ -374,9 +376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c191f693dcc148045b3f9a996696e1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillSelectorUI: {fileID: 271926510}
-  skillsUI: {fileID: 2071132997}
-  skillInformationUI: {fileID: 2114128271}
 --- !u!1 &57580264
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1797,7 +1796,8 @@ MonoBehaviour:
     skillLevel: 0
     maxLevel: 0
     upgradeCost: 0
-    sprite: {fileID: 0}
+    sprite:
+    - {fileID: 0}
     attributes: []
     upgradeCostNumber: 2000
 --- !u!114 &319645458
@@ -1821,7 +1821,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.40498397, g: 0.7301107, b: 0.9056604, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.39999998, b: 0.39999998, a: 1}
     m_PressedColor: {r: 1, g: 0.76847225, b: 0.50377357, a: 1}
     m_SelectedColor: {r: 0.4039216, g: 0.7294118, b: 0.9058824, a: 1}
@@ -3291,7 +3291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Healer
+  m_text: Fight
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3428,7 +3428,8 @@ MonoBehaviour:
     skillLevel: 0
     maxLevel: 0
     upgradeCost: 0
-    sprite: {fileID: 0}
+    sprite:
+    - {fileID: 0}
     attributes: []
     upgradeCostNumber: 2000
 --- !u!114 &573947715
@@ -3452,7 +3453,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 0.9902929, b: 0.63584906, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.39999998, b: 0.39999998, a: 1}
     m_PressedColor: {r: 1, g: 0.76847225, b: 0.50377357, a: 1}
     m_SelectedColor: {r: 1, g: 0.9921569, b: 0.63529414, a: 1}
@@ -4056,7 +4057,8 @@ MonoBehaviour:
     skillLevel: 0
     maxLevel: 0
     upgradeCost: 0
-    sprite: {fileID: 0}
+    sprite:
+    - {fileID: 0}
     attributes: []
     upgradeCostNumber: 2000
 --- !u!224 &690611756 stripped
@@ -4702,7 +4704,8 @@ MonoBehaviour:
     skillLevel: 0
     maxLevel: 0
     upgradeCost: 0
-    sprite: {fileID: 0}
+    sprite:
+    - {fileID: 0}
     attributes: []
     upgradeCostNumber: 2000
 --- !u!114 &737081521
@@ -4726,7 +4729,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.24620858, g: 0.8584906, b: 0.65436786, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.39999998, b: 0.39999998, a: 1}
     m_PressedColor: {r: 1, g: 0.76847225, b: 0.50377357, a: 1}
     m_SelectedColor: {r: 0.24705884, g: 0.8588236, b: 0.654902, a: 1}
@@ -8676,7 +8679,8 @@ MonoBehaviour:
     skillLevel: 0
     maxLevel: 0
     upgradeCost: 0
-    sprite: {fileID: 0}
+    sprite:
+    - {fileID: 0}
     attributes: []
     upgradeCostNumber: 2000
 --- !u!114 &1333448137
@@ -8700,7 +8704,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.6088448, g: 0.28686363, b: 0.6415094, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.39999998, b: 0.39999998, a: 1}
     m_PressedColor: {r: 1, g: 0.76847225, b: 0.50377357, a: 1}
     m_SelectedColor: {r: 0.60784316, g: 0.28627452, b: 0.6431373, a: 1}
@@ -10495,7 +10499,8 @@ MonoBehaviour:
     skillLevel: 0
     maxLevel: 0
     upgradeCost: 0
-    sprite: {fileID: 0}
+    sprite:
+    - {fileID: 0}
     attributes: []
     upgradeCostNumber: 2000
 --- !u!114 &1640679632
@@ -10519,7 +10524,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.24620858, g: 0.8584906, b: 0.65436786, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.39999998, b: 0.39999998, a: 1}
     m_PressedColor: {r: 1, g: 0.76847225, b: 0.50377357, a: 1}
     m_SelectedColor: {r: 0.24705884, g: 0.8588236, b: 0.654902, a: 1}
@@ -11176,7 +11181,8 @@ MonoBehaviour:
     skillLevel: 0
     maxLevel: 0
     upgradeCost: 0
-    sprite: {fileID: 0}
+    sprite:
+    - {fileID: 0}
     attributes: []
     upgradeCostNumber: 2000
 --- !u!114 &1752944142
@@ -11200,7 +11206,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.6088448, g: 0.28686363, b: 0.6415094, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.39999998, b: 0.39999998, a: 1}
     m_PressedColor: {r: 1, g: 0.76847225, b: 0.50377357, a: 1}
     m_SelectedColor: {r: 0.60784316, g: 0.28627452, b: 0.6431373, a: 1}
@@ -12664,7 +12670,8 @@ MonoBehaviour:
     skillLevel: 0
     maxLevel: 0
     upgradeCost: 0
-    sprite: {fileID: 0}
+    sprite:
+    - {fileID: 0}
     attributes: []
     upgradeCostNumber: 2000
 --- !u!114 &1957740734
@@ -12688,7 +12695,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.6088448, g: 0.28686363, b: 0.6415094, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.39999998, b: 0.39999998, a: 1}
     m_PressedColor: {r: 1, g: 0.76847225, b: 0.50377357, a: 1}
     m_SelectedColor: {r: 0.60784316, g: 0.28627452, b: 0.6431373, a: 1}
@@ -13023,7 +13030,8 @@ MonoBehaviour:
     skillLevel: 0
     maxLevel: 0
     upgradeCost: 0
-    sprite: {fileID: 0}
+    sprite:
+    - {fileID: 0}
     attributes: []
     upgradeCostNumber: 2000
 --- !u!114 &2034720630
@@ -13047,7 +13055,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.24620858, g: 0.8584906, b: 0.65436786, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.39999998, b: 0.39999998, a: 1}
     m_PressedColor: {r: 1, g: 0.76847225, b: 0.50377357, a: 1}
     m_SelectedColor: {r: 0.24705884, g: 0.8588236, b: 0.654902, a: 1}

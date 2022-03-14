@@ -21,7 +21,6 @@ public class CurrentSkillOnUI : MonoBehaviour
         if (onButtonClicked != null)
         {
             onButtonClicked.Invoke(skill);
-            Debug.Log("asfasfasf");
         }
     }
 }
