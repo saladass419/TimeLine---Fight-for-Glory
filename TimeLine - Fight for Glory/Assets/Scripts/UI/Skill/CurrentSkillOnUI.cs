@@ -17,7 +17,11 @@ public class CurrentSkillOnUI : MonoBehaviour
     }
     public void OnButtonClicked()
     {
+        UIManager.instance.SkillDataUI.SetActive(true);
         if (onButtonClicked != null)
+        {
             onButtonClicked.Invoke(skill);
+            Debug.Log("asfasfasf");
+        }
     }
 }

@@ -21,8 +21,9 @@ public class UpdateInformation : MonoBehaviour
     }
     private void UpdateInformationInUI(SkillData skill, int level)
     {
-        image.sprite = skill.Sprite;
+        image.sprite = skill.Sprite[level - 1];
         nameTxt.text = skill.SkillName + " - " + level;
         descText.text = skill.Description;
+        gameObject.SetActive(true);
     }
 }

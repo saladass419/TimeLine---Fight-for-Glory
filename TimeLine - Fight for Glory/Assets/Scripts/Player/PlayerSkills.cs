@@ -41,6 +41,20 @@ public class PlayerSkills : MonoBehaviour
             }
         }
     }
+    public int GetSkillLevelByData(SkillData data)
+    {
+        foreach (var element in skillCombo)
+        {
+            foreach(var element2 in element.SkillTrio)
+            {
+                if (element2.SkillData == data)
+                {
+                    return element2.Level;
+                }
+            }
+        }
+        return -1;
+    }
 }
 [System.Serializable]
 public class SkillTrio

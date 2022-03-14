@@ -5,13 +5,10 @@ using UnityEngine.UI;
 
 public class SkillUI : MonoBehaviour
 {
-    [SerializeField] private GameObject skillSelectorUI;
-    [SerializeField] private GameObject skillsUI;
-    [SerializeField] private GameObject skillInformationUI;
-
     private SkillData currentSkillData;
     private int currentSkillLevelToUpgradeTo;
     private GameObject player;
+
     public GameObject Player { get => player; set => player = value; }
 
     private void Start()

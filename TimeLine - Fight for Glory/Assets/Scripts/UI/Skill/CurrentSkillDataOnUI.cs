@@ -42,13 +42,18 @@ public class CurrentSkillDataOnUI : MonoBehaviour
             if (data.SkillLevel == skillAdvancemenLevel)
             {
                 skillData = data;
-                gameObject.GetComponent<Image>().sprite = skillData.Sprite;
+                gameObject.GetComponent<Image>().sprite = data.Sprite[level - 1];
             }
         }
     }
     public void OnButtonClicked()
     {
+        UIManager.instance.SkillInformationUI.SetActive(true);
+
         if (onButtonClicked != null)
+        {
             onButtonClicked.Invoke(skillData, level);
+            Debug.Log("asfasfasf");
+        }
     }
 }

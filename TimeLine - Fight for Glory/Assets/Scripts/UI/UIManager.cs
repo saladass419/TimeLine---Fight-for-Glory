@@ -11,15 +11,23 @@ public class UIManager : MonoBehaviour
     {
         instance = this;
     }
+
     [SerializeField] private CinemachineFreeLook freeLook;
     [SerializeField] private GameObject chestUI;
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject equipmentUI;
     [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject informationUI;
+    [SerializeField] private GameObject skillInformationUI;
+    [SerializeField] private GameObject skillDataUI;
     [SerializeField] private GameObject skillUI;
 
     private GameObject currentlyOpen;
+
+    public GameObject InventoryUI { get => inventoryUI; set => inventoryUI = value; }
+    public GameObject SkillInformationUI { get => skillInformationUI; set => skillInformationUI = value; }
+    public GameObject SkillDataUI { get => skillDataUI; set => skillDataUI = value; }
+
     private void Start()
     {
         currentlyOpen = null;
@@ -47,8 +55,16 @@ public class UIManager : MonoBehaviour
             currentlyOpen.SetActive(!currentlyOpen.activeSelf);
         }
 
-        inventoryUI.SetActive(true);
-        informationUI.SetActive(true);
+        if(uiObject != skillUI)
+        {
+            inventoryUI.SetActive(true);
+            informationUI.SetActive(true);
+        }
+        else
+        {
+            inventoryUI.SetActive(false);
+            informationUI.SetActive(false);
+        }
 
         freeLook.enabled = false;
 
@@ -112,6 +128,13 @@ public class UIManager : MonoBehaviour
         if (player == null) return;
 
         skillUI.GetComponent<SkillUI>().Player = player;
-        skillUI.SetActive(!skillUI.activeSelf);
+
+        OpenCloseUIElement(skillUI);
+
+        if (skillDataUI.activeInHierarchy)
+        {
+            skillDataUI.SetActive(false);
+            skillInformationUI.SetActive(false);
+        }
     }
 }

@@ -25,7 +25,7 @@ public class SkillData
     [SerializeField] private SkillAdvancemenLevel skillLevel;
     [SerializeField] private int maxLevel;
     [SerializeField] private float upgradeCost;
-    [SerializeField] private Sprite sprite;
+    [SerializeField] private Sprite[] sprite;
     [SerializeField] private List<Attribute> attributes;
     public List<Attribute> Attributes { get => attributes; set => attributes = value; }
     public int Level { get => level; set => level = value; }
@@ -34,7 +34,7 @@ public class SkillData
     public SkillAdvancemenLevel SkillLevel { get => skillLevel; set => skillLevel = value; }
     public string SkillName { get => skillName; set => skillName = value; }
     public string Description { get => description; set => description = value; }
-    public Sprite Sprite { get => sprite; set => sprite = value; }
+    public Sprite[] Sprite { get => sprite; set => sprite = value; }
 
     [SerializeField] private int upgradeCostNumber = 2000;
     public int CalculateCost(SkillAdvancemenLevel skillAdvancementLevel,int _level)
