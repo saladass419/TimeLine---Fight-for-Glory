@@ -35,7 +35,6 @@ public class GenericInventory : MonoBehaviour
         else inventory.Add(item, putInAmount);
 
         RefreshInspector();
-
         if (InventoryChanged != null)
         {
             InventoryChanged();

@@ -82,6 +82,7 @@ public class UIManager : MonoBehaviour
         if (player == null) return;
 
         inventoryUI.GetComponent<GenericInventoryUI>().Inventory = player.GetComponent<PlayerInventory>();
+        inventoryUI.GetComponent<GenericInventoryUI>().RefreshInventory();
     }
     public void SetChest(GameObject chest,GameObject player)
     {
@@ -90,6 +91,7 @@ public class UIManager : MonoBehaviour
         SetPlayer(player);
 
         chestUI.GetComponent<GenericInventoryUI>().Inventory = chest.GetComponent<ChestInventory>();
+        chestUI.GetComponent<GenericInventoryUI>().RefreshInventory();
         OpenCloseUIElement(chestUI);
     }
     public void SetShop(GameObject shop, GameObject player)
@@ -99,6 +101,7 @@ public class UIManager : MonoBehaviour
         SetPlayer(player);
 
         shopUI.GetComponent<GenericInventoryUI>().Inventory = shop.GetComponent<ShopInventory>();
+        shopUI.GetComponent<GenericInventoryUI>().RefreshInventory();
         OpenCloseUIElement(shopUI);
     }
     public void SetEquipment(GameObject player)
@@ -108,6 +111,7 @@ public class UIManager : MonoBehaviour
         SetPlayer(player);
 
         equipmentUI.GetComponent<GenericInventoryUI>().Inventory = player.GetComponent<PlayerEquipmentInventory>();
+        equipmentUI.GetComponent<GenericInventoryUI>().RefreshInventory();
         OpenCloseUIElement(equipmentUI);
     }
     public void SetInformation(GameObject item)

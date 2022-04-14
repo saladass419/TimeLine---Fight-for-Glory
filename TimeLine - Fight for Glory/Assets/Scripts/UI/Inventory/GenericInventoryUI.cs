@@ -57,6 +57,7 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
     }
     public void RefreshInventory()
     {
+        GetSlots();
         int i = 0;
         foreach (var item in Inventory.inventory)
         {
@@ -69,7 +70,7 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
                     slots[i].GetComponentInChildren<ItemInUI>().Amount = 1;
                     images[1].sprite = item.Key.BackGround;
                     images[2].sprite = item.Key.ItemSprite;
-                    slots[i].GetComponentInChildren<TextMeshProUGUI>().text = "1";
+                    slots[i].GetComponentInChildren<TextMeshProUGUI>().text = "";
                     i++;
                 }
             }
