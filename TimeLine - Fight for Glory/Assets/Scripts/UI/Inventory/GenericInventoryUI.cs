@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -44,8 +45,6 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
         {
             inventoriesInScene[i].InventoryChanged += RefreshInventory;
         }
-        GetSlots();
-        RefreshInventory();
     }
     private void GetSlots()
     {
@@ -85,6 +84,7 @@ public class GenericInventoryUI: MonoBehaviour,IBeginDragHandler , IDragHandler,
                 i++;
             }
         }
+
         for (int j = i; j < slots.Length; j++)
         {
             Image[] images = slots[j].GetComponentsInChildren<Image>();

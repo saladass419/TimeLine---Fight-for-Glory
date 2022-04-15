@@ -13618,13 +13618,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 963194228}
   moveSpeed: 8
-  gravity: -9.81
+  gravity: -19.62
   groundCheck: {fileID: 863807964}
   isGrounded: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  jumpHeight: 2
+  jumpHeight: 1.6
 --- !u!143 &8872815177780108916
 CharacterController:
   m_ObjectHideFlags: 0

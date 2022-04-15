@@ -23,7 +23,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject skillUI;
 
     private GameObject currentlyOpen;
-
     public GameObject InventoryUI { get => inventoryUI; set => inventoryUI = value; }
     public GameObject SkillInformationUI { get => skillInformationUI; set => skillInformationUI = value; }
     public GameObject SkillDataUI { get => skillDataUI; set => skillDataUI = value; }
