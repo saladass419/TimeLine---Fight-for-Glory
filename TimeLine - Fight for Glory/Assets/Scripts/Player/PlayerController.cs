@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(distance < range)
+        if(minDistance < range)
         {
             return objectToReturn;
         }
