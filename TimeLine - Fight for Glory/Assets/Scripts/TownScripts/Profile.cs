@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class Profile : MonoBehaviour
 {
-    [SerializeField] private bool firstTime = true;
     [SerializeField] private string userName = "KisFaszos";
     [SerializeField] private Town town;
-    [SerializeField] int money;
-
-    public void Start()
-    {
-
-    }
-
+    [SerializeField] private int score;
+    public string UserName { get => userName; set => userName = value; }
+    public Town Town { get => town; set => town = value; }
+    public int Score { get => score; set => score = value; }
 }
