@@ -12,6 +12,7 @@ TagManager:
   - InventoryItems
   - Shop
   - AmountSlider
+  - BoardGameCamera
   layers:
   - Default
   - TransparentFX
