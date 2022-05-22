@@ -9,9 +9,11 @@ public class Tile : MonoBehaviour
     [SerializeField] private ItemCard currentObjectOnTile;
     [SerializeField] private (int, int) position;
 
+    public (int, int) Position { get => position; set => position = value; }
+
     public void PlaceMonster(HeroCard heroCard) 
     {
-        if(currentCreatureOnTile != null)
+        if(currentCreatureOnTile == null)
         {
             Instantiate(heroCard.ModelPrefab, transform.position, Quaternion.identity);
             currentCreatureOnTile = heroCard;
@@ -21,7 +23,7 @@ public class Tile : MonoBehaviour
 
     public void PlaceObject(ItemCard itemCard)
     {
-        if (currentObjectOnTile != null)
+        if (currentObjectOnTile == null)
         {
             Instantiate(itemCard.PrefabObject, transform.position, Quaternion.identity);
             currentObjectOnTile = itemCard;

@@ -13,6 +13,7 @@ TagManager:
   - Shop
   - AmountSlider
   - BoardGameCamera
+  - Tile
   layers:
   - Default
   - TransparentFX
