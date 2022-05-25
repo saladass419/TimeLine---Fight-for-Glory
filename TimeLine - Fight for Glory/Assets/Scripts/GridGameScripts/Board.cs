@@ -36,9 +36,6 @@ public class Board : MonoBehaviour
 
     public void AddMonsterToTile(HeroCard heroCard, int x, int y)
     {
-        GameObject instantiatedHeroPrefab = Instantiate(heroCard.ModelPrefab, transform.position, Quaternion.identity);
-        heroCard.InstantiatedModel = instantiatedHeroPrefab;
-        Debug.Log(heroCard.InstantiatedModel);
         Tile chosenTile = findTile(x, y);
         heroCard.InstantiatedModel.transform.position = chosenTile.transform.position;
         chosenTile.PlaceMonster(heroCard);

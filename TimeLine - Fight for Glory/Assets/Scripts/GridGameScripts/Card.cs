@@ -14,4 +14,5 @@ public class Card : ScriptableObject
     public int ManaCost { get => manaCost; set => manaCost = value; }
     public string Description { get => description; set => description = value; }
     public string CardName { get => cardName; set => cardName = value; }
+    public CardType CardType { get => cardType; set => cardType = value; }
 }

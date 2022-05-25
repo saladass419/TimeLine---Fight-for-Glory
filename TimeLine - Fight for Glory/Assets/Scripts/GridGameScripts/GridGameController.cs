@@ -23,6 +23,8 @@ public class GridGameController : MonoBehaviour
 
     [SerializeField] private GridGameUIManager uiManager;
 
+    [SerializeField] private Profile player;
+
     private GameStates gameState;
     private ActionTypeChosen actionType = ActionTypeChosen.NONE;
     private int turn;
@@ -49,8 +51,11 @@ public class GridGameController : MonoBehaviour
         currentChosenHeroCard.TileToAttack.Add((7, 7));
         string json = JsonUtility.ToJson(currentChosenHeroCard);
         File.WriteAllText(@"C:\Users\SteveP1\Desktop\json", json);
-        board.AddMonsterToTile(currentChosenHeroCard, 0, 0);
+        gameState = GameStates.START;
+        SetUpGame();
+        //board.AddMonsterToTile(currentChosenHeroCard, 0, 0);
     }
+
 
 
 
@@ -129,6 +134,27 @@ public class GridGameController : MonoBehaviour
             }
         }
     }
+
+    private void SetUpGame()
+    {
+        GameObject[] heroAreaSlots = GameObject.FindGameObjectsWithTag("HeroAreaSlot");
+        if(gameState == GameStates.START)
+        {
+            int i = 0;
+            foreach (HeroCard card in player.Deck.CardsInDeck)
+            {
+                if(card.CardType == CardType.HERO)
+                {
+                    GameObject instantiatedHeroPrefab = Instantiate(card.ModelPrefab, heroAreaSlots[i].transform.position, Quaternion.identity);
+                    card.InstantiatedModel = instantiatedHeroPrefab;
+                    i++;
+                }
+            }
+            gameState = GameStates.PLAYERTURN;
+        }
+    }
+
+
 
     public void MoveHero()
     {
