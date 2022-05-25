@@ -40,8 +40,6 @@ public class GridGameController : MonoBehaviour
     {
         boardGameCamera = Camera.allCameras[1];
     }
-
-
     private void Start()
     {
         currentChosenHeroCard.TilesToMove.Add((1, 1));
@@ -55,10 +53,6 @@ public class GridGameController : MonoBehaviour
         SetUpGame();
         //board.AddMonsterToTile(currentChosenHeroCard, 0, 0);
     }
-
-
-
-
     private void Update()
     {
         Vector3 center = new Vector3(1.12f, 0f, 39.21f);
