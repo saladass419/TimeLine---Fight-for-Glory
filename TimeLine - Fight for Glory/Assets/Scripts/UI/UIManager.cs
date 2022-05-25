@@ -18,14 +18,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject equipmentUI;
     [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject informationUI;
-    [SerializeField] private GameObject skillInformationUI;
-    [SerializeField] private GameObject skillDataUI;
-    [SerializeField] private GameObject skillUI;
 
     private GameObject currentlyOpen;
     public GameObject InventoryUI { get => inventoryUI; set => inventoryUI = value; }
-    public GameObject SkillInformationUI { get => skillInformationUI; set => skillInformationUI = value; }
-    public GameObject SkillDataUI { get => skillDataUI; set => skillDataUI = value; }
 
     private void Start()
     {
@@ -54,16 +49,8 @@ public class UIManager : MonoBehaviour
             currentlyOpen.SetActive(!currentlyOpen.activeSelf);
         }
 
-        if(uiObject != skillUI)
-        {
-            inventoryUI.SetActive(true);
-            informationUI.SetActive(true);
-        }
-        else
-        {
-            inventoryUI.SetActive(false);
-            informationUI.SetActive(false);
-        }
+        inventoryUI.SetActive(true);
+        informationUI.SetActive(true);
 
         freeLook.enabled = false;
 
@@ -124,20 +111,6 @@ public class UIManager : MonoBehaviour
         {
             informationUI.GetComponentsInChildren<TextMeshProUGUI>()[0].text = item.GetComponent<ItemInUI>().Item.ItemName;
             informationUI.GetComponentsInChildren<TextMeshProUGUI>()[1].text = item.GetComponent<ItemInUI>().Item.ItemDescription;
-        }
-    }
-    public void SetSkillTree(GameObject player)
-    {
-        if (player == null) return;
-
-        skillUI.GetComponent<SkillUI>().Player = player;
-
-        OpenCloseUIElement(skillUI);
-
-        if (skillDataUI.activeInHierarchy)
-        {
-            skillDataUI.SetActive(false);
-            skillInformationUI.SetActive(false);
         }
     }
 }

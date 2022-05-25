@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e398e537bd4c444f930b6cb264b746c, type: 3}
+  m_Script: {fileID: 11500000, guid: 51dbe5a7a229c9843a2686c5aad93069, type: 3}
   m_Name: Sword 2
   m_EditorClassIdentifier: 
   itemId: 6
@@ -28,8 +28,3 @@ MonoBehaviour:
   - attributeName: 1
     value: 7
   backGround: {fileID: 21300000, guid: bbc355b1c56ff4a4b9c250fbbfd2e61d, type: 3}
-  craftingRecipe:
-  - item: {fileID: 11400000, guid: 20bdeb2d65d437f4c88a31df5078bdce, type: 2}
-    amount: 2
-  - item: {fileID: 11400000, guid: ac6374cc6ff6db24187f299a47ffe7e8, type: 2}
-    amount: 2

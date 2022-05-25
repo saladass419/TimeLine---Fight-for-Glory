@@ -47,11 +47,6 @@ public class PlayerController : MonoBehaviour
             UIManager.instance.SetEquipment(gameObject);
         }
 
-        //Open SkillTree
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            UIManager.instance.SetSkillTree(gameObject);
-        }
     }
 
     private GameObject isObjectCloseEnough(string tag)
