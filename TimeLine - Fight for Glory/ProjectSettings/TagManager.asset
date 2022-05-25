@@ -14,6 +14,7 @@ TagManager:
   - AmountSlider
   - BoardGameCamera
   - Tile
+  - TileObject
   layers:
   - Default
   - TransparentFX

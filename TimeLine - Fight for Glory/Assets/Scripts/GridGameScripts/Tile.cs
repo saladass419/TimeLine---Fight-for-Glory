@@ -6,32 +6,38 @@ public class Tile : MonoBehaviour
 {
 
     [SerializeField] private HeroCard currentCreatureOnTile;
-    [SerializeField] private ItemCard currentObjectOnTile;
-    [SerializeField] private (int, int) position;
+    [SerializeField] private GameObject currentHeroModelOnTile;
+    [SerializeField] private (int PosX, int PosY) position;
 
-    public (int, int) Position { get => position; set => position = value; }
+    public (int PosX, int PosY) Position { get => position; set => position = value; }
+    public HeroCard CurrentCreatureOnTile { get => currentCreatureOnTile; set => currentCreatureOnTile = value; }
+    public GameObject CurrentHeroModelOnTile { get => currentHeroModelOnTile; set => currentHeroModelOnTile = value; }
 
     public void PlaceMonster(HeroCard heroCard) 
     {
         if(currentCreatureOnTile == null)
         {
-            Instantiate(heroCard.ModelPrefab, transform.position, Quaternion.identity);
+            heroCard.InstantiatedModel.GetComponent<Model>().Position = position;
             currentCreatureOnTile = heroCard;
+            currentHeroModelOnTile = heroCard.InstantiatedModel;
         }
     }
 
-
-    public void PlaceObject(ItemCard itemCard)
+    public void MoveMonsterToTile(HeroCard hero)
     {
-        if (currentObjectOnTile == null)
-        {
-            Instantiate(itemCard.PrefabObject, transform.position, Quaternion.identity);
-            currentObjectOnTile = itemCard;
-        }
+        currentCreatureOnTile = hero;
+        currentHeroModelOnTile = hero.InstantiatedModel;
     }
 
-    public void VanishMonster()
+
+    public void VanishMonster(Tile _newTile)
     {
+        Debug.Log(position.PosX);
+        Debug.Log(position.PosY);
+        currentHeroModelOnTile.transform.position = _newTile.transform.position;
+        currentHeroModelOnTile.GetComponent<Model>().Position = _newTile.Position;
+        currentCreatureOnTile.Position = _newTile.Position;
         currentCreatureOnTile = null;
+        currentHeroModelOnTile = null;
     }
 }

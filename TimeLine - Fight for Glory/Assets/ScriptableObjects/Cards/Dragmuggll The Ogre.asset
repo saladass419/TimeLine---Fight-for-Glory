@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260f9e31c9f17d14d96afbc5f75c293d, type: 3}
   m_Name: Dragmuggll The Ogre
   m_EditorClassIdentifier: 
-  heroCardType: 0
-  modelPrefab: {fileID: 1798744183352039230, guid: 57d21201fb2b7f546be541b5a3517c80, type: 3}
-  maximumHealth: 0
-  currentHealth: 0
-  attack: 0
-  actionPoints: 0
-  maximumActionPoints: 0
+  heroCardType: 4
+  attackType: 0
+  rangeType: 1
+  modelPrefab: {fileID: 6494263826191555372, guid: 32fdad9efdcc8b145ba823a13b7c6075, type: 3}
+  maximumHealth: 400
+  currentHealth: 150
+  attack: 24
+  actionPoints: 3
+  maximumActionPoints: 3
   items: []

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum CardType { HERO, SPELL, ITEM};
 
-public abstract class Card : ScriptableObject
+public class Card : ScriptableObject
 {
     private int manaCost;
     private string cardName;

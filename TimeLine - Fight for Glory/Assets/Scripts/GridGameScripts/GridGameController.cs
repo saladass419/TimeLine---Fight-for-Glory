@@ -1,52 +1,80 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
-public enum GameStates { START, PLAYERTURN, ENEMYTURN, GAMEOVER }; 
+public enum GameStates { START, PLAYERTURN, ENEMYTURN, GAMEOVER };
+public enum ActionTypeChosen { NONE, MOVE, ATTACK, SPECIALABILITY1, SPECIALABILITY2 };
+
 
 public class GridGameController : MonoBehaviour
 {
-    private GameStates gameState;
-    private int turn;
     [SerializeField] private Board board;
-    private Camera boardGameCamera;
+    [SerializeField] Material attackTileMaterial;
+    [SerializeField] Material moveTileMaterial;
+    [SerializeField] Material tile1Material;
+    [SerializeField] Material tile2Material;
+
     [SerializeField] private HeroCard currentChosenHeroCard;
-    private ItemCard currentChosenItemCard;
+    [SerializeField] private GameObject currentChosenHeroModel;
+    [SerializeField] private ItemCard currentChosenItemCard;
+    [SerializeField] private Tile currentChosenTile;
+
+    [SerializeField] private GridGameUIManager uiManager;
+
+    private GameStates gameState;
+    private ActionTypeChosen actionType = ActionTypeChosen.NONE;
+    private int turn;
+    private Camera boardGameCamera;
+   
+    
     private float currentDistanceFromBoard = 0;
     private bool rotatePressed = false;
     private bool antiRotatePressed = false;
 
+
+    private void Awake()
+    {
+        boardGameCamera = Camera.allCameras[1];
+    }
+
+
+    private void Start()
+    {
+        currentChosenHeroCard.TilesToMove.Add((1, 1));
+        currentChosenHeroCard.TilesToMove.Add((0, 0));
+        currentChosenHeroCard.TilesToMove.Add((2, 3));
+        currentChosenHeroCard.TileToAttack.Add((2, 3));
+        currentChosenHeroCard.TileToAttack.Add((7, 7));
+        string json = JsonUtility.ToJson(currentChosenHeroCard);
+        File.WriteAllText(@"C:\Users\SteveP1\Desktop\json", json);
+        board.AddMonsterToTile(currentChosenHeroCard, 0, 0);
+    }
+
+
+
     private void Update()
     {
-        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0 && !rotatePressed)
+        Vector3 center = new Vector3(1.12f, 0f, 39.21f);
+        Vector3 vectorToCenter = boardGameCamera.transform.position - center;
+        vectorToCenter.Normalize();
+        
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
         {
-            Vector3 center = new Vector3(1.12f, 0f, 39.21f);
-            Debug.Log(boardGameCamera.transform.position.x);
-            Debug.Log(boardGameCamera.transform.position.y);
-            Debug.Log(boardGameCamera.transform.position.z);
-            Vector3 vectorToCenter = boardGameCamera.transform.position - center;
-            Debug.Log(vectorToCenter.x);
-            Debug.Log(vectorToCenter.y);
-            Debug.Log(vectorToCenter.z);
-            vectorToCenter.Normalize();
-            Debug.Log("Vector to center:");
-            Debug.Log(vectorToCenter.y * 0.3f);
-            if(currentDistanceFromBoard > -7.5f)
+            if (currentDistanceFromBoard > -5f)
             {
-                boardGameCamera.transform.position = new Vector3(boardGameCamera.transform.position.x, boardGameCamera.transform.position.y + vectorToCenter.y*0.3f, boardGameCamera.transform.position.z + vectorToCenter.z * 0.3f);
-                currentDistanceFromBoard -= 0.3f;
+                boardGameCamera.transform.position = new Vector3(boardGameCamera.transform.position.x + vectorToCenter.x * 0.7f, boardGameCamera.transform.position.y + vectorToCenter.y* 0.7f, boardGameCamera.transform.position.z + vectorToCenter.z * 0.7f);
+                currentDistanceFromBoard -= 0.7f;
             }
         }
 
-        if (Input.GetAxisRaw("Mouse ScrollWheel") < 0 && !rotatePressed)
+        if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
         {
-            Vector3 center = new Vector3(1.12f, 0f, 39.21f);
-            Vector3 vectorToCenter = boardGameCamera.transform.position - center;
-            vectorToCenter.Normalize();
-            if (currentDistanceFromBoard < 5)
+            if (currentDistanceFromBoard < 10.0f)
             {
-                boardGameCamera.transform.position = new Vector3(boardGameCamera.transform.position.x, boardGameCamera.transform.position.y - vectorToCenter.y * 0.3f, boardGameCamera.transform.position.z - vectorToCenter.z * 0.3f);
-                currentDistanceFromBoard += 0.3f;
+                boardGameCamera.transform.position = new Vector3(boardGameCamera.transform.position.x - vectorToCenter.x * 0.7f, boardGameCamera.transform.position.y - vectorToCenter.y * 0.7f, boardGameCamera.transform.position.z - vectorToCenter.z * 0.7f);
+                currentDistanceFromBoard += 0.7f;
             }
         }
 
@@ -79,23 +107,65 @@ public class GridGameController : MonoBehaviour
         {
             boardGameCamera.transform.RotateAround(new Vector3(1.12f, 0f, 39.21f), Vector3.up, 30 * -Time.deltaTime);
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.allCameras[1].ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.tag == "TileObject")
+                {
+                    Debug.Log("Gotcha bitch");
+                }
+                else if(hit.transform.tag == "Tile" && actionType == ActionTypeChosen.MOVE)
+                {
+                    Tile newTile = hit.transform.GetComponent<Tile>();
+                    Tile oldTile = board.findTile(currentChosenHeroCard.InstantiatedModel.GetComponent<Model>().Position.PosX, currentChosenHeroCard.InstantiatedModel.GetComponent<Model>().Position.PosY);
+                    board.MoveHeroFromTileToAnother(currentChosenHeroCard, oldTile, newTile);
+                    actionType = ActionTypeChosen.NONE;
+                    board.ResetBoardMaterial(tile1Material, tile2Material);
+                }
+            }
+        }
     }
 
-
-    private void Awake()
+    public void MoveHero()
     {
-        boardGameCamera = Camera.allCameras[1];
+        actionType = ActionTypeChosen.MOVE;
+        HighlightPossiblePlaces(currentChosenHeroCard.Position, currentChosenHeroCard.TilesToMove, moveTileMaterial);
     }
 
-    private void Start()
+    private void HighlightPossiblePlaces((int PosX, int PosY) currentPos, List<(int PosX, int PosY)> Pos, Material changeMaterial)
     {
-        board.AddMonsterToTile(currentChosenHeroCard, 0, 0);
+        foreach((int PosX, int PosY) position in Pos)
+        {
+            int boardCoordinatePositionX = currentPos.PosX + position.PosX;
+            int boardCoordinatePositionY = currentPos.PosY + position.PosY;
+            if(RealTileOnBoard(boardCoordinatePositionX, boardCoordinatePositionY))
+            {
+                board.HighlightTiles(board.TileList[boardCoordinatePositionX, boardCoordinatePositionY], changeMaterial);
+            }
+        }
     }
 
-    private void RotateCamera()
+    public void Attack()
     {
-        boardGameCamera.gameObject.transform.position = new Vector3();
+        actionType = ActionTypeChosen.ATTACK;
+        HighlightPossiblePlaces(currentChosenHeroCard.Position, currentChosenHeroCard.TileToAttack, attackTileMaterial);
+        board.ResetBoardMaterial(tile1Material, tile2Material);
     }
+
+
+    private bool RealTileOnBoard(int x, int y)
+    {
+        if((x > -1 && x < 8) && (y > -1 && y < 8))
+        {
+            return true;
+        }
+        return false;
+    }
+
 
     private void RestrictMovement()
     {

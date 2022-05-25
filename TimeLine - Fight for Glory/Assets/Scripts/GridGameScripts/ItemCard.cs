@@ -7,10 +7,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ItemCard")]
 public class ItemCard : Card
 {
-    private GameObject prefabObject;
-
-    public GameObject PrefabObject { get => prefabObject; set => prefabObject = value; }
-
     public void Equip()
     {
 
