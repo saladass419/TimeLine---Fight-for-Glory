@@ -3,25 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - InventorySlot
-  - InventoryItemPrefab
-  - Chest
-  - Item
-  - PlayerInventoryUI
-  - InventoryItems
-  - Shop
-  - AmountSlider
-  - BoardGameCamera
-  - Tile
-  - TileObject
-  - HeroArea
-  - HeroAreaSlot
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Terrain
+  - 
   - Water
   - UI
   - 

@@ -284,7 +284,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6494263826191910668}
   - component: {fileID: 6494263826182072552}
-  - component: {fileID: 7858608647286918400}
   - component: {fileID: -3209579857776507858}
   m_Layer: 0
   m_Name: ChestMonsterPolyart
@@ -318,7 +317,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6494263826191555372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: ca0980e90982fe6468542f951647d58c, type: 3}
   m_Controller: {fileID: 9100000, guid: ad18e1e3bc906104699c48eb7dfd95dc, type: 2}
   m_CullingMode: 1
@@ -330,18 +329,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7858608647286918400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6494263826191555372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c2199b45c0f604ab583d4f0e9edd50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &-3209579857776507858
 BoxCollider:
   m_ObjectHideFlags: 0

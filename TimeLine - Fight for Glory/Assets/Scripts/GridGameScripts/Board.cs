@@ -31,9 +31,6 @@ public class Board : MonoBehaviour
     }
 
 
-
-
-
     public void AddMonsterToTile(HeroCard heroCard, int x, int y)
     {
         Tile chosenTile = findTile(x, y);

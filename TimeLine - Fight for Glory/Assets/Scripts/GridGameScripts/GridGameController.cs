@@ -51,7 +51,6 @@ public class GridGameController : MonoBehaviour
         File.WriteAllText(@"C:\Users\SteveP1\Desktop\json", json);
         gameState = GameStates.START;
         SetUpGame();
-        //board.AddMonsterToTile(currentChosenHeroCard, 0, 0);
     }
     private void Update()
     {
@@ -117,7 +116,7 @@ public class GridGameController : MonoBehaviour
                 {
                     Debug.Log("Gotcha bitch");
                 }
-                else if(hit.transform.tag == "Tile" && actionType == ActionTypeChosen.MOVE)
+                else if (hit.transform.tag == "Tile" && actionType == ActionTypeChosen.MOVE)
                 {
                     Tile newTile = hit.transform.GetComponent<Tile>();
                     Tile oldTile = board.findTile(currentChosenHeroCard.InstantiatedModel.GetComponent<Model>().Position.PosX, currentChosenHeroCard.InstantiatedModel.GetComponent<Model>().Position.PosY);
@@ -140,7 +139,10 @@ public class GridGameController : MonoBehaviour
                 if(card.CardType == CardType.HERO)
                 {
                     GameObject instantiatedHeroPrefab = Instantiate(card.ModelPrefab, heroAreaSlots[i].transform.position, Quaternion.identity);
+                    instantiatedHeroPrefab.AddComponent<DragAndDrop>();
+                    instantiatedHeroPrefab.AddComponent<Model>();
                     card.InstantiatedModel = instantiatedHeroPrefab;
+                    instantiatedHeroPrefab.GetComponent<Model>().Hero = card;
                     i++;
                 }
             }
