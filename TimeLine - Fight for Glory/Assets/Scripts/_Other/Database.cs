@@ -11,8 +11,6 @@ public class Database : MonoBehaviour,ISerializationCallbackReceiver
         instance = this;
     }
     public List<GenericItemObject> ItemObjects;
-    public List<GenericItemObject> itemsUnlockedInCurrentDimension;
-    public List<GenericItemObject> itemsUnlocked;
 
     [ContextMenu("Update ID's")]
     public void UpdateID()
@@ -30,17 +28,5 @@ public class Database : MonoBehaviour,ISerializationCallbackReceiver
     public void OnBeforeSerialize()
     {
         UpdateID();
-    }
-    public void ItemUnlockedInCurrentDimension(int dimensionNumber)
-    {
-        itemsUnlocked = new List<GenericItemObject>().Where(x => x.ItemDimensionAvailable == dimensionNumber).ToList();
-        AddUnlockedItemsToList();
-    }
-    public void AddUnlockedItemsToList()
-    {
-        foreach (GenericItemObject item in itemsUnlockedInCurrentDimension)
-        {
-            itemsUnlocked.Add(item);
-        }
     }
 }

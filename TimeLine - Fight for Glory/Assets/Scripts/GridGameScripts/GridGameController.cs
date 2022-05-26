@@ -28,7 +28,7 @@ public class GridGameController : MonoBehaviour
     private GameStates gameState;
     private ActionTypeChosen actionType = ActionTypeChosen.NONE;
     private int turn;
-    private Camera boardGameCamera;
+    private Camera cam;
    
     
     private float currentDistanceFromBoard = 0;
@@ -38,7 +38,7 @@ public class GridGameController : MonoBehaviour
 
     private void Awake()
     {
-        boardGameCamera = Camera.allCameras[1];
+       cam = Camera.main;
     }
     private void Start()
     {
@@ -48,21 +48,21 @@ public class GridGameController : MonoBehaviour
         currentChosenHeroCard.TileToAttack.Add((2, 3));
         currentChosenHeroCard.TileToAttack.Add((7, 7));
         string json = JsonUtility.ToJson(currentChosenHeroCard);
-        File.WriteAllText(@"C:\Users\SteveP1\Desktop\json", json);
+        //File.WriteAllText(@"C:\Users\SteveP1\Desktop\json", json);
         gameState = GameStates.START;
         SetUpGame();
     }
     private void Update()
     {
         Vector3 center = new Vector3(1.12f, 0f, 39.21f);
-        Vector3 vectorToCenter = boardGameCamera.transform.position - center;
+        Vector3 vectorToCenter = cam.transform.position - center;
         vectorToCenter.Normalize();
         
         if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
         {
             if (currentDistanceFromBoard > -5f)
             {
-                boardGameCamera.transform.position = new Vector3(boardGameCamera.transform.position.x + vectorToCenter.x * 0.7f, boardGameCamera.transform.position.y + vectorToCenter.y* 0.7f, boardGameCamera.transform.position.z + vectorToCenter.z * 0.7f);
+               cam.transform.position = new Vector3(cam.transform.position.x + vectorToCenter.x * 0.7f, cam.transform.position.y + vectorToCenter.y* 0.7f, cam.transform.position.z + vectorToCenter.z * 0.7f);
                 currentDistanceFromBoard -= 0.7f;
             }
         }
@@ -71,7 +71,7 @@ public class GridGameController : MonoBehaviour
         {
             if (currentDistanceFromBoard < 10.0f)
             {
-                boardGameCamera.transform.position = new Vector3(boardGameCamera.transform.position.x - vectorToCenter.x * 0.7f, boardGameCamera.transform.position.y - vectorToCenter.y * 0.7f, boardGameCamera.transform.position.z - vectorToCenter.z * 0.7f);
+               cam.transform.position = new Vector3(cam.transform.position.x - vectorToCenter.x * 0.7f, cam.transform.position.y - vectorToCenter.y * 0.7f, cam.transform.position.z - vectorToCenter.z * 0.7f);
                 currentDistanceFromBoard += 0.7f;
             }
         }
@@ -98,17 +98,17 @@ public class GridGameController : MonoBehaviour
 
         if (rotatePressed)
         {
-            boardGameCamera.transform.RotateAround(new Vector3(1.12f, 0f, 39.21f), Vector3.up, 30 * Time.deltaTime);
+            cam.transform.RotateAround(new Vector3(1.12f, 0f, 39.21f), Vector3.up, 30 * Time.deltaTime);
         }
 
         if(antiRotatePressed)
         {
-            boardGameCamera.transform.RotateAround(new Vector3(1.12f, 0f, 39.21f), Vector3.up, 30 * -Time.deltaTime);
+            cam.transform.RotateAround(new Vector3(1.12f, 0f, 39.21f), Vector3.up, 30 * -Time.deltaTime);
         }
 
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.allCameras[1].ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.allCameras[0].ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
