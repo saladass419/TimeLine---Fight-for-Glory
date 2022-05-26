@@ -34,6 +34,8 @@ public class GridGameController : MonoBehaviour
     private float currentDistanceFromBoard = 0;
     private bool rotatePressed = false;
     private bool antiRotatePressed = false;
+    private bool rotateUpPressed = false;
+    private bool antiRotateUpPressed = false;
 
 
     private void Awake()
@@ -96,6 +98,38 @@ public class GridGameController : MonoBehaviour
             antiRotatePressed = false;
         }
 
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    rotateUpPressed = true;
+        //}
+
+        //if (Input.GetKeyUp(KeyCode.W))
+        //{
+        //    rotateUpPressed = false;
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    antiRotateUpPressed = true;
+        //}
+
+        //if (Input.GetKeyUp(KeyCode.S))
+        //{
+        //    antiRotateUpPressed = false;
+        //}
+
+
+        //if (rotateUpPressed)
+        //{
+        //    cam.transform.RotateAround(new Vector3(1.12f, 0f, 39.21f), new Vector3(1, 0, 1), 30 * Time.deltaTime);
+        //}
+
+        //if (antiRotateUpPressed)
+        //{
+        //    cam.transform.RotateAround(new Vector3(1.12f, 0f, 39.21f), new Vector3(1, 0, 1), 30 * -Time.deltaTime);
+        //}
+
+
         if (rotatePressed)
         {
             cam.transform.RotateAround(new Vector3(1.12f, 0f, 39.21f), Vector3.up, 30 * Time.deltaTime);
@@ -112,11 +146,11 @@ public class GridGameController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.tag == "TileObject")
+                if (hit.transform.CompareTag("TileObject"))
                 {
                     Debug.Log("Gotcha bitch");
                 }
-                else if (hit.transform.tag == "Tile" && actionType == ActionTypeChosen.MOVE)
+                else if (hit.transform.CompareTag("Tile") && actionType == ActionTypeChosen.MOVE)
                 {
                     Tile newTile = hit.transform.GetComponent<Tile>();
                     Tile oldTile = board.findTile(currentChosenHeroCard.InstantiatedModel.GetComponent<Model>().Position.PosX, currentChosenHeroCard.InstantiatedModel.GetComponent<Model>().Position.PosY);

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &14889041
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -383,6 +384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &65409027
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -594,6 +596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &191266143
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -707,6 +710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &206182156
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -942,6 +946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &241649656
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1055,6 +1060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &254643542
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1432,6 +1438,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3856626339953374218, guid: b530e4f38cf3bb6ac9d09407190a13c0, type: 3}
+      propertyPath: m_TagString
+      value: Board
+      objectReference: {fileID: 0}
     - target: {fileID: 4200708479692140527, guid: b530e4f38cf3bb6ac9d09407190a13c0, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1544,6 +1554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &320428463
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1657,6 +1668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &337805473
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1770,6 +1782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &347079784
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1883,6 +1896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &351252298
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1996,6 +2010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &386335028
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2109,6 +2124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &391754950
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2222,6 +2238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &411077425
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2335,6 +2352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &444695376
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2448,6 +2466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &446574965
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2659,6 +2678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &479808249
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2772,6 +2792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &482324057
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2885,6 +2906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &494251723
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2998,6 +3020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &512189341
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3210,6 +3233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &580332878
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3323,6 +3347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &582324703
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3436,6 +3461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &584992773
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3647,6 +3673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &685892562
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3760,6 +3787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &724208258
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3873,6 +3901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &786563956
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3986,6 +4015,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &807215444
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4099,6 +4129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &810463000
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4372,6 +4403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &840098960
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4485,6 +4517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &841788486
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4566,6 +4599,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c94ad7cbd37ae14391b186965e36179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hightLightMaterial: {fileID: 2100000, guid: d2ef83bb32b380943bd2305df3f17945, type: 2}
+  tile1Material: {fileID: 2100000, guid: 8d6d1c2b5ef3d844885a247e35f947cc, type: 2}
+  tile2Material: {fileID: 2100000, guid: 699811b309f61d848828c302248ae4d9, type: 2}
 --- !u!1 &848131194
 GameObject:
   m_ObjectHideFlags: 0
@@ -4615,6 +4651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &848131197
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4728,6 +4765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &877615805
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5110,6 +5148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &889903006
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5223,6 +5262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &924075464
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5336,6 +5376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &966764422
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5585,7 +5626,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.3, y: 7.98}
+  m_AnchoredPosition: {x: 1.31, y: 7.98}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &975602641
@@ -5751,6 +5792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1002515764
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5864,6 +5906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1096482867
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6112,6 +6155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1113855103
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6225,6 +6269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1207699863
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6460,6 +6505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1310290082
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6573,6 +6619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1321838099
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6741,6 +6788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1338328523
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6854,6 +6902,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1363361634
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6967,6 +7016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1391168151
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7080,6 +7130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1445891867
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7193,6 +7244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1453457158
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7741,6 +7793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1524655357
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7854,6 +7907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1532589962
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8199,6 +8253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1645423568
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8312,6 +8367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1664518601
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8425,6 +8481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1681169933
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8538,6 +8595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1719361996
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8753,6 +8811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1738233068
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8866,6 +8925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1749956208
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8979,6 +9039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1759347514
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9092,6 +9153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1782905621
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9205,6 +9267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1792437211
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9318,6 +9381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1799602623
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9664,6 +9728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1806123384
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9777,6 +9842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1810475322
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10180,6 +10246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &1910588186
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10893,6 +10960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &2094625310
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11006,6 +11074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &2121042815
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11119,6 +11188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &2126731542
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11232,6 +11302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCreatureOnTile: {fileID: 0}
   currentHeroModelOnTile: {fileID: 0}
+  ownMaterial: {fileID: 0}
 --- !u!64 &2127217250
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -8,10 +8,13 @@ public class Tile : MonoBehaviour
     [SerializeField] private HeroCard currentCreatureOnTile;
     [SerializeField] private GameObject currentHeroModelOnTile;
     [SerializeField] private (int PosX, int PosY) position;
+    [SerializeField] private Material ownMaterial;
+
 
     public (int PosX, int PosY) Position { get => position; set => position = value; }
     public HeroCard CurrentCreatureOnTile { get => currentCreatureOnTile; set => currentCreatureOnTile = value; }
     public GameObject CurrentHeroModelOnTile { get => currentHeroModelOnTile; set => currentHeroModelOnTile = value; }
+    public Material OwnMaterial { get => ownMaterial; set => ownMaterial = value; }
 
     public void PlaceMonster(HeroCard heroCard) 
     {

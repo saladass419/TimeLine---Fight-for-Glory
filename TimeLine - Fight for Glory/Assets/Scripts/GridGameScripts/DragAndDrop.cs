@@ -3,53 +3,22 @@ using UnityEngine.EventSystems;
 
 public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
-
-    #region Variables
-    private Vector3 _dragOffset;
-    private Vector3 startingPos;
-    [SerializeField] private bool canDrag = true;
-    [SerializeField] private float _speed = 100;
-    #endregion
-
-    void Awake()
-    {
-        _cam = Camera.main;
-    }
-    /*
-    public void setDrag(bool val)
-    {
-        canDrag = val;
-    }
-    Vector3 GetMousePos()
-    {
-        var mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
-        //Debug.Log(mousePos.x);
-        //Debug.Log(mousePos.y);
-        //Debug.Log(mousePos.z);
-        return mousePos;
-    }
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        startingPos = transform.position;
-        _dragOffset = transform.position - GetMousePos();
-    }
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (canDrag)
-        {
-            Debug.Log("Dragging");
-            transform.position = Vector3.MoveTowards(transform.position, GetMousePos() + _dragOffset, _speed * Time.deltaTime);
-        }
-    }
-    public void OnEndDrag(PointerEventData eventData)
-    {
-
-    }*/
     private Plane plane = new Plane(Vector3.up, -1.5f);
     private Camera _cam;
     private GameObject objectHoveredOver;
     private GameObject objectBeingDragged;
     private Vector3 worldPos;
+    private bool inOnAndDrag = false;
+    Board board = null;
+    [SerializeField] Tile currentHighlightedTile = null;
+    private Vector3 oldPosition;
+
+    void Awake()
+    {
+        _cam = Camera.main;
+        board = GameObject.FindGameObjectWithTag("Board").GetComponent<Board>();
+    }
+
     public GameObject ObjectHoveredOver { get => objectHoveredOver; set => objectHoveredOver = value; }
     public GameObject ObjectBeingDragged { get => objectBeingDragged; set => objectBeingDragged = value; }
 
@@ -64,6 +33,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        inOnAndDrag = false;
         if (ObjectHoveredOver != null)
         {
             ObjectBeingDragged = ObjectHoveredOver;
@@ -71,7 +41,8 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (ObjectBeingDragged == null) return;
+        oldPosition = transform.position;
+        if (ObjectBeingDragged == null || ObjectBeingDragged.GetComponent<Model>().Placed == true) return;
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
         if (plane.Raycast(ray,out float dist))
         {
@@ -80,16 +51,38 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     }
     private void Update()
     {
-        if (ObjectBeingDragged != null) ObjectBeingDragged.transform.position = Vector3.Lerp(ObjectBeingDragged.transform.position, worldPos, 0.05f);
+        if (ObjectBeingDragged != null && inOnAndDrag == false)
+        {
+            if(gameObject.GetComponent<Model>().Placed != true)
+                ObjectBeingDragged.transform.position = Vector3.Lerp(ObjectBeingDragged.transform.position, worldPos, 0.05f);
+        }
+        
+        (Tile tile, float minimumDistance) = board.closestTileToObject(gameObject);
+
+        if (currentHighlightedTile != tile && currentHighlightedTile != null)
+            board.UnHighlightTile(currentHighlightedTile);
+
+        currentHighlightedTile = tile;
+        if(minimumDistance < 2.0f && gameObject.GetComponent<Model>().Placed != true)
+        {
+            board.GetComponent<Board>().HighlightTiles(tile, board.GetComponent<Board>().HightLightMaterial);
+        }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        //DestroyItemBeingDragged();
-    }
-    public void DestroyItemBeingDragged()
-    {
-        if (ObjectBeingDragged != null)
-            Destroy(ObjectBeingDragged);
-        else ObjectBeingDragged = null;
+        (Tile tile, float minimumDistance) = board.closestTileToObject(gameObject);
+        if(minimumDistance <2.0f)
+        {
+            inOnAndDrag = true;
+            objectBeingDragged.transform.position = tile.transform.position;
+            tile.PlaceMonster(gameObject.GetComponent<Model>().Hero);
+            gameObject.GetComponent<Model>().Placed = true;
+            board.UnHighlightTile(currentHighlightedTile);
+        }
+        else
+        {
+            board.UnHighlightTile(currentHighlightedTile);
+            transform.position = oldPosition;
+        }
     }
 }

@@ -17,6 +17,7 @@ TagManager:
   - TileObject
   - HeroArea
   - HeroAreaSlot
+  - Board
   layers:
   - Default
   - TransparentFX
