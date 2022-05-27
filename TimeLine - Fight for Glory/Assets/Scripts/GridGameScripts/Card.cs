@@ -4,15 +4,15 @@ using UnityEngine;
 
 public enum CardType { HERO, SPELL, ITEM};
 
-public class Card : ScriptableObject
+public abstract class Card : ScriptableObject
 {
     private int manaCost;
     private string cardName;
     private string description;
     private CardType cardType;
 
-    public int ManaCost { get => manaCost; set => manaCost = value; }
-    public string Description { get => description; set => description = value; }
+    public  int ManaCost { get => manaCost; set => manaCost = value; }
+    public  string Description { get => description; set => description = value; }
     public string CardName { get => cardName; set => cardName = value; }
     public CardType CardType { get => cardType; set => cardType = value; }
 }

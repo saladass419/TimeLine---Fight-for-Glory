@@ -1,34 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
-public class CardFactory : MonoBehaviour
+public static class CardFactory
 {
-    private System.Random rnd = new System.Random();
+    private static System.Random rnd = new System.Random();
+    private static Dictionary<string, Type> heroesList;
+    private static bool isInitialized => heroesList != null;
 
-    private void Start()
+    private static void InitializeFactory()
     {
-        Card card = CreateCard();
+        if (isInitialized)
+            return;
+
+        var heroTypes = Assembly.GetAssembly(typeof(HeroCard)).GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(HeroCard)));
+
+        heroesList = new Dictionary<string, Type>();
+
+        foreach(var type in heroTypes)
+        {
+            var tempHeroType = Activator.CreateInstance(type) as HeroCard;
+            //heroesList.Add(tempHeroType.Name, type);
+        }
     }
 
-    private Card CreateCard()
+    public static HeroCard CreateCard()
     {
-        int cardTypeNumber = rnd.Next(3);
-        switch (cardTypeNumber)
-        {
-            case 0:
-                HeroCard newHeroCard = new HeroCard();
-                return newHeroCard;
-            case 1:
-                SpellCard newSpellCard = new SpellCard();
-                return newSpellCard;
-            case 2:
-                ItemCard newItemCard = new ItemCard();
-                return newItemCard;
-            default:
-                Debug.Log("Not a possible number");
-                break;
-        }
-        return null;
+        InitializeFactory();
+
+        int numbe = rnd.Next(10);
+        return new HeroCard();
     }
 }
