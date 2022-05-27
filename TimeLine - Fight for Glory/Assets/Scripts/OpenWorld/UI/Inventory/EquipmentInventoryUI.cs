@@ -7,8 +7,8 @@ public class EquipmentInventoryUI : GenericInventoryUI
 {
     void Awake()
     {
-        Inventory = FindObjectOfType<PlayerEquipmentInventory>();
-        InventoryType = InventoryType.PlayerEquipment;
+        Inventory = FindObjectOfType<EquipmentInventory>();
+        InventoryType = InventoryType.Equipment;
     }
     public override void OnEndDrag(PointerEventData eventData)
     {
@@ -19,7 +19,7 @@ public class EquipmentInventoryUI : GenericInventoryUI
             switch (DestType)
             {
                 case InventoryType.PlayerInventory:
-                    PlayerEquipmentInventory equipment = (PlayerEquipmentInventory)StartInventory.GetComponent<GenericInventoryUI>().Inventory;
+                    EquipmentInventory equipment = (EquipmentInventory)StartInventory.GetComponent<GenericInventoryUI>().Inventory;
 
                     equipment.UnequipItem(ItemBeingDragged.Item);
                     break;

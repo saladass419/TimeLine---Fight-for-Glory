@@ -106,5 +106,5 @@ public class ShowItemsInInspector
 }
 public enum InventoryType
 {
-    PlayerInventory, ChestInventory, PlayerEquipment, ShopInventory
+    PlayerInventory, ChestInventory, Equipment, ShopInventory
 }

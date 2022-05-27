@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
-        FindObjectOfType<PlayerEquipmentInventory>().itemEquipped += ChangeAttributeValue;
+        FindObjectOfType<EquipmentInventory>().itemEquipped += ChangeAttributeValue;
     }
     public void ChangeAttributeValue(AttributeName _attribute, float value)
     {

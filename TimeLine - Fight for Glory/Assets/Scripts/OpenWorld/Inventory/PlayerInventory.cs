@@ -7,13 +7,13 @@ using UnityEngine.EventSystems;
 
 public class PlayerInventory : GenericInventory
 {
-    private PlayerEquipmentInventory equipmentInventory;
-    public PlayerEquipmentInventory EquipmentInventory { get => equipmentInventory; set => equipmentInventory = value; }
+    private EquipmentInventory equipmentInventory;
+    public EquipmentInventory EquipmentInventory { get => equipmentInventory; set => equipmentInventory = value; }
     private void Awake()
     {
         inventoryType = InventoryType.PlayerInventory;
         if(maxSlot==0) maxSlot = 24;
-        equipmentInventory = gameObject.GetComponent<PlayerEquipmentInventory>();
+        equipmentInventory = gameObject.GetComponent<EquipmentInventory>();
     }
     private void Start()
     {

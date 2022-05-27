@@ -96,7 +96,7 @@ public class UIManager : MonoBehaviour
 
         SetPlayer(player);
 
-        equipmentUI.GetComponent<GenericInventoryUI>().Inventory = player.GetComponent<PlayerEquipmentInventory>();
+        equipmentUI.GetComponent<GenericInventoryUI>().Inventory = player.GetComponent<EquipmentInventory>();
         equipmentUI.GetComponent<GenericInventoryUI>().RefreshInventory();
         OpenCloseUIElement(equipmentUI);
     }

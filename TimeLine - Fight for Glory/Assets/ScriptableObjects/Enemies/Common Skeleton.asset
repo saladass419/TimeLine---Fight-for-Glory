@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74657bdcefec23d48b75e68cb37c7b6d, type: 3}
+  m_Name: Common Skeleton
+  m_EditorClassIdentifier: 
+  enemyName: Common Skeleton
+  enemyTier: 0
+  enemyType: 1
+  visionRange: 20
+  fov: 120
+  moveSpeed: 6
+  attributes:
+  - attributeName: 0
+    value: 100
+  - attributeName: 1
+    value: 5
+  - attributeName: 2
+    value: 10
+  equipments:
+  - {fileID: 11400000, guid: 6a2b0187f8410314e96eb1098da8bbe2, type: 2}
+  - {fileID: 11400000, guid: 409f9c0571362024cb42f5468e9afde2, type: 2}

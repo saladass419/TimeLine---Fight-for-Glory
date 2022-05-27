@@ -22,8 +22,8 @@ public class PlayerInventoryUI : GenericInventoryUI
                 case InventoryType.ChestInventory:
                     StartCoroutine(WaitForValue());
                     break;
-                case InventoryType.PlayerEquipment:
-                    PlayerEquipmentInventory equipment = (PlayerEquipmentInventory)DestinationInventory.GetComponent<GenericInventoryUI>().Inventory;
+                case InventoryType.Equipment:
+                    EquipmentInventory equipment = (EquipmentInventory)DestinationInventory.GetComponent<GenericInventoryUI>().Inventory;
 
                     equipment.EquipItem(ItemBeingDragged.Item);
 

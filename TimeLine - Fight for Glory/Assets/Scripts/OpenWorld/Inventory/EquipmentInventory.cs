@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
-public class PlayerEquipmentInventory : GenericInventory
+public class EquipmentInventory : GenericInventory
 {
     public event Action<AttributeName, float> itemEquipped;
     private PlayerInventory playerInventory;
@@ -11,7 +11,7 @@ public class PlayerEquipmentInventory : GenericInventory
 
     private void Awake()
     {
-        inventoryType = InventoryType.PlayerEquipment;
+        inventoryType = InventoryType.Equipment;
         if (maxSlot == 0) maxSlot = 6;
         playerInventory = gameObject.GetComponent<PlayerInventory>();
     }
