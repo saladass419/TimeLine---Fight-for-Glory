@@ -21,6 +21,7 @@ TagManager:
   - HeroOnTile
   - ItemOnTile
   - SpellOnTile
+  - controller
   layers:
   - Default
   - TransparentFX

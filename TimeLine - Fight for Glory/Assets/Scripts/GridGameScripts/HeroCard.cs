@@ -16,13 +16,10 @@ public class HeroCard : Card
 
 
     [SerializeField] private GameObject modelPrefab;
-    [SerializeField] private GameObject instantiatedModel;
 
     [SerializeField] private float currentHealth;
     [SerializeField] private int currentActionPoints;
     [SerializeField] private HeroAttributes heroAttributes;
-
-    [SerializeField] private (int PositionX, int PositionY) position;
 
     [SerializeField] private List<ItemCard> items;
 
@@ -37,12 +34,10 @@ public class HeroCard : Card
     }
 
 
-    public (int, int) Position { get => position; set => position = value; }
     public List<ItemCard> Items { get => items; set => items = value; }
     public GameObject ModelPrefab { get => modelPrefab; set => modelPrefab = value; }
     public List<(int, int)> TilesToMove { get => tilesToMove; set => tilesToMove = value; }
     public List<(int, int)> TilesToAttack { get => tilesToAttack; set => tilesToAttack = value; }
-    public GameObject InstantiatedModel { get => instantiatedModel; set => instantiatedModel = value; }
     public RangeType RangeType { get => rangeType; set => rangeType = value; }
     public AttackType AttackType { get => attackType; set => attackType = value; }
     public HeroCardType HeroCardType { get => heroCardType; set => heroCardType = value; }

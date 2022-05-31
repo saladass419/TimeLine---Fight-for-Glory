@@ -49,11 +49,10 @@ public class Board : MonoBehaviour
     }
 
 
-    public void AddMonsterToTile(HeroCard heroCard, int x, int y)
+    public void AddMonsterToTile(GameObject heroModel, int x, int y)
     {
         Tile chosenTile = findTile(x, y);
-        heroCard.InstantiatedModel.transform.position = chosenTile.transform.position;
-        chosenTile.PlaceMonster(heroCard);
+        chosenTile.PlaceMonster(heroModel);
     }
 
 
@@ -85,10 +84,10 @@ public class Board : MonoBehaviour
         _tile.GetComponent<Renderer>().material = _tile.OwnMaterial;
     }
 
-    public void MoveHeroFromTileToAnother(HeroCard hero, Tile oldTile, Tile newTile)
+    public void MoveHeroFromTileToAnother(GameObject heroModel, Tile oldTile, Tile newTile)
     {
         oldTile.VanishMonster(newTile);
-        newTile.MoveMonsterToTile(hero);
+        newTile.MoveMonsterToTile(heroModel);
     }
 
     public (Tile tile, float distance) closestTileToObject(GameObject _object)

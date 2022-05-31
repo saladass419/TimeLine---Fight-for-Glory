@@ -76,8 +76,9 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         if(minimumDistance <2.0f && tile.Occupied == false)
         {
             inOnAndDrag = true;
-            objectBeingDragged.transform.position = tile.transform.position;
-            tile.PlaceMonster(gameObject.GetComponent<Model>().Hero);
+            gameObject.transform.position = tile.transform.position;
+            gameObject.GetComponent<Model>().Position = tile.Position;
+            tile.PlaceMonster(gameObject);
             gameObject.GetComponent<Model>().Placed = true;
             tile.Occupied = true;
             board.UnHighlightTile(currentHighlightedTile);
