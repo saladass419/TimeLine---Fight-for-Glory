@@ -176,6 +176,8 @@ public class GridGameController : MonoBehaviour
     public void MoveHero()
     {
         actionType = ActionTypeChosen.MOVE;
+        Debug.Log(currentChosenHeroCard.TilesToMove);
+        Debug.Log(currentChosenHeroCard.Position);
         HighlightPossiblePlaces(currentChosenHeroCard.Position, currentChosenHeroCard.TilesToMove, moveTileMaterial);
     }
 
