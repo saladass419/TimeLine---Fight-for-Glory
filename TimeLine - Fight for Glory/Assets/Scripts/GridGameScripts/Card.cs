@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CardType { HERO, SPELL, ITEM};
+public enum CardType { HERO, SPELL, ITEM, OBJECT};
 
-public abstract class Card : ScriptableObject
+public abstract class Card
 {
     private int manaCost;
     private string cardName;

@@ -1,15 +1,13 @@
-using System;
+ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum HeroCardType { OGRE, DWARF, Fairy, Giant, Oni, Centaur, Werewolf, Unicorn}
+public enum HeroCardType { ORC, DWARF, FAIRY, GIANT, ONI, CENTAUR, GOBLIN}
 public enum AttackType { FIRE, FREEZE, ELECTRIC, POISON}
-public enum RangeType { SHORT, MEDIUM, LONG, }
+public enum RangeType { SHORT, MEDIUM, LONG}
 
 
-[System.Serializable]
-[CreateAssetMenu(menuName = "HeroCard")]
 public class HeroCard : Card
 {
     [SerializeField] private HeroCardType heroCardType;
@@ -19,40 +17,41 @@ public class HeroCard : Card
 
     [SerializeField] private GameObject modelPrefab;
     [SerializeField] private GameObject instantiatedModel;
-    [SerializeField] private float maximumHealth;
+
     [SerializeField] private float currentHealth;
-    [SerializeField] private float attack;
-    [SerializeField] private int actionPoints;
-    [SerializeField] private int maximumActionPoints;
+    [SerializeField] private int currentActionPoints;
+    [SerializeField] private HeroAttributes heroAttributes;
+
     [SerializeField] private (int PositionX, int PositionY) position;
+
     [SerializeField] private List<ItemCard> items;
 
     [SerializeField] private List<(int PositionX, int PositionY)> tilesToMove = new List<(int, int)>();
-    [SerializeField] private List<(int PositionX, int PositionY)> tileToAttack = new List<(int, int)>();
+    [SerializeField] private List<(int PositionX, int PositionY)> tilesToAttack = new List<(int, int)>();
 
 
     public HeroCard()
     {
-        ;
+        CardName = "HeroCard";
+        CardType = CardType.HERO;
     }
 
-    public HeroCard(HeroCardType heroCardType, AttackType attackType, RangeType rangeType)
-    {
-        ;
-    }
 
     public (int, int) Position { get => position; set => position = value; }
     public List<ItemCard> Items { get => items; set => items = value; }
     public GameObject ModelPrefab { get => modelPrefab; set => modelPrefab = value; }
     public List<(int, int)> TilesToMove { get => tilesToMove; set => tilesToMove = value; }
-    public List<(int, int)> TileToAttack { get => tileToAttack; set => tileToAttack = value; }
+    public List<(int, int)> TilesToAttack { get => tilesToAttack; set => tilesToAttack = value; }
     public GameObject InstantiatedModel { get => instantiatedModel; set => instantiatedModel = value; }
+    public RangeType RangeType { get => rangeType; set => rangeType = value; }
+    public AttackType AttackType { get => attackType; set => attackType = value; }
+    public HeroCardType HeroCardType { get => heroCardType; set => heroCardType = value; }
 
     public void Attack()
     {
-        if (actionPoints > 0)
+        if (currentActionPoints > 0)
         {
-            actionPoints--;
+            currentActionPoints--;
         }
     }
 
@@ -63,30 +62,30 @@ public class HeroCard : Card
 
     public void Move()
     {
-        if (actionPoints > 0)
+        if (currentActionPoints > 0)
         {
-            actionPoints--;
+            currentActionPoints--;
         }
     }
 
     public void Ability1()
     {
-        if (actionPoints > 0)
+        if (currentActionPoints > 0)
         {
-            actionPoints--;
+            currentActionPoints--;
         }
     }
 
     public void Ability2()
     {
-        if(actionPoints > 0)
+        if(currentActionPoints > 0)
         {
-            actionPoints--;
+            currentActionPoints--;
         }
     }
 
     public void ResetActionPoints()
     {
-        actionPoints = maximumActionPoints;
+        //currentActionPoints = maximumActionPoints;
     }
 }

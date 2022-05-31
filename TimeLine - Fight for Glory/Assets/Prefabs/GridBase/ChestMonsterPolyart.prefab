@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: -3209579857776507858}
   m_Layer: 0
   m_Name: ChestMonsterPolyart
-  m_TagString: TileObject
+  m_TagString: HeroOnTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

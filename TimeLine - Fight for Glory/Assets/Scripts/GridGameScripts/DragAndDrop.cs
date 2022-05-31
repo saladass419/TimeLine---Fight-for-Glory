@@ -33,6 +33,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        oldPosition = transform.position;
         inOnAndDrag = false;
         if (ObjectHoveredOver != null)
         {
@@ -41,7 +42,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     }
     public void OnDrag(PointerEventData eventData)
     {
-        oldPosition = transform.position;
         if (ObjectBeingDragged == null || ObjectBeingDragged.GetComponent<Model>().Placed == true) return;
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
         if (plane.Raycast(ray,out float dist))
@@ -54,7 +54,9 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         if (ObjectBeingDragged != null && inOnAndDrag == false)
         {
             if(gameObject.GetComponent<Model>().Placed != true)
+            {
                 ObjectBeingDragged.transform.position = Vector3.Lerp(ObjectBeingDragged.transform.position, worldPos, 0.05f);
+            }
         }
         
         (Tile tile, float minimumDistance) = board.closestTileToObject(gameObject);
@@ -71,16 +73,18 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     public void OnEndDrag(PointerEventData eventData)
     {
         (Tile tile, float minimumDistance) = board.closestTileToObject(gameObject);
-        if(minimumDistance <2.0f)
+        if(minimumDistance <2.0f && tile.Occupied == false)
         {
             inOnAndDrag = true;
             objectBeingDragged.transform.position = tile.transform.position;
             tile.PlaceMonster(gameObject.GetComponent<Model>().Hero);
             gameObject.GetComponent<Model>().Placed = true;
+            tile.Occupied = true;
             board.UnHighlightTile(currentHighlightedTile);
         }
         else
         {
+            inOnAndDrag = true;
             board.UnHighlightTile(currentHighlightedTile);
             transform.position = oldPosition;
         }

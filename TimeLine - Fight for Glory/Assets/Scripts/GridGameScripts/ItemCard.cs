@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[System.Serializable]
-[CreateAssetMenu(menuName = "ItemCard")]
 public class ItemCard : Card
 {
+
+    public ItemCard()
+    {
+        CardName = "ItemCard";
+        CardType = CardType.ITEM;
+    }
+
     public void Equip()
     {
 

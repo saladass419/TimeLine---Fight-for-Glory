@@ -12,6 +12,12 @@ public class GridGameUIManager : MonoBehaviour
     [SerializeField] private Button closePanelButton;
     [SerializeField] private GameObject informationPanel;
 
+    [SerializeField] private TMP_Text cardName;
+    [SerializeField] private TMP_Text description;
+    [SerializeField] private TMP_Text heroType;
+    [SerializeField] private TMP_Text attackType;
+    [SerializeField] private TMP_Text rangeType;
+
     public void CloseInformationPanel()
     {
         informationPanel.SetActive(!informationPanel.activeSelf);
@@ -35,8 +41,12 @@ public class GridGameUIManager : MonoBehaviour
 
     }
 
-    private void RefreshUI(HeroCard card)
+    public void RefreshUI(HeroCard card)
     {
-
+        cardName.text = card.CardName;
+        description.text = card.Description;
+        heroType.text = card.HeroCardType.ToString();
+        attackType.text = card.AttackType.ToString();
+        rangeType.text = card.RangeType.ToString();
     }
 }

@@ -18,6 +18,9 @@ TagManager:
   - HeroArea
   - HeroAreaSlot
   - Board
+  - HeroOnTile
+  - ItemOnTile
+  - SpellOnTile
   layers:
   - Default
   - TransparentFX

@@ -11,10 +11,10 @@ public enum ActionTypeChosen { NONE, MOVE, ATTACK, SPECIALABILITY1, SPECIALABILI
 public class GridGameController : MonoBehaviour
 {
     [SerializeField] private Board board;
-    [SerializeField] Material attackTileMaterial;
-    [SerializeField] Material moveTileMaterial;
-    [SerializeField] Material tile1Material;
-    [SerializeField] Material tile2Material;
+    [SerializeField] private Material attackTileMaterial;
+    [SerializeField] private Material moveTileMaterial;
+    [SerializeField] private Material tile1Material;
+    [SerializeField] private Material tile2Material;
 
     [SerializeField] private HeroCard currentChosenHeroCard;
     [SerializeField] private GameObject currentChosenHeroModel;
@@ -22,6 +22,9 @@ public class GridGameController : MonoBehaviour
     [SerializeField] private Tile currentChosenTile;
 
     [SerializeField] private GridGameUIManager uiManager;
+
+    [SerializeField] private GameObject testPrefab1;
+    [SerializeField] private GameObject testPrefab2;
 
     [SerializeField] private Profile player;
 
@@ -34,8 +37,6 @@ public class GridGameController : MonoBehaviour
     private float currentDistanceFromBoard = 0;
     private bool rotatePressed = false;
     private bool antiRotatePressed = false;
-    private bool rotateUpPressed = false;
-    private bool antiRotateUpPressed = false;
 
 
     private void Awake()
@@ -44,13 +45,18 @@ public class GridGameController : MonoBehaviour
     }
     private void Start()
     {
-        currentChosenHeroCard.TilesToMove.Add((1, 1));
-        currentChosenHeroCard.TilesToMove.Add((0, 0));
-        currentChosenHeroCard.TilesToMove.Add((2, 3));
-        currentChosenHeroCard.TileToAttack.Add((2, 3));
-        currentChosenHeroCard.TileToAttack.Add((7, 7));
-        string json = JsonUtility.ToJson(currentChosenHeroCard);
+        //string json = JsonUtility.ToJson(currentChosenHeroCard);
         //File.WriteAllText(@"C:\Users\SteveP1\Desktop\json", json);
+
+        player.AddCard(CardFactory.CreateCard(0));
+        player.AddCard(CardFactory.CreateCard(0));
+        player.AddCard(CardFactory.CreateCard(1));
+        player.AddCard(CardFactory.CreateCard(1));
+        player.AddCard(CardFactory.CreateCard(1));
+        player.AddCard(CardFactory.CreateCard(1));
+        player.AddCard(CardFactory.CreateCard(2));
+        player.AddCard(CardFactory.CreateCard(3));
+
         gameState = GameStates.START;
         SetUpGame();
     }
@@ -98,37 +104,6 @@ public class GridGameController : MonoBehaviour
             antiRotatePressed = false;
         }
 
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    rotateUpPressed = true;
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.W))
-        //{
-        //    rotateUpPressed = false;
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.S))
-        //{
-        //    antiRotateUpPressed = true;
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.S))
-        //{
-        //    antiRotateUpPressed = false;
-        //}
-
-
-        //if (rotateUpPressed)
-        //{
-        //    cam.transform.RotateAround(new Vector3(1.12f, 0f, 39.21f), new Vector3(1, 0, 1), 30 * Time.deltaTime);
-        //}
-
-        //if (antiRotateUpPressed)
-        //{
-        //    cam.transform.RotateAround(new Vector3(1.12f, 0f, 39.21f), new Vector3(1, 0, 1), 30 * -Time.deltaTime);
-        //}
-
 
         if (rotatePressed)
         {
@@ -146,17 +121,22 @@ public class GridGameController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.CompareTag("TileObject"))
+                if (hit.transform.CompareTag("HeroOnTile"))
                 {
-                    Debug.Log("Gotcha bitch");
+                    currentChosenHeroCard = hit.transform.GetComponent<Model>().Hero;
+                    currentChosenHeroModel = hit.transform.gameObject;
+                    uiManager.RefreshUI(currentChosenHeroCard);
                 }
                 else if (hit.transform.CompareTag("Tile") && actionType == ActionTypeChosen.MOVE)
                 {
                     Tile newTile = hit.transform.GetComponent<Tile>();
-                    Tile oldTile = board.findTile(currentChosenHeroCard.InstantiatedModel.GetComponent<Model>().Position.PosX, currentChosenHeroCard.InstantiatedModel.GetComponent<Model>().Position.PosY);
-                    board.MoveHeroFromTileToAnother(currentChosenHeroCard, oldTile, newTile);
-                    actionType = ActionTypeChosen.NONE;
-                    board.ResetBoardMaterial(tile1Material, tile2Material);
+                    if (newTile.Occupied != true)
+                    {
+                        Tile oldTile = board.findTile(currentChosenHeroCard.InstantiatedModel.GetComponent<Model>().Position.PosX, currentChosenHeroCard.InstantiatedModel.GetComponent<Model>().Position.PosY);
+                        board.MoveHeroFromTileToAnother(currentChosenHeroCard, oldTile, newTile);
+                        actionType = ActionTypeChosen.NONE;
+                        board.ResetBoardMaterial(tile1Material, tile2Material);
+                    }
                 }
             }
         }
@@ -168,15 +148,22 @@ public class GridGameController : MonoBehaviour
         if(gameState == GameStates.START)
         {
             int i = 0;
-            foreach (HeroCard card in player.Deck.CardsInDeck)
+            foreach (Card card in player.Deck.CardsInDeck)
             {
                 if(card.CardType == CardType.HERO)
                 {
-                    GameObject instantiatedHeroPrefab = Instantiate(card.ModelPrefab, heroAreaSlots[i].transform.position, Quaternion.identity);
+                    HeroCard heroCard = (HeroCard) card;
+
+                    if(i%2 == 0)
+                        heroCard.ModelPrefab = testPrefab1;
+                    else
+                        heroCard.ModelPrefab = testPrefab2;
+
+                    GameObject instantiatedHeroPrefab = Instantiate(heroCard.ModelPrefab, heroAreaSlots[i].transform.position, Quaternion.identity);
                     instantiatedHeroPrefab.AddComponent<DragAndDrop>();
                     instantiatedHeroPrefab.AddComponent<Model>();
-                    card.InstantiatedModel = instantiatedHeroPrefab;
-                    instantiatedHeroPrefab.GetComponent<Model>().Hero = card;
+                    heroCard.InstantiatedModel = instantiatedHeroPrefab;
+                    instantiatedHeroPrefab.GetComponent<Model>().Hero = heroCard;
                     i++;
                 }
             }
@@ -208,7 +195,7 @@ public class GridGameController : MonoBehaviour
     public void Attack()
     {
         actionType = ActionTypeChosen.ATTACK;
-        HighlightPossiblePlaces(currentChosenHeroCard.Position, currentChosenHeroCard.TileToAttack, attackTileMaterial);
+        HighlightPossiblePlaces(currentChosenHeroCard.Position, currentChosenHeroCard.TilesToAttack, attackTileMaterial);
         board.ResetBoardMaterial(tile1Material, tile2Material);
     }
 

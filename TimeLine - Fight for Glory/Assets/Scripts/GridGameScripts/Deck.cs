@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Deck
 {
-    List<Card> cardsInDeck = new List<Card>();
-    List<Card> cardsInHand = new List<Card>();
+    [SerializeField] List<Card> cardsInDeck = new List<Card>();
+    [SerializeField] List<Card> cardsInHand = new List<Card>();
     List<Card> cardsInDiscardPile = new List<Card>();
 
     public List<Card> CardsInDeck { get => cardsInDeck; set => cardsInDeck = value; }
 
 
-    public void AddCard(Card card)
+    public void AddCardToDeck(Card card)
     {
         cardsInDeck.Add(card);
     }
