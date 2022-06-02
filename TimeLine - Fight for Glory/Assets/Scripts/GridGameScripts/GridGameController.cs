@@ -127,11 +127,14 @@ public class GridGameController : MonoBehaviour
                 else if (hit.transform.CompareTag("Tile") && actionType == ActionTypeChosen.MOVE)
                 {
                     Tile newTile = hit.transform.GetComponent<Tile>();
-                    if (newTile.Occupied != true)
+                    List<(int, int)> boardPositions = board.LocalHeroPositionsToBoardPositions(currentChosenHeroModel.GetComponent<Model>().Direction, currentChosenHeroModel.GetComponent<Model>().Position, currentChosenHeroModel.GetComponent<Model>().Hero.TilesToMove);
+                    if (newTile.Occupied != true && board.ChoosenTileInMovementRange(newTile, boardPositions))
                     {
-                        Tile oldTile = board.findTile(currentChosenHeroModel.GetComponent<Model>().Position.PosX, currentChosenHeroModel.GetComponent<Model>().Position.PosY);
+                        Tile oldTile = board.FindTile(currentChosenHeroModel.GetComponent<Model>().Position.PosX, currentChosenHeroModel.GetComponent<Model>().Position.PosY);
                         board.MoveHeroFromTileToAnother(currentChosenHeroModel, oldTile, newTile);
-                        actionType = ActionTypeChosen.NONE;
+                        currentChosenHeroModel.transform.position = newTile.transform.position;
+                        currentChosenHeroModel.GetComponent<Model>().Position = newTile.Position;
+                        currentChosenHeroModel.GetComponent<Model>().RotateModel(RotateDirection.LEFT, 90);
                         board.ResetBoardMaterial(tile1Material, tile2Material);
                     }
                 }
@@ -168,24 +171,24 @@ public class GridGameController : MonoBehaviour
         instantiatedHeroPrefab.AddComponent<DragAndDrop>();
         instantiatedHeroPrefab.AddComponent<Model>();
         instantiatedHeroPrefab.GetComponent<Model>().Hero = card;
+        instantiatedHeroPrefab.GetComponent<Model>().Direction = CardinalDirection.NORTH;
     }
 
 
     public void MoveHero()
     {
         actionType = ActionTypeChosen.MOVE;
-        HighlightPossiblePlaces(currentChosenHeroModel.GetComponent<Model>().Position, currentChosenHeroModel.GetComponent<Model>().Hero.TilesToMove, moveTileMaterial);
+        HighlightPossiblePlaces(currentChosenHeroModel.GetComponent<Model>().Direction, currentChosenHeroModel.GetComponent<Model>().Position, currentChosenHeroModel.GetComponent<Model>().Hero.TilesToMove, moveTileMaterial);
     }
 
-    private void HighlightPossiblePlaces((int PosX, int PosY) currentPos, List<(int PosX, int PosY)> Pos, Material changeMaterial)
+    private void HighlightPossiblePlaces(CardinalDirection direction, (int PosX, int PosY) currentPos, List<(int PosX, int PosY)> Pos, Material changeMaterial)
     {
         foreach((int PosX, int PosY) position in Pos)
         {
-            int boardCoordinatePositionX = currentPos.PosX + position.PosX;
-            int boardCoordinatePositionY = currentPos.PosY + position.PosY;
-            if(RealTileOnBoard(boardCoordinatePositionX, boardCoordinatePositionY))
+            (int PosX, int PosY) boardCoordinates = board.PositionInBoardCoordinate(direction, currentPos, position);
+            if(RealTileOnBoard(boardCoordinates))
             {
-                board.HighlightTiles(board.TileList[boardCoordinatePositionX, boardCoordinatePositionY], changeMaterial);
+                board.HighlightTiles(board.TileList[boardCoordinates.PosX, boardCoordinates.PosY], changeMaterial);
             }
         }
     }
@@ -193,14 +196,14 @@ public class GridGameController : MonoBehaviour
     public void Attack()
     {
         actionType = ActionTypeChosen.ATTACK;
-        HighlightPossiblePlaces(currentChosenHeroModel.GetComponent<Model>().Position, currentChosenHeroModel.GetComponent<Model>().Hero.TilesToAttack, attackTileMaterial);
+        HighlightPossiblePlaces(currentChosenHeroModel.GetComponent<Model>().Direction, currentChosenHeroModel.GetComponent<Model>().Position, currentChosenHeroModel.GetComponent<Model>().Hero.TilesToAttack, attackTileMaterial);
         board.ResetBoardMaterial(tile1Material, tile2Material);
     }
 
 
-    private bool RealTileOnBoard(int x, int y)
+    private bool RealTileOnBoard((int PosX, int PosY) position)
     {
-        if((x > -1 && x < 8) && (y > -1 && y < 8))
+        if((position.PosX > -1 && position.PosX < 8) && (position.PosY > -1 && position.PosY < 8))
         {
             return true;
         }

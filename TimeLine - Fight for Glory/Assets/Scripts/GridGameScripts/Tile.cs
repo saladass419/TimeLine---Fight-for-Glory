@@ -19,7 +19,6 @@ public class Tile : MonoBehaviour
     {
         if(occupied == false)
         {
-            heroModel.GetComponent<Model>().Position = position;
             currentHeroModelOnTile = heroModel;
             occupied = true;
         }
@@ -35,8 +34,6 @@ public class Tile : MonoBehaviour
     public void VanishMonster(Tile _newTile)
     {
         occupied = false;
-        currentHeroModelOnTile.transform.position = _newTile.transform.position;
-        currentHeroModelOnTile.GetComponent<Model>().Position = _newTile.Position;
         currentHeroModelOnTile = null;
     }
 }

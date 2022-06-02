@@ -24,9 +24,9 @@ public static class CardFactory
         possibleAttackPatterns.Add("shortRange+", new List<(int, int)>() {(0,1), (0,2)});
         possibleAttackPatterns.Add("shortRange++", new List<(int, int)>() {(0,1), (0,2), (0,3)});
 
-        possibleMovePatterns.Add("shortRange", new List<(int, int)>() { (0, 1) });
-        possibleMovePatterns.Add("shortRange+", new List<(int, int)>() { (0, 1), (0, 2) });
-        possibleMovePatterns.Add("shortRange++", new List<(int, int)>() { (0, 1), (0, 2), (0, 3) });
+        possibleMovePatterns.Add("shortRange", new List<(int, int)>() {(0,1)});
+        possibleMovePatterns.Add("shortRange+", new List<(int, int)>() {(0,1), (0,2)});
+        possibleMovePatterns.Add("shortRange++", new List<(int, int)>() {(0, 1), (0,2), (0,3), (1,0)});
 
         var heroTypes = Assembly.GetAssembly(typeof(Card)).GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Card)));
 
@@ -102,6 +102,6 @@ public static class CardFactory
 
         hero.TilesToAttack = possibleAttackPatterns["shortRange"];
 
-        hero.TilesToMove = possibleMovePatterns["shortRange+"];
+        hero.TilesToMove = possibleMovePatterns["shortRange++"];
     }
 }
