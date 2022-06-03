@@ -168,10 +168,13 @@ public class GridGameController : MonoBehaviour
     {
         card.ModelPrefab = testPrefab1;
         GameObject instantiatedHeroPrefab = Instantiate(card.ModelPrefab, slotToPlace.transform.position, Quaternion.identity);
-        instantiatedHeroPrefab.AddComponent<DragAndDrop>();
-        instantiatedHeroPrefab.AddComponent<Model>();
-        instantiatedHeroPrefab.GetComponent<Model>().Hero = card;
-        instantiatedHeroPrefab.GetComponent<Model>().Direction = CardinalDirection.NORTH;
+        Model createdHeroModel = instantiatedHeroPrefab.GetComponent<Model>();
+        createdHeroModel.Hero = card;
+        card.HeroAttributes.HeroAttributesList[HeroAttributeType.MAXHEALTH] = 100f;
+        card.CurrentHealth = card.HeroAttributes.HeroAttributesList[HeroAttributeType.MAXHEALTH];
+        createdHeroModel.Direction = CardinalDirection.NORTH;
+        createdHeroModel.IsEnemy = false;
+        createdHeroModel.GetComponentInChildren<HealthBar>().SubscribeToHealthChanged();
     }
 
 

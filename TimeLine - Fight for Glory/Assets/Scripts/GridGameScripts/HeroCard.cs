@@ -19,12 +19,14 @@ public class HeroCard : Card
 
     [SerializeField] private float currentHealth;
     [SerializeField] private int currentActionPoints;
-    [SerializeField] private HeroAttributes heroAttributes;
+    [SerializeField] private HeroAttributes heroAttributes = new HeroAttributes();
 
     [SerializeField] private List<ItemCard> items;
 
     [SerializeField] private List<(int PositionX, int PositionY)> tilesToMove = new List<(int, int)>();
     [SerializeField] private List<(int PositionX, int PositionY)> tilesToAttack = new List<(int, int)>();
+
+    public event Action<float> OnHealthPercentageChanged = delegate { };
 
 
     public HeroCard()
@@ -41,6 +43,16 @@ public class HeroCard : Card
     public RangeType RangeType { get => rangeType; set => rangeType = value; }
     public AttackType AttackType { get => attackType; set => attackType = value; }
     public HeroCardType HeroCardType { get => heroCardType; set => heroCardType = value; }
+    public HeroAttributes HeroAttributes { get => heroAttributes; set => heroAttributes = value; }
+    public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
+
+
+    public void ModifyHealth(float value)
+    {
+        currentHealth += value;
+        float currentHealhtPercentage = currentHealth / heroAttributes.HeroAttributesList[HeroAttributeType.MAXHEALTH];
+        OnHealthPercentageChanged(currentHealhtPercentage);
+    }
 
     public void Attack()
     {

@@ -10,14 +10,24 @@ public enum RotateDirection {LEFT, RIGHT}
 public class Model : MonoBehaviour
 {
     private (int PosX, int PosY) position;
-    [SerializeField] private HeroCard hero;
+    [SerializeField] private HeroCard hero = new HeroCard();
     [SerializeField] private bool placed = false;
     private CardinalDirection direction;
+    private bool isEnemy;
 
     public (int PosX, int PosY) Position { get => position; set => position = value; }
     public HeroCard Hero { get => hero; set => hero = value; }
     public bool Placed { get => placed; set => placed = value; }
     public CardinalDirection Direction { get => direction; set => direction = value; }
+    public bool IsEnemy { get => isEnemy; set => isEnemy = value; }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            hero.ModifyHealth(-10);
+        }
+    }
 
     public void RotateModel(RotateDirection rotateDirection, float angel)
     {
