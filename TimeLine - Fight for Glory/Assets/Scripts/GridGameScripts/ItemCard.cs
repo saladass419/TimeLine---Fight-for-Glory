@@ -8,12 +8,12 @@ public class ItemCard : Card
 
     public ItemCard()
     {
-        CardName = "ItemCard";
+        CardName = this.GetType().Name;
         CardType = CardType.ITEM;
     }
 
-    public void Equip()
+    public virtual void Equip()
     {
-
+        ;
     }
 }

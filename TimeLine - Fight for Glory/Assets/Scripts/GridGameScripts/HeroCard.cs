@@ -14,9 +14,6 @@ public class HeroCard : Card
     [SerializeField] private AttackType attackType;
     [SerializeField] private RangeType rangeType;
 
-
-    [SerializeField] private GameObject modelPrefab;
-
     [SerializeField] private float currentHealth;
     [SerializeField] private int currentActionPoints;
     [SerializeField] private HeroAttributes heroAttributes = new HeroAttributes();
@@ -31,13 +28,12 @@ public class HeroCard : Card
 
     public HeroCard()
     {
-        CardName = "HeroCard";
+        CardName = this.GetType().Name;
         CardType = CardType.HERO;
     }
 
 
     public List<ItemCard> Items { get => items; set => items = value; }
-    public GameObject ModelPrefab { get => modelPrefab; set => modelPrefab = value; }
     public List<(int, int)> TilesToMove { get => tilesToMove; set => tilesToMove = value; }
     public List<(int, int)> TilesToAttack { get => tilesToAttack; set => tilesToAttack = value; }
     public RangeType RangeType { get => rangeType; set => rangeType = value; }

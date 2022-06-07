@@ -46,14 +46,14 @@ public class GridGameController : MonoBehaviour
         //string json = JsonUtility.ToJson(currentChosenHeroCard);
         //File.WriteAllText(@"C:\Users\SteveP1\Desktop\json", json);
 
-        player.AddCard(CardFactory.CreateCard(0));
-        player.AddCard(CardFactory.CreateCard(0));
-        player.AddCard(CardFactory.CreateCard(1));
-        player.AddCard(CardFactory.CreateCard(1));
-        player.AddCard(CardFactory.CreateCard(1));
-        player.AddCard(CardFactory.CreateCard(1));
-        player.AddCard(CardFactory.CreateCard(2));
-        player.AddCard(CardFactory.CreateCard(3));
+        player.AddCardToCollection(CardFactory.CreateCard(0));
+        player.AddCardToCollection(CardFactory.CreateCard(0));
+        player.AddCardToCollection(CardFactory.CreateCard(1));
+        player.AddCardToCollection(CardFactory.CreateCard(1));
+        player.AddCardToCollection(CardFactory.CreateCard(1));
+        player.AddCardToCollection(CardFactory.CreateCard(1));
+        player.AddCardToCollection(CardFactory.CreateCard(2));
+        player.AddCardToCollection(CardFactory.CreateCard(3));
 
         gameState = GameStates.START;
         SetUpGame();

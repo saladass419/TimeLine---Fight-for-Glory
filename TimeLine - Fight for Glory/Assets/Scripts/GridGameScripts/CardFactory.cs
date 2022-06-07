@@ -33,6 +33,7 @@ public static class CardFactory
         foreach(var type in heroTypes)
         {
             var tempHeroType = Activator.CreateInstance(type) as Card;
+            Debug.Log(tempHeroType.CardName);
             heroesList.Add(tempHeroType.CardName, type);
         }
     }
@@ -86,7 +87,7 @@ public static class CardFactory
 
     public static void giveRandomStatsToHeroCard(HeroCard hero)
     {
-        hero.Description = "This heo is a close damage monster";
+        hero.Description = "This hero is a close damage monster";
 
         Array heroCardTypes = Enum.GetValues(typeof(HeroCardType));
         int number = rnd.Next(1, heroCardTypes.Length);

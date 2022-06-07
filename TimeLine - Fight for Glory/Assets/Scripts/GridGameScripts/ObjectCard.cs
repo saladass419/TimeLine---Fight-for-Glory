@@ -9,7 +9,7 @@ public class ObjectCard : Card
 
     public ObjectCard()
     {
-        CardName = "ObjectCard";
+        CardName = this.GetType().Name;
         CardType = CardType.OBJECT;
     }
 }

@@ -8,7 +8,7 @@ public class SpellCard : Card
 
     public SpellCard()
     {
-        CardName = "SpellCard";
+        CardName = this.GetType().Name;
         CardType = CardType.SPELL;
     }
     public void Effect()
