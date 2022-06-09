@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class Deck
 {
-    [SerializeField] List<Card> cardsInDeck = new List<Card>();
-    [SerializeField] List<Card> cardsInHand = new List<Card>();
-    List<Card> cardsInDiscardPile = new List<Card>();
+    [SerializeField] List<GameObject> cardsInDeck = new List<GameObject>();
+    [SerializeField] List<GameObject> cardsInHand = new List<GameObject>();
+    List<GameObject> cardsInDiscardPile = new List<GameObject>();
 
-    public List<Card> CardsInDeck { get => cardsInDeck; set => cardsInDeck = value; }
+    public List<GameObject> CardsInDeck { get => cardsInDeck; set => cardsInDeck = value; }
 
 
-    public void AddCardToDeck(Card card)
+    public void AddGameObjectToDeck(GameObject card)
     {
         cardsInDeck.Add(card);
     }
 
     public void DrawCard()
     {
-        Card drawnCard = cardsInDeck[0];
+        GameObject drawnGameObject = cardsInDeck[0];
         cardsInDeck.RemoveAt(0);
-        cardsInHand.Add(drawnCard);
+        cardsInHand.Add(drawnGameObject);
     }
 }

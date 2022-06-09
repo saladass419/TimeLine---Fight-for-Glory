@@ -46,14 +46,14 @@ public class GridGameController : MonoBehaviour
         //string json = JsonUtility.ToJson(currentChosenHeroCard);
         //File.WriteAllText(@"C:\Users\SteveP1\Desktop\json", json);
 
-        player.AddCardToCollection(CardFactory.CreateCard(0));
-        player.AddCardToCollection(CardFactory.CreateCard(0));
-        player.AddCardToCollection(CardFactory.CreateCard(1));
-        player.AddCardToCollection(CardFactory.CreateCard(1));
-        player.AddCardToCollection(CardFactory.CreateCard(1));
-        player.AddCardToCollection(CardFactory.CreateCard(1));
-        player.AddCardToCollection(CardFactory.CreateCard(2));
-        player.AddCardToCollection(CardFactory.CreateCard(3));
+        player.AddGameObjectToCollection(CardFactory.CreateCard(1));
+        player.AddGameObjectToCollection(CardFactory.CreateCard(1));
+        player.AddGameObjectToCollection(CardFactory.CreateCard(1));
+        player.AddGameObjectToCollection(CardFactory.CreateCard(1));
+        player.AddGameObjectToCollection(CardFactory.CreateCard(1));
+        player.AddGameObjectToCollection(CardFactory.CreateCard(1));
+        player.AddGameObjectToCollection(CardFactory.CreateCard(1));
+        player.AddGameObjectToCollection(CardFactory.CreateCard(1));
 
         gameState = GameStates.START;
         SetUpGame();
@@ -122,19 +122,18 @@ public class GridGameController : MonoBehaviour
                 if (hit.transform.CompareTag("HeroOnTile"))
                 {
                     currentChosenHeroModel = hit.transform.gameObject;
-                    uiManager.RefreshUI(currentChosenHeroModel.GetComponent<Model>().Hero);
                 }
                 else if (hit.transform.CompareTag("Tile") && actionType == ActionTypeChosen.MOVE)
                 {
                     Tile newTile = hit.transform.GetComponent<Tile>();
-                    List<(int, int)> boardPositions = board.LocalHeroPositionsToBoardPositions(currentChosenHeroModel.GetComponent<Model>().Direction, currentChosenHeroModel.GetComponent<Model>().Position, currentChosenHeroModel.GetComponent<Model>().Hero.TilesToMove);
+                    List<Position> boardPositions = board.LocalHeroPositionsToBoardPositions(currentChosenHeroModel.GetComponent<Model>().Direction, currentChosenHeroModel.GetComponent<NewModel>().Position, currentChosenHeroModel.GetComponent<HeroCard>().TilesToMove);
                     if (newTile.Occupied != true && board.ChoosenTileInMovementRange(newTile, boardPositions))
                     {
                         Tile oldTile = board.FindTile(currentChosenHeroModel.GetComponent<Model>().Position.PosX, currentChosenHeroModel.GetComponent<Model>().Position.PosY);
                         board.MoveHeroFromTileToAnother(currentChosenHeroModel, oldTile, newTile);
                         currentChosenHeroModel.transform.position = newTile.transform.position;
-                        currentChosenHeroModel.GetComponent<Model>().Position = newTile.Position;
-                        currentChosenHeroModel.GetComponent<Model>().RotateModel(RotateDirection.LEFT, 90);
+                        currentChosenHeroModel.GetComponent<NewModel>().Position = newTile.Position;
+                        currentChosenHeroModel.GetComponent<NewModel>().RotateModel(RotateDirection.LEFT, 90);
                         board.ResetBoardMaterial(tile1Material, tile2Material);
                     }
                 }
@@ -148,14 +147,11 @@ public class GridGameController : MonoBehaviour
         if(gameState == GameStates.START)
         {
             int i = 0;
-            foreach (Card card in player.Deck.CardsInDeck)
+            foreach (GameObject GO in player.Deck.CardsInDeck)
             {
-                if(card.CardType == CardType.HERO)
+                if(GO.CompareTag("HeroOnTile"))
                 {
-                    HeroCard heroCard = (HeroCard) card;
-
-                    CreateHeroModelOnPlayGround(heroCard, heroAreaSlots[i]);
-
+                    CreateHeroModelOnPlayGround(GO, heroAreaSlots[i]);
                     i++;
                 }
             }
@@ -164,31 +160,33 @@ public class GridGameController : MonoBehaviour
     }
 
 
-    private void CreateHeroModelOnPlayGround(HeroCard card, GameObject slotToPlace)
+    private void CreateHeroModelOnPlayGround(GameObject hero, GameObject slotToPlace)
     {
-        card.ModelPrefab = testPrefab1;
-        GameObject instantiatedHeroPrefab = Instantiate(card.ModelPrefab, slotToPlace.transform.position, Quaternion.identity);
-        Model createdHeroModel = instantiatedHeroPrefab.GetComponent<Model>();
-        createdHeroModel.Hero = card;
-        card.HeroAttributes.HeroAttributesList[HeroAttributeType.MAXHEALTH] = 100f;
-        card.CurrentHealth = card.HeroAttributes.HeroAttributesList[HeroAttributeType.MAXHEALTH];
-        createdHeroModel.Direction = CardinalDirection.NORTH;
-        createdHeroModel.IsEnemy = false;
-        createdHeroModel.GetComponentInChildren<HealthBar>().SubscribeToHealthChanged();
+        Instantiate(hero, slotToPlace.transform.position, Quaternion.identity);
+        hero.transform.position = slotToPlace.transform.position;
+        if(hero.GetComponent<HeroCard>() == null)
+            Debug.Log("Ahhaaa");
+        Debug.Log(hero.GetComponent<HeroCard>().name);
+        hero.GetComponent<HeroCard>().HeroAttributes = new HeroAttributes();
+        hero.GetComponent<HeroCard>().HeroAttributes.HeroAttributesList[HeroAttributeType.MAXHEALTH] = 100f;
+        hero.GetComponent<HeroCard>().CurrentHealth = hero.GetComponent<HeroCard>().HeroAttributes.HeroAttributesList[HeroAttributeType.MAXHEALTH];
+        hero.GetComponent<NewModel>().Direction = CardinalDirection.NORTH;
+        hero.GetComponent<NewModel>().IsEnemy = false;
+        hero.GetComponentInChildren<HealthBar>().SubscribeToHealthChanged();
     }
 
 
     public void MoveHero()
     {
         actionType = ActionTypeChosen.MOVE;
-        HighlightPossiblePlaces(currentChosenHeroModel.GetComponent<Model>().Direction, currentChosenHeroModel.GetComponent<Model>().Position, currentChosenHeroModel.GetComponent<Model>().Hero.TilesToMove, moveTileMaterial);
+        HighlightPossiblePlaces(currentChosenHeroModel.GetComponent<NewModel>().Direction, currentChosenHeroModel.GetComponent<NewModel>().Position, currentChosenHeroModel.GetComponent<HeroCard>().TilesToMove, moveTileMaterial);
     }
 
-    private void HighlightPossiblePlaces(CardinalDirection direction, (int PosX, int PosY) currentPos, List<(int PosX, int PosY)> Pos, Material changeMaterial)
+    private void HighlightPossiblePlaces(CardinalDirection direction, Position currentPos, List<Position> Pos, Material changeMaterial)
     {
-        foreach((int PosX, int PosY) position in Pos)
+        foreach(Position position in Pos)
         {
-            (int PosX, int PosY) boardCoordinates = board.PositionInBoardCoordinate(direction, currentPos, position);
+            Position boardCoordinates = board.PositionInBoardCoordinate(direction, currentPos, position);
             if(RealTileOnBoard(boardCoordinates))
             {
                 board.HighlightTiles(board.TileList[boardCoordinates.PosX, boardCoordinates.PosY], changeMaterial);
@@ -199,12 +197,12 @@ public class GridGameController : MonoBehaviour
     public void Attack()
     {
         actionType = ActionTypeChosen.ATTACK;
-        HighlightPossiblePlaces(currentChosenHeroModel.GetComponent<Model>().Direction, currentChosenHeroModel.GetComponent<Model>().Position, currentChosenHeroModel.GetComponent<Model>().Hero.TilesToAttack, attackTileMaterial);
+        HighlightPossiblePlaces(currentChosenHeroModel.GetComponent<NewModel>().Direction, currentChosenHeroModel.GetComponent<NewModel>().Position, currentChosenHeroModel.GetComponent<HeroCard>().TilesToAttack, attackTileMaterial);
         board.ResetBoardMaterial(tile1Material, tile2Material);
     }
 
 
-    private bool RealTileOnBoard((int PosX, int PosY) position)
+    private bool RealTileOnBoard(Position position)
     {
         if((position.PosX > -1 && position.PosX < 8) && (position.PosY > -1 && position.PosY < 8))
         {

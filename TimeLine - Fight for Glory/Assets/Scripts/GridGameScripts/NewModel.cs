@@ -2,38 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CardinalDirection { NORTH, SOUTH, WEST, EAST }
+public enum RotateDirection { LEFT, RIGHT }
 
-public class Model : MonoBehaviour
+
+public class NewModel : MonoBehaviour
 {
-    private (int PosX, int PosY) position;
-    [SerializeField] private HeroCard hero;
-    [SerializeField] private bool placed = false;
+    [SerializeField] private string id;
+    [SerializeField] private string characterName;
+
+    private Position position;
+    private bool onBoard = false;
     private CardinalDirection direction;
     private bool isEnemy;
 
-    public (int PosX, int PosY) Position { get => position; set => position = value; }
-    public HeroCard Hero { get => hero; set => hero = value; }
-    public bool Placed { get => placed; set => placed = value; }
+    private void Start()
+    {
+        id = this.GetType().Name;
+    }
+
+
+    public Position Position { get => position; set => position = value; }
+    public bool OnBoard { get => onBoard; set => onBoard = value; }
     public CardinalDirection Direction { get => direction; set => direction = value; }
     public bool IsEnemy { get => isEnemy; set => isEnemy = value; }
-
-    private void Awake()
-    {
-        hero = new HeroCard();
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            hero.ModifyHealth(-10);
-        }
-    }
 
     public void RotateModel(RotateDirection rotateDirection, float angel)
     {
 
-        if(rotateDirection == RotateDirection.LEFT)
+        if (rotateDirection == RotateDirection.LEFT)
         {
             gameObject.transform.Rotate(Vector3.up, -angel);
         }
@@ -104,4 +101,23 @@ public class Model : MonoBehaviour
         }
     }
 
+
+
+}
+
+
+
+public struct Position {
+
+    private int posX;
+    private int posY;
+
+    public Position(int x, int y)
+    {
+        posX = x;
+        posY = y;
+    }
+
+    public int PosX { get => posX; set => posX = value; }
+    public int PosY { get => posY; set => posY = value; }
 }

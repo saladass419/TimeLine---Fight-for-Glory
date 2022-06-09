@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum HeroCardType { ORC, DWARF, FAIRY, GIANT, ONI, CENTAUR, GOBLIN}
+public enum HeroCardType { ORC, DWARF, FAIRY, GIANT, ONI, CENTAUR, GOBLIN, DRAGON}
 public enum AttackType { FIRE, FREEZE, ELECTRIC, POISON}
 public enum RangeType { SHORT, MEDIUM, LONG}
 
@@ -16,32 +16,32 @@ public class HeroCard : Card
 
     [SerializeField] private float currentHealth;
     [SerializeField] private int currentActionPoints;
-    [SerializeField] private HeroAttributes heroAttributes = new HeroAttributes();
+    [SerializeField] private HeroAttributes heroAttributes;
 
     [SerializeField] private List<ItemCard> items;
 
-    [SerializeField] private List<(int PositionX, int PositionY)> tilesToMove = new List<(int, int)>();
-    [SerializeField] private List<(int PositionX, int PositionY)> tilesToAttack = new List<(int, int)>();
+    [SerializeField] private List<Position> tilesToMove;
+    [SerializeField] private List<Position> tilesToAttack;
 
-    public event Action<float> OnHealthPercentageChanged = delegate { };
+    public event Action<float> OnHealthPercentageChanged;
 
-
-    public HeroCard()
+    private void Awake()
     {
-        CardName = this.GetType().Name;
-        CardType = CardType.HERO;
+        OnHealthPercentageChanged = delegate { };
+        tilesToMove = new List<Position>();
+        tilesToAttack = new List<Position>();
+        heroAttributes = new HeroAttributes();
     }
 
 
     public List<ItemCard> Items { get => items; set => items = value; }
-    public List<(int, int)> TilesToMove { get => tilesToMove; set => tilesToMove = value; }
-    public List<(int, int)> TilesToAttack { get => tilesToAttack; set => tilesToAttack = value; }
     public RangeType RangeType { get => rangeType; set => rangeType = value; }
     public AttackType AttackType { get => attackType; set => attackType = value; }
     public HeroCardType HeroCardType { get => heroCardType; set => heroCardType = value; }
     public HeroAttributes HeroAttributes { get => heroAttributes; set => heroAttributes = value; }
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
-
+    public List<Position> TilesToMove { get => tilesToMove; set => tilesToMove = value; }
+    public List<Position> TilesToAttack { get => tilesToAttack; set => tilesToAttack = value; }
 
     public void ModifyHealth(float value)
     {
@@ -50,7 +50,7 @@ public class HeroCard : Card
         OnHealthPercentageChanged(currentHealhtPercentage);
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         if (currentActionPoints > 0)
         {
@@ -71,7 +71,7 @@ public class HeroCard : Card
         }
     }
 
-    public void Ability1()
+    public virtual void Ability1()
     {
         if (currentActionPoints > 0)
         {
@@ -79,7 +79,7 @@ public class HeroCard : Card
         }
     }
 
-    public void Ability2()
+    public virtual void Ability2()
     {
         if(currentActionPoints > 0)
         {

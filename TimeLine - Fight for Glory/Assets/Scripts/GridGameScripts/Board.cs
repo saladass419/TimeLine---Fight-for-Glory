@@ -22,7 +22,8 @@ public class Board : MonoBehaviour
         {
             Tile tTile = _tileObject.GetComponent<Tile>();
             tileList[n, m] = tTile;
-            tTile.Position = (n, m);
+            //tileList[n, m].Position.PosX = n;
+            //tileList[n, m].Position.PosY = m;
 
             if (n % 2 == 0 && m % 2 == 0)
             {
@@ -55,13 +56,6 @@ public class Board : MonoBehaviour
         chosenTile.PlaceMonster(heroModel);
     }
 
-
-    public (int,int) TellManhattanDistance(Tile tile1, Tile tile2)
-    {
-        (int x1, int y1) = tile1.Position;
-        (int x2, int y2) = tile2.Position;
-        return (Mathf.Abs(x1 - y1), Mathf.Abs(x2 - y2));
-    }
 
     public void HighlightTiles(Tile _tile, Material changeMaterial)
     {
@@ -110,7 +104,7 @@ public class Board : MonoBehaviour
     {
         foreach (Tile _tile in tileList)
         {
-            if (_tile.Position == (x, y))
+            if (_tile.Position.PosX == x && _tile.Position.PosY == y)
             {
                 return _tile;
             }
@@ -118,49 +112,56 @@ public class Board : MonoBehaviour
         return null;
     }
 
-    public (int PosX, int PosY) PositionInBoardCoordinate(CardinalDirection direction, (int PosX, int PosY) heroPosition, (int PosX, int PosY) localPosition)
+    public Position PositionInBoardCoordinate(CardinalDirection direction, Position heroPosition, Position localPosition)
     {
-        int newX = 0;
-        int newY = 0;
+        Position position = new Position();
         if (direction == CardinalDirection.NORTH)
         {
-            newX = heroPosition.PosX + localPosition.PosX;
-            newY = heroPosition.PosY + localPosition.PosY;
+            position.PosX = heroPosition.PosX + localPosition.PosX;
+            position.PosY = heroPosition.PosY + localPosition.PosY;
+            //newX = heroPosition.PosX + localPosition.PosX;
+            //newY = heroPosition.PosY + localPosition.PosY;
         }
         else if(direction == CardinalDirection.SOUTH)
         {
-            newX = heroPosition.PosX - localPosition.PosX;
-            newY = heroPosition.PosY - localPosition.PosY;
+            position.PosX = heroPosition.PosX - localPosition.PosX;
+            position.PosY = heroPosition.PosY - localPosition.PosY;
+            //newX = heroPosition.PosX - localPosition.PosX;
+            //newY = heroPosition.PosY - localPosition.PosY;
         }
         else if(direction == CardinalDirection.WEST)
         {
-            newX = heroPosition.PosX + localPosition.PosY;
-            newY = heroPosition.PosY - localPosition.PosX;
+            position.PosX = heroPosition.PosX + localPosition.PosY;
+            position.PosY = heroPosition.PosY - localPosition.PosX;
+            //newX = heroPosition.PosX + localPosition.PosY;
+            //newY = heroPosition.PosY - localPosition.PosX;
         }
         else
         {
-            newX = heroPosition.PosX - localPosition.PosY;
-            newY = heroPosition.PosY + localPosition.PosX;
+            position.PosX = heroPosition.PosX - localPosition.PosY;
+            position.PosY = heroPosition.PosY + localPosition.PosX;
+            //newX = heroPosition.PosX - localPosition.PosY;
+            //newY = heroPosition.PosY + localPosition.PosX;
         }
-        return (newX, newY);
+        return position;
     }
 
-    public List<(int PosX, int PosY)> LocalHeroPositionsToBoardPositions(CardinalDirection direction, (int PosX, int PosY) heroPosition, List<(int PosX, int PosY)> listOfLocalPositions)
+    public List<Position> LocalHeroPositionsToBoardPositions(CardinalDirection direction, Position heroPosition, List<Position> listOfLocalPositions)
     {
-        List<(int PosX, int PosY)> boardCoordinates = new List<(int PosX, int PosY)>();
+        List<Position> boardCoordinates = new List<Position>();
 
-        foreach((int PosX, int PosY) pos in listOfLocalPositions)
+        foreach(Position pos in listOfLocalPositions)
         {
             boardCoordinates.Add(PositionInBoardCoordinate(direction, heroPosition, pos));
         }
         return boardCoordinates;
     }
 
-    public bool ChoosenTileInMovementRange(Tile tile, List<(int PosX, int PosY)> positions)
+    public bool ChoosenTileInMovementRange(Tile tile, List<Position> positions)
     {
-        foreach((int PosX, int PosY) position in positions)
+        foreach(Position position in positions)
         {
-            if (tile.Position == position)
+            if (tile.Position.PosX == position.PosX && tile.Position.PosY == position.PosY)
                 return true;
         }
         return false;

@@ -8,10 +8,12 @@ using UnityEngine;
 public static class CardFactory
 {
     private static System.Random rnd = new System.Random();
-    private static Dictionary<string, Type> heroesList = new Dictionary<string, Type>();
+    private static List<GameObject> heroes = new List<GameObject>();
+    private static List<GameObject> spells = new List<GameObject>();
+    private static List<GameObject> items = new List<GameObject>();
     private static bool isInitialized = false;
-    private static Dictionary<string, List<(int PosX, int PosY)>> possibleAttackPatterns = new Dictionary<string, List<(int PosX, int PosY)>>();
-    private static Dictionary<string, List<(int PosX, int PosY)>> possibleMovePatterns = new Dictionary<string, List<(int PosX, int PosY)>>();
+    private static Dictionary<string, List<Position>> possibleAttackPatterns = new Dictionary<string, List<Position>>();
+    private static Dictionary<string, List<Position>> possibleMovePatterns = new Dictionary<string, List<Position>>();
     private static void InitializeFactory()
     {
         if (isInitialized)
@@ -19,90 +21,75 @@ public static class CardFactory
 
         isInitialized = true;
 
+        possibleAttackPatterns.Add("shortRange", new List<Position>()  {new Position(0,1), new Position(0, 2)});
+        possibleAttackPatterns.Add("shortRange+", new List<Position>() { new Position(0, 1), new Position(0, 2), new Position(0, 3) });
+        possibleAttackPatterns.Add("shortRange++", new List<Position>() { new Position(0, 1), new Position(0, 2), new Position(1, 2), new Position(-2, -2) });
 
-        possibleAttackPatterns.Add("shortRange", new List<(int, int)>() {(0,1)});
-        possibleAttackPatterns.Add("shortRange+", new List<(int, int)>() {(0,1), (0,2)});
-        possibleAttackPatterns.Add("shortRange++", new List<(int, int)>() {(0,1), (0,2), (0,3)});
+        possibleMovePatterns.Add("shortRange", new List<Position>() { new Position(0, 1), new Position(0, 2) });
+        possibleMovePatterns.Add("shortRange+", new List<Position>() { new Position(0, 1), new Position(0, 2), new Position(3, 3), new Position(-1, -1) });
+        possibleMovePatterns.Add("shortRange++", new List<Position>() { new Position(0, 1), new Position(0, 2), new Position(-2, 2), new Position(2, -2) });
 
-        possibleMovePatterns.Add("shortRange", new List<(int, int)>() {(0,1)});
-        possibleMovePatterns.Add("shortRange+", new List<(int, int)>() {(0,1), (0,2)});
-        possibleMovePatterns.Add("shortRange++", new List<(int, int)>() {(0, 1), (0,2), (0,3), (1,0)});
 
-        var heroTypes = Assembly.GetAssembly(typeof(Card)).GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Card)));
+        var objects = Resources.LoadAll("Dragons", typeof(GameObject)).Cast<GameObject>().ToArray();
+        foreach (var t in objects)
+            heroes.Add(t);
+        objects = Resources.LoadAll("Items", typeof(GameObject)).Cast<GameObject>().ToArray();
+        foreach (var t in objects)
+            items.Add(t);
+        //objects = Resources.LoadAll("Spells", typeof(GameObject)).Cast<GameObject>().ToArray();
+        //foreach (var t in objects)
+        //    spells.Add(t);
 
-        foreach(var type in heroTypes)
-        {
-            var tempHeroType = Activator.CreateInstance(type) as Card;
-            Debug.Log(tempHeroType.CardName);
-            heroesList.Add(tempHeroType.CardName, type);
-        }
     }
 
-    private static Card GetCard(string cardName)
-    {
-        if (heroesList.ContainsKey(cardName))
-        {
-            Type type = heroesList[cardName];
-            var card = Activator.CreateInstance(type) as Card;
-            return card;
-        }
-        else
-        {
-            Debug.Log("Not valid CardName: " + cardName);
-            return null;
-        }
-    }
 
 
     //Card will be random if randomCard = 0, if 1 it will be HeroCard, 2 SpellCard, 3 ItemCard
-    public static Card CreateCard(int randomCard)
+    public static GameObject CreateCard(int randomCard)
     {
         InitializeFactory();
-
-        Card card = null;
 
         if (randomCard == 0)
         {
             randomCard = rnd.Next(1, 3);
         }
 
+
         switch (randomCard)
         {
             case 1:
-                card = GetCard("HeroCard");
-                giveRandomStatsToHeroCard((HeroCard)card);
-                break;
+                int number = rnd.Next(0, heroes.Count);
+                giveRandomStatsToHeroCard(heroes[number]);
+                return heroes[number];
             case 2:
-                card = GetCard("SpellCard");
-                //Debug.Log("SpellCard created!");
-                break;
+                //number = rnd.Next(0, spells.Count);
+                //return spells[number];
+                return null;
             case 3:
-                card = GetCard("ItemCard");
-                //Debug.Log("ItemCard created!");
-                break;
+                number = rnd.Next(0, items.Count);
+                return items[number];
+            //break;
+            default:
+                return null;
         }
-
-        return card;
     }
 
-    public static void giveRandomStatsToHeroCard(HeroCard hero)
+    public static void giveRandomStatsToHeroCard(GameObject hero)
     {
-        hero.Description = "This hero is a close damage monster";
+        HeroCard heroCard = hero.GetComponent<HeroCard>();
 
-        Array heroCardTypes = Enum.GetValues(typeof(HeroCardType));
-        int number = rnd.Next(1, heroCardTypes.Length);
-        hero.HeroCardType = (HeroCardType)number;
+        int number = 0;
 
         Array attackTypes = Enum.GetValues(typeof(AttackType));
         number = rnd.Next(1, attackTypes.Length);
-        hero.AttackType = (AttackType)number;
+        heroCard.AttackType = (AttackType)number;
 
         Array rangeTypes = Enum.GetValues(typeof(RangeType));
         number = rnd.Next(1, rangeTypes.Length);
-        hero.RangeType = (RangeType)number;
+        heroCard.RangeType = (RangeType)number;
 
-        hero.TilesToAttack = possibleAttackPatterns["shortRange"];
+        heroCard.TilesToAttack = possibleAttackPatterns["shortRange"];
 
-        hero.TilesToMove = possibleMovePatterns["shortRange++"];
+        heroCard.TilesToMove = possibleMovePatterns["shortRange++"];
     }
 }

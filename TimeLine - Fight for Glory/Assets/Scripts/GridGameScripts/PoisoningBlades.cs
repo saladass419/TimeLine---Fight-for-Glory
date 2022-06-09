@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class ItemCard : Card
+public class PoisoningBlades : ItemCard
 {
-    public virtual void Equip()
+    public override void Equip()
     {
-        ;
+        base.Equip();
     }
 }

@@ -30,7 +30,6 @@ public class HealthBar : MonoBehaviour
             healthBar.fillAmount = Mathf.Lerp(preChangePercentage, percentage, elapsed / updateInSec);
             yield return null;
         }
-        Debug.Log(percentage);
         healthBar.fillAmount = percentage;
     }
 

@@ -42,7 +42,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (ObjectBeingDragged == null || ObjectBeingDragged.GetComponent<Model>().Placed == true) return;
+        if (ObjectBeingDragged == null || ObjectBeingDragged.GetComponent<NewModel>().OnBoard == true) return;
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
         if (plane.Raycast(ray,out float dist))
         {
@@ -53,7 +53,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     {
         if (ObjectBeingDragged != null && inOnAndDrag == false)
         {
-            if(gameObject.GetComponent<Model>().Placed != true)
+            if(gameObject.GetComponent<NewModel>().OnBoard != true)
             {
                 ObjectBeingDragged.transform.position = Vector3.Lerp(ObjectBeingDragged.transform.position, worldPos, 0.05f);
             }
@@ -65,7 +65,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             board.UnHighlightTile(currentHighlightedTile);
 
         currentHighlightedTile = tile;
-        if(minimumDistance < 2.0f && gameObject.GetComponent<Model>().Placed != true)
+        if(minimumDistance < 2.0f && gameObject.GetComponent<NewModel>().OnBoard != true)
         {
             board.GetComponent<Board>().HighlightTiles(tile, board.GetComponent<Board>().HightLightMaterial);
         }
@@ -77,9 +77,9 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         {
             inOnAndDrag = true;
             gameObject.transform.position = tile.transform.position;
-            gameObject.GetComponent<Model>().Position = tile.Position;
+            gameObject.GetComponent<NewModel>().Position = tile.Position;
             tile.PlaceMonster(gameObject);
-            gameObject.GetComponent<Model>().Placed = true;
+            gameObject.GetComponent<NewModel>().OnBoard = true;
             tile.Occupied = true;
             board.UnHighlightTile(currentHighlightedTile);
         }

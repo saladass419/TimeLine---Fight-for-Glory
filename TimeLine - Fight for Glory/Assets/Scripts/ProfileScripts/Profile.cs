@@ -7,7 +7,7 @@ public class Profile : MonoBehaviour
 {
     [SerializeField] private string userName = "KisFaszos";
 
-    private List<Card> cardCollection = new List<Card>();
+    private List<GameObject> cardCollection = new List<GameObject>();
     private Deck deck = new Deck();
     private int heroEssence;
     private int heroTypeEssence;
@@ -22,10 +22,10 @@ public class Profile : MonoBehaviour
         instanceOfProfile = this;
     }
 
-    public void AddCardToCollection(Card card)
+    public void AddGameObjectToCollection(GameObject gameObject)
     {
-        cardCollection.Add(card);
-        deck.CardsInDeck.Add(card);
+        cardCollection.Add(gameObject);
+        deck.CardsInDeck.Add(gameObject);
     }
 
     public string UserName { get => userName; set => userName = value; }
