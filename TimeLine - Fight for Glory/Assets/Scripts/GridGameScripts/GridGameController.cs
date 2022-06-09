@@ -164,9 +164,7 @@ public class GridGameController : MonoBehaviour
     {
         Instantiate(hero, slotToPlace.transform.position, Quaternion.identity);
         hero.transform.position = slotToPlace.transform.position;
-        if(hero.GetComponent<HeroCard>() == null)
-            Debug.Log("Ahhaaa");
-        Debug.Log(hero.GetComponent<HeroCard>().name);
+
         hero.GetComponent<HeroCard>().HeroAttributes = new HeroAttributes();
         hero.GetComponent<HeroCard>().HeroAttributes.HeroAttributesList[HeroAttributeType.MAXHEALTH] = 100f;
         hero.GetComponent<HeroCard>().CurrentHealth = hero.GetComponent<HeroCard>().HeroAttributes.HeroAttributesList[HeroAttributeType.MAXHEALTH];
@@ -179,6 +177,8 @@ public class GridGameController : MonoBehaviour
     public void MoveHero()
     {
         actionType = ActionTypeChosen.MOVE;
+        Debug.Log(currentChosenHeroModel.GetComponent<NewModel>().Position.PosX);
+        Debug.Log(currentChosenHeroModel.GetComponent<NewModel>().Position.PosY);
         HighlightPossiblePlaces(currentChosenHeroModel.GetComponent<NewModel>().Direction, currentChosenHeroModel.GetComponent<NewModel>().Position, currentChosenHeroModel.GetComponent<HeroCard>().TilesToMove, moveTileMaterial);
     }
 

@@ -741,9 +741,9 @@ MonoBehaviour:
   description: 
   cardType: 0
   heroCardType: 4
-  attackType: 3
+  attackType: 2
   rangeType: 1
-  currentHealth: 50
+  currentHealth: 100
   currentActionPoints: 50
   items: []
 --- !u!114 &-8997269858843708394

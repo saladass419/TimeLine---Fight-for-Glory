@@ -20,6 +20,7 @@ public class HeroCard : Card
 
     [SerializeField] private List<ItemCard> items;
 
+    [SerializeField] private List<Position> toBeAdded;
     [SerializeField] private List<Position> tilesToMove;
     [SerializeField] private List<Position> tilesToAttack;
 
@@ -27,9 +28,8 @@ public class HeroCard : Card
 
     private void Awake()
     {
-        OnHealthPercentageChanged = delegate { };
-        tilesToMove = new List<Position>();
-        tilesToAttack = new List<Position>();
+        tilesToMove = new List<Position>() { new Position(0,1), new Position(0, 2), new Position(0, 3), new Position(-1, -1) };
+        tilesToAttack = new List<Position>() { new Position(0, 1), new Position(0, 2), new Position(0, 3) };
         heroAttributes = new HeroAttributes();
     }
 
@@ -42,6 +42,7 @@ public class HeroCard : Card
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public List<Position> TilesToMove { get => tilesToMove; set => tilesToMove = value; }
     public List<Position> TilesToAttack { get => tilesToAttack; set => tilesToAttack = value; }
+    public List<Position> ToBeAdded { get => toBeAdded; set => toBeAdded = value; }
 
     public void ModifyHealth(float value)
     {

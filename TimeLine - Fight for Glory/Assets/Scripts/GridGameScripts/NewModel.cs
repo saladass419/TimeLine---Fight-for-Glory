@@ -8,18 +8,12 @@ public enum RotateDirection { LEFT, RIGHT }
 
 public class NewModel : MonoBehaviour
 {
-    [SerializeField] private string id;
     [SerializeField] private string characterName;
 
-    private Position position;
-    private bool onBoard = false;
-    private CardinalDirection direction;
-    private bool isEnemy;
-
-    private void Start()
-    {
-        id = this.GetType().Name;
-    }
+    [SerializeField] private Position position;
+    [SerializeField] private bool onBoard = false;
+    [SerializeField] private CardinalDirection direction;
+    [SerializeField] private bool isEnemy;
 
 
     public Position Position { get => position; set => position = value; }

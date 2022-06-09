@@ -517,7 +517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.718, y: 0.3187822, z: 42.761665}
+  m_LocalPosition: {x: 8.7300005, y: 0.3187822, z: 35.414467}
   m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -587,12 +587,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  cardName: 
+  cardName: CopperDragon2.0
   description: 
   cardType: 0
   heroCardType: 7
-  attackType: 1
-  rangeType: 2
+  attackType: 2
+  rangeType: 1
   currentHealth: 100
   currentActionPoints: 100
   items: []
@@ -2241,8 +2241,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385460288380310799}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.02}
-  m_LocalScale: {x: 0.05555555, y: 0.05555555, z: 0.05555555}
+  m_LocalPosition: {x: 0, y: 0, z: 1.0200075}
+  m_LocalScale: {x: 0.05555554, y: 0.05555554, z: 0.05555554}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9170172328516483027}
@@ -2252,7 +2252,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.09, y: 4.93}
+  m_AnchoredPosition: {x: -0.09000015, y: 4.9296875}
   m_SizeDelta: {x: 199.3992, y: 21.8513}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8716169105907165795

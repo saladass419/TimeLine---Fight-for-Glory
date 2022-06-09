@@ -682,7 +682,7 @@ MonoBehaviour:
   cardName: 
   description: 
   cardType: 0
-  heroCardType: 5
+  heroCardType: 7
   attackType: 2
   rangeType: 2
   currentHealth: 100

@@ -20,10 +20,9 @@ public class Board : MonoBehaviour
         int m = 0;
         foreach (GameObject _tileObject in objectTiles)
         {
-            Tile tTile = _tileObject.GetComponent<Tile>();
-            tileList[n, m] = tTile;
-            //tileList[n, m].Position.PosX = n;
-            //tileList[n, m].Position.PosY = m;
+            _tileObject.GetComponent<Tile>().Position = new Position(n,m);
+            tileList[n, m] = _tileObject.GetComponent<Tile>();
+ 
 
             if (n % 2 == 0 && m % 2 == 0)
             {

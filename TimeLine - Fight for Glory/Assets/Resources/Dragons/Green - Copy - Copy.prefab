@@ -1829,9 +1829,9 @@ MonoBehaviour:
   cardName: 
   description: 
   cardType: 0
-  heroCardType: 1
-  attackType: 1
-  rangeType: 1
+  heroCardType: 7
+  attackType: 2
+  rangeType: 2
   currentHealth: 100
   currentActionPoints: 100
   items: []

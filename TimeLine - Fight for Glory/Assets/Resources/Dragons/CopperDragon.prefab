@@ -1234,7 +1234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 11.078, y: 0.3188, z: 42.77603}
   m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1307,10 +1307,10 @@ MonoBehaviour:
   cardName: 
   description: 
   cardType: 0
-  heroCardType: 0
-  attackType: 0
-  rangeType: 0
-  currentHealth: 0
+  heroCardType: 7
+  attackType: 2
+  rangeType: 1
+  currentHealth: 100
   currentActionPoints: 0
   items: []
 --- !u!65 &7242189551271031006

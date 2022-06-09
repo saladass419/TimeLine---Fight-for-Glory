@@ -21,7 +21,7 @@ public static class CardFactory
 
         isInitialized = true;
 
-        possibleAttackPatterns.Add("shortRange", new List<Position>()  {new Position(0,1), new Position(0, 2)});
+        possibleAttackPatterns.Add("shortRange", new List<Position>()  { new Position(0,1), new Position(0, 2)});
         possibleAttackPatterns.Add("shortRange+", new List<Position>() { new Position(0, 1), new Position(0, 2), new Position(0, 3) });
         possibleAttackPatterns.Add("shortRange++", new List<Position>() { new Position(0, 1), new Position(0, 2), new Position(1, 2), new Position(-2, -2) });
 
@@ -76,20 +76,29 @@ public static class CardFactory
 
     public static void giveRandomStatsToHeroCard(GameObject hero)
     {
-        HeroCard heroCard = hero.GetComponent<HeroCard>();
-
         int number = 0;
 
         Array attackTypes = Enum.GetValues(typeof(AttackType));
         number = rnd.Next(1, attackTypes.Length);
-        heroCard.AttackType = (AttackType)number;
+        hero.GetComponent<HeroCard>().AttackType = (AttackType)number;
 
         Array rangeTypes = Enum.GetValues(typeof(RangeType));
         number = rnd.Next(1, rangeTypes.Length);
-        heroCard.RangeType = (RangeType)number;
+        hero.GetComponent<HeroCard>().RangeType = (RangeType)number;
 
-        heroCard.TilesToAttack = possibleAttackPatterns["shortRange"];
+        hero.GetComponent<HeroCard>().TilesToAttack = new List<Position>();
 
-        heroCard.TilesToMove = possibleMovePatterns["shortRange++"];
+        foreach(Position position in possibleAttackPatterns["shortRange"])
+        {
+            hero.GetComponent<HeroCard>().TilesToAttack.Add(position);
+        }
+
+        hero.GetComponent<HeroCard>().TilesToMove = new List<Position>();
+        hero.GetComponent<HeroCard>().ToBeAdded = new List<Position>();
+
+        foreach (Position position in possibleMovePatterns["shortRange++"])
+        {
+            hero.GetComponent<HeroCard>().ToBeAdded.Add(position);
+        }
     }
 }

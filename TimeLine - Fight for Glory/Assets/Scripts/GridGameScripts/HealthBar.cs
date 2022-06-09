@@ -12,7 +12,7 @@ public class HealthBar : MonoBehaviour
 
     public void SubscribeToHealthChanged()
     {
-        GetComponentInParent<Model>().Hero.OnHealthPercentageChanged += HandleHealthChanged;
+        //GetComponentInParent<HeroCard>().OnHealthPercentageChanged += HandleHealthChanged;
     }
 
     private void HandleHealthChanged(float percentage)
