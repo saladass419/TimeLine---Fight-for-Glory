@@ -20,6 +20,7 @@ public class NewModel : MonoBehaviour
     public bool OnBoard { get => onBoard; set => onBoard = value; }
     public CardinalDirection Direction { get => direction; set => direction = value; }
     public bool IsEnemy { get => isEnemy; set => isEnemy = value; }
+    public string CharacterName { get => characterName; set => characterName = value; }
 
     public void RotateModel(RotateDirection rotateDirection, float angel)
     {

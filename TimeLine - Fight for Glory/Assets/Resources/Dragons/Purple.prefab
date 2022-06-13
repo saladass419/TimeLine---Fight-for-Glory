@@ -609,7 +609,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.718, y: 0.3187822, z: 42.761665}
+  m_LocalPosition: {x: 8.7300005, y: 0.3187822, z: 35.414467}
   m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -664,8 +664,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530abf37896f31844b1d9813d6a0f1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: NewModel
   characterName: 
+  onBoard: 0
+  direction: 0
+  isEnemy: 0
 --- !u!114 &-4392361261781215377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,7 +682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manaCost: 0
   cardName: 
-  description: 
+  description: Very dangerous dragon
   cardType: 0
   heroCardType: 7
   attackType: 2
@@ -699,8 +701,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 7.747268, y: 5.7247453, z: 15.455221}
+  m_Center: {x: 0.016832352, y: 2.3623724, z: -0.93637174}
 --- !u!1 &116878
 GameObject:
   m_ObjectHideFlags: 0

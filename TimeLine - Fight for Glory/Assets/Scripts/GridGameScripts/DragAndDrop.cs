@@ -13,10 +13,14 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     [SerializeField] Tile currentHighlightedTile = null;
     private Vector3 oldPosition;
 
+    private Material startingMaterial;
+
+
     void Awake()
     {
         _cam = Camera.main;
         board = GameObject.FindGameObjectWithTag("Board").GetComponent<Board>();
+        startingMaterial = GetComponentInChildren<SkinnedMeshRenderer>().material;
     }
 
     public GameObject ObjectHoveredOver { get => objectHoveredOver; set => objectHoveredOver = value; }
@@ -24,14 +28,15 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = GridGameController.instance.tile1Material;
         ObjectHoveredOver = gameObject;
         if (ObjectHoveredOver == null) return;
     }
     public void OnPointerExit(PointerEventData eventData)
     {
+        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = startingMaterial;
         ObjectHoveredOver = null;
-    }
-    public void OnBeginDrag(PointerEventData eventData)
+    }    public void OnBeginDrag(PointerEventData eventData)
     {
         oldPosition = transform.position;
         inOnAndDrag = false;

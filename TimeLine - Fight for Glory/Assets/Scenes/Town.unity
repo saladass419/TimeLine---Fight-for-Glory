@@ -11091,6 +11091,7 @@ MonoBehaviour:
   tile1Material: {fileID: 2100000, guid: 8d6d1c2b5ef3d844885a247e35f947cc, type: 2}
   tile2Material: {fileID: 2100000, guid: 699811b309f61d848828c302248ae4d9, type: 2}
   currentChosenHeroModel: {fileID: 0}
+  currentChosenHeroModelMaterial: {fileID: 0}
   currentChosenTile: {fileID: 0}
   uiManager: {fileID: 558215942}
   testPrefab1: {fileID: 5721021344868881028, guid: 2db5b7850ae82b24788a4c012f6909e5, type: 3}

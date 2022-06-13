@@ -79,11 +79,11 @@ public static class CardFactory
         int number = 0;
 
         Array attackTypes = Enum.GetValues(typeof(AttackType));
-        number = rnd.Next(1, attackTypes.Length);
+        number = rnd.Next(0, attackTypes.Length);
         hero.GetComponent<HeroCard>().AttackType = (AttackType)number;
 
         Array rangeTypes = Enum.GetValues(typeof(RangeType));
-        number = rnd.Next(1, rangeTypes.Length);
+        number = rnd.Next(0, rangeTypes.Length);
         hero.GetComponent<HeroCard>().RangeType = (RangeType)number;
 
         hero.GetComponent<HeroCard>().TilesToAttack = new List<Position>();

@@ -13,14 +13,15 @@ public class GridGameController : MonoBehaviour
     [SerializeField] private Board board;
     [SerializeField] private Material attackTileMaterial;
     [SerializeField] private Material moveTileMaterial;
-    [SerializeField] private Material tile1Material;
+    [SerializeField] public Material tile1Material;
     [SerializeField] private Material tile2Material;
 
     [SerializeField] private GameObject currentChosenHeroModel;
-    [SerializeField] private ItemCard currentChosenItemCard;
+    [SerializeField] private Material currentChosenHeroModelMaterial;
     [SerializeField] private Tile currentChosenTile;
 
     [SerializeField] private GridGameUIManager uiManager;
+    public static GridGameController instance;
 
     [SerializeField] private GameObject testPrefab1;
 
@@ -39,6 +40,7 @@ public class GridGameController : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
        cam = Camera.main;
     }
     private void Start()
@@ -122,14 +124,15 @@ public class GridGameController : MonoBehaviour
                 if (hit.transform.CompareTag("HeroOnTile"))
                 {
                     currentChosenHeroModel = hit.transform.gameObject;
+                    uiManager.RefreshUI(currentChosenHeroModel);
                 }
                 else if (hit.transform.CompareTag("Tile") && actionType == ActionTypeChosen.MOVE)
                 {
                     Tile newTile = hit.transform.GetComponent<Tile>();
-                    List<Position> boardPositions = board.LocalHeroPositionsToBoardPositions(currentChosenHeroModel.GetComponent<Model>().Direction, currentChosenHeroModel.GetComponent<NewModel>().Position, currentChosenHeroModel.GetComponent<HeroCard>().TilesToMove);
+                    List<Position> boardPositions = board.LocalHeroPositionsToBoardPositions(currentChosenHeroModel.GetComponent<NewModel>().Direction, currentChosenHeroModel.GetComponent<NewModel>().Position, currentChosenHeroModel.GetComponent<HeroCard>().TilesToMove);
                     if (newTile.Occupied != true && board.ChoosenTileInMovementRange(newTile, boardPositions))
                     {
-                        Tile oldTile = board.FindTile(currentChosenHeroModel.GetComponent<Model>().Position.PosX, currentChosenHeroModel.GetComponent<Model>().Position.PosY);
+                        Tile oldTile = board.FindTile(currentChosenHeroModel.GetComponent<NewModel>().Position.PosX, currentChosenHeroModel.GetComponent<NewModel>().Position.PosY);
                         board.MoveHeroFromTileToAnother(currentChosenHeroModel, oldTile, newTile);
                         currentChosenHeroModel.transform.position = newTile.transform.position;
                         currentChosenHeroModel.GetComponent<NewModel>().Position = newTile.Position;
@@ -160,6 +163,18 @@ public class GridGameController : MonoBehaviour
     }
 
 
+    private Queue<GameObject> CreateOrderOfPlay()
+    {
+       List<GameObject> orderedList = new List<GameObject>();
+        foreach(GameObject hero in player.Deck.CardsInDeck)
+        {
+            if(hero.GetComponent<HeroCard>().HeroAttributes.HeroAttributesList[HeroAttributeType.MOVEMENTSPEED] < )
+            {
+
+            }
+        }
+    }
+
     private void CreateHeroModelOnPlayGround(GameObject hero, GameObject slotToPlace)
     {
         Instantiate(hero, slotToPlace.transform.position, Quaternion.identity);
@@ -177,8 +192,6 @@ public class GridGameController : MonoBehaviour
     public void MoveHero()
     {
         actionType = ActionTypeChosen.MOVE;
-        Debug.Log(currentChosenHeroModel.GetComponent<NewModel>().Position.PosX);
-        Debug.Log(currentChosenHeroModel.GetComponent<NewModel>().Position.PosY);
         HighlightPossiblePlaces(currentChosenHeroModel.GetComponent<NewModel>().Direction, currentChosenHeroModel.GetComponent<NewModel>().Position, currentChosenHeroModel.GetComponent<HeroCard>().TilesToMove, moveTileMaterial);
     }
 

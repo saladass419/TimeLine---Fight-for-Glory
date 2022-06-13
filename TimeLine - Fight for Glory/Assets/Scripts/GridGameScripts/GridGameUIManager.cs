@@ -41,12 +41,12 @@ public class GridGameUIManager : MonoBehaviour
 
     }
 
-    public void RefreshUI(HeroCard card)
+    public void RefreshUI(GameObject hero)
     {
-        cardName.text = card.CardName;
-        description.text = card.Description;
-        heroType.text = card.HeroCardType.ToString();
-        attackType.text = card.AttackType.ToString();
-        rangeType.text = card.RangeType.ToString();
+        cardName.text = hero.GetComponent<HeroCard>().CardName;
+        description.text = hero.GetComponent<HeroCard>().Description;
+        heroType.text = hero.GetComponent<HeroCard>().HeroCardType.ToString();
+        attackType.text = hero.GetComponent<HeroCard>().AttackType.ToString();
+        rangeType.text = hero.GetComponent<HeroCard>().RangeType.ToString();
     }
 }

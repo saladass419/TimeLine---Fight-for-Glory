@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum HeroAttributeType { DAMAGE, MAGICDAMAGE, MAXHEALTH, BASICDEFENSE, MAGICDENFESE, ACTIONPOINT, MOVEMENT, }
+public enum HeroAttributeType { DAMAGE, MAGICDAMAGE, MAXHEALTH, BASICDEFENSE, MAGICDENFESE, ACTIONPOINT, MOVEMENTSPEED, }
 
 public class HeroAttributes
 {

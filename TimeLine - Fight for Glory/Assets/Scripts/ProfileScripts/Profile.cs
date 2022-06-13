@@ -8,7 +8,7 @@ public class Profile : MonoBehaviour
     [SerializeField] private string userName = "KisFaszos";
 
     private List<GameObject> cardCollection = new List<GameObject>();
-    private Deck deck = new Deck();
+    private Deck deck;
     private int heroEssence;
     private int heroTypeEssence;
     private int attackTypeEssence;

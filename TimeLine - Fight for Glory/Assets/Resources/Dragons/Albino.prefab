@@ -84,8 +84,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530abf37896f31844b1d9813d6a0f1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: NewModel
   characterName: 
+  onBoard: 0
+  direction: 0
+  isEnemy: 0
 --- !u!114 &890529041994034425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,11 +102,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manaCost: 0
   cardName: 
-  description: 
+  description: Very dangerous dragon
   cardType: 0
   heroCardType: 7
   attackType: 1
-  rangeType: 1
+  rangeType: 0
   currentHealth: 100
   currentActionPoints: 100
   items: []
